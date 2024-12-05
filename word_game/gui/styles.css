@@ -1,0 +1,13 @@
+*[highlight-incorrect=true] {
+    border: 1px solid red;
+	height: 20px;
+}
+
+#ProgressBar {
+    height: 12px;
+    border-radius: 6px;
+}
+#ProgressBar::chunk {
+    border-radius: 6px;
+    background-color: #0078D4;
+}
