@@ -3,6 +3,18 @@
 	height: 20px;
 }
 
+#RoomListItem {
+    height: 28px;
+    background-color: #E0E0E0;
+    border-radius: 6px;
+}
+#RoomListItem:hover {
+    background-color: #D0D0D0;
+}
+#RoomListItem[selected=true] {
+    background-color: #96C8FF;
+}
+
 #ProgressBar {
     height: 12px;
     border-radius: 6px;

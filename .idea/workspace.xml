@@ -4,10 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="004bf431-fb4f-4a0a-8912-e57b0897525c" name="Changes" comment="threads tasks">
-      <change beforePath="$PROJECT_DIR$/.idea/ORIS-tasks.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ORIS-tasks.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="004bf431-fb4f-4a0a-8912-e57b0897525c" name="Changes" comment="word game menu">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/gui/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/gui/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/gui/file_index.json" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/gui/file_index.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/gui/room_browser.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/gui/room_browser.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/gui/room_browser.ui" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/gui/room_browser.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/gui/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/gui/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/word_game.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/word_game.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,29 +51,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.1.executor": "Run",
-    "Python.10.executor": "Run",
-    "Python.2.executor": "Run",
-    "Python.3.executor": "Run",
-    "Python.4.executor": "Run",
-    "Python.5.executor": "Run",
-    "Python.6.executor": "Run",
-    "Python.7.executor": "Run",
-    "Python.8.executor": "Run",
-    "Python.networking.executor": "Run",
-    "Python.recompile.executor": "Run",
-    "Python.word_game.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "Shell Script.Qt Designer.executor": "Run",
-    "Shell Script.Unnamed.executor": "Run",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/gilya/Projects/PyCharm/ORIS-tasks/toolkit",
-    "settings.editor.selected.configurable": "reference.idesettings.debugger.python"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.1.executor&quot;: &quot;Run&quot;,
+    &quot;Python.10.executor&quot;: &quot;Run&quot;,
+    &quot;Python.2.executor&quot;: &quot;Run&quot;,
+    &quot;Python.3.executor&quot;: &quot;Run&quot;,
+    &quot;Python.4.executor&quot;: &quot;Run&quot;,
+    &quot;Python.5.executor&quot;: &quot;Run&quot;,
+    &quot;Python.6.executor&quot;: &quot;Run&quot;,
+    &quot;Python.7.executor&quot;: &quot;Run&quot;,
+    &quot;Python.8.executor&quot;: &quot;Run&quot;,
+    &quot;Python.networking.executor&quot;: &quot;Run&quot;,
+    &quot;Python.recompile.executor&quot;: &quot;Run&quot;,
+    &quot;Python.word_game.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;Shell Script.Qt Designer.executor&quot;: &quot;Run&quot;,
+    &quot;Shell Script.Unnamed.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/gilya/Projects/PyCharm/ORIS-tasks/toolkit&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.idesettings.debugger.python&quot;
   }
-}]]></component>
+}</component>
   <component name="PyDebuggerOptionsProvider">
     <option name="myPyQtBackend" value="pyqt6" />
   </component>
@@ -84,6 +88,39 @@
       <recent name="C:\Users\gilya\Projects\PyCharm\ORIS-tasks\word_game" />
       <recent name="C:\Users\gilya\Projects\PyCharm\ORIS-tasks\word_game\gui" />
     </key>
+  </component>
+  <component name="RunManager" selected="Python.word_game">
+    <configuration name="word_game" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="ORIS-tasks" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/word_game" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/word_game/word_game.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.word_game" />
+      <item itemvalue="Shell Script.Qt Designer" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.word_game" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -109,7 +146,15 @@
       <option name="project" value="LOCAL" />
       <updated>1733305890261</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="word game menu">
+      <option name="closed" value="true" />
+      <created>1733439624145</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1733439624145</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -125,6 +170,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="threads tasks" />
-    <option name="LAST_COMMIT_MESSAGE" value="threads tasks" />
+    <MESSAGE value="word game menu" />
+    <option name="LAST_COMMIT_MESSAGE" value="word game menu" />
   </component>
 </project>
