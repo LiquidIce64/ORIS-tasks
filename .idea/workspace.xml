@@ -4,14 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="004bf431-fb4f-4a0a-8912-e57b0897525c" name="Changes" comment="word game rooms finished">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/gui/file_index.json" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/gui/file_index.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/gui/player_list_item.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/gui/player_list_item.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/gui/player_list_item.ui" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/gui/player_list_item.ui" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/gui/resources.qrc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/word_game.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/word_game.py" afterDir="false" />
-    </list>
+    <list default="true" id="004bf431-fb4f-4a0a-8912-e57b0897525c" name="Changes" comment="word game resources" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -178,7 +171,23 @@
       <option name="project" value="LOCAL" />
       <updated>1733591685972</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="word game resources">
+      <option name="closed" value="true" />
+      <created>1733596008272</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1733596008272</updated>
+    </task>
+    <task id="LOCAL-00007" summary="word game resources">
+      <option name="closed" value="true" />
+      <created>1733596257895</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1733596257895</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -198,6 +207,7 @@
     <MESSAGE value="word game room browser" />
     <MESSAGE value="word game rooms" />
     <MESSAGE value="word game rooms finished" />
-    <option name="LAST_COMMIT_MESSAGE" value="word game rooms finished" />
+    <MESSAGE value="word game resources" />
+    <option name="LAST_COMMIT_MESSAGE" value="word game resources" />
   </component>
 </project>
