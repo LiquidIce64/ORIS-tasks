@@ -22,7 +22,6 @@ class Ui_PlayerListItem(object):
         self.label_username.setObjectName("label_username")
         self.horizontalLayout.addWidget(self.label_username)
         self.icon_host = QtWidgets.QLabel(parent=PlayerListItem)
-        self.icon_host.setPixmap(QtGui.QPixmap(":/icons/host.png"))
         self.icon_host.setObjectName("icon_host")
         self.horizontalLayout.addWidget(self.icon_host)
         self.horizontalLayout.setStretch(0, 1)
