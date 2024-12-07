@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import os
 import sys
 from warnings import filterwarnings
 from threading import Thread
@@ -8,14 +9,22 @@ from toolkit.networking import ClientServer
 
 import gui
 from PyQt6.QtCore import pyqtSignal, pyqtSlot, QObject, QTimer
-from PyQt6.QtWidgets import (
-    QApplication, QMainWindow, QWidget, QDialog, QMenu
-)
+from PyQt6.QtWidgets import QApplication, QMainWindow, QWidget, QDialog, QMenu
+from PyQt6.QtGui import QPixmap
 
 
 filterwarnings(action="ignore", message="sipPyTypeDict()", category=DeprecationWarning)
 
+
+class Resources(QObject):
+    def __init__(self):
+        super().__init__()
+        icons_dir = os.path.join(os.path.abspath(os.curdir), "gui\\icons\\")
+        self.host = QPixmap(icons_dir + "host.png")
+
+
 STYLESHEET = open("gui/styles.css", "r").read()
+RESOURCES = Resources()
 
 
 def parse_address(address: str):
@@ -62,6 +71,7 @@ class PlayerListItem(QWidget, gui.Ui_PlayerListItem):
         if self.room.host == self.room.main.room_browser.username:
             self.add_host_actions()
 
+        self.icon_host.setPixmap(RESOURCES.host)
         self.icon_host.setMaximumWidth(16 if self.room.host == name else 0)
         self.label_username.setText(self.name + " (you)" if self.is_you else self.name)
 
