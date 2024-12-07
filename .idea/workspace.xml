@@ -4,16 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="004bf431-fb4f-4a0a-8912-e57b0897525c" name="Changes" comment="word game room browser">
+    <list default="true" id="004bf431-fb4f-4a0a-8912-e57b0897525c" name="Changes" comment="word game rooms">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/toolkit/networking.py" beforeDir="false" afterPath="$PROJECT_DIR$/toolkit/networking.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/word_game/gui/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/gui/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/word_game/gui/file_index.json" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/gui/file_index.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/gui/room_browser.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/gui/room_browser.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/gui/room_browser.ui" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/gui/room_browser.ui" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/gui/room_list_item.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/gui/room_list_item.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/gui/room_list_item.ui" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/gui/room_list_item.ui" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/gui/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/gui/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/gui/player_list_item.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/gui/player_list_item.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/gui/player_list_item.ui" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/gui/player_list_item.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/gui/room.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/gui/room.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/gui/room.ui" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/gui/room.ui" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/word_game/word_game.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/word_game.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -54,34 +52,35 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.1.executor&quot;: &quot;Run&quot;,
-    &quot;Python.10.executor&quot;: &quot;Run&quot;,
-    &quot;Python.2.executor&quot;: &quot;Run&quot;,
-    &quot;Python.3.executor&quot;: &quot;Run&quot;,
-    &quot;Python.4.executor&quot;: &quot;Run&quot;,
-    &quot;Python.5.executor&quot;: &quot;Run&quot;,
-    &quot;Python.6.executor&quot;: &quot;Run&quot;,
-    &quot;Python.7.executor&quot;: &quot;Run&quot;,
-    &quot;Python.8.executor&quot;: &quot;Run&quot;,
-    &quot;Python.networking.executor&quot;: &quot;Run&quot;,
-    &quot;Python.recompile.executor&quot;: &quot;Run&quot;,
-    &quot;Python.word_game.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;Shell Script.Qt Designer.executor&quot;: &quot;Run&quot;,
-    &quot;Shell Script.Unnamed.executor&quot;: &quot;Run&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/gilya/Projects/PyCharm/ORIS-tasks/toolkit&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.idesettings.debugger.python&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.1.executor": "Run",
+    "Python.10.executor": "Run",
+    "Python.2.executor": "Run",
+    "Python.3.executor": "Run",
+    "Python.4.executor": "Run",
+    "Python.5.executor": "Run",
+    "Python.6.executor": "Run",
+    "Python.7.executor": "Run",
+    "Python.8.executor": "Run",
+    "Python.networking.executor": "Run",
+    "Python.recompile.executor": "Run",
+    "Python.word_game.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "Shell Script.Qt Designer.executor": "Run",
+    "Shell Script.Unnamed.executor": "Run",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/gilya/Projects/PyCharm/ORIS-tasks/word_game/gui/icons",
+    "settings.editor.selected.configurable": "reference.idesettings.debugger.python"
   }
-}</component>
+}]]></component>
   <component name="PyDebuggerOptionsProvider">
     <option name="myPyQtBackend" value="pyqt6" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\gilya\Projects\PyCharm\ORIS-tasks\word_game\gui\icons" />
       <recent name="C:\Users\gilya\Projects\PyCharm\ORIS-tasks\toolkit" />
       <recent name="C:\Users\gilya\Projects\PyCharm\ORIS-tasks" />
       <recent name="C:\Users\gilya\Projects\PyCharm\ORIS-tasks\threads" />
@@ -165,7 +164,15 @@
       <option name="project" value="LOCAL" />
       <updated>1733510428826</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="word game rooms">
+      <option name="closed" value="true" />
+      <created>1733529604739</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1733529604739</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -183,6 +190,7 @@
     <MESSAGE value="threads tasks" />
     <MESSAGE value="word game menu" />
     <MESSAGE value="word game room browser" />
-    <option name="LAST_COMMIT_MESSAGE" value="word game room browser" />
+    <MESSAGE value="word game rooms" />
+    <option name="LAST_COMMIT_MESSAGE" value="word game rooms" />
   </component>
 </project>

@@ -12,15 +12,20 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 class Ui_PlayerListItem(object):
     def setupUi(self, PlayerListItem):
         PlayerListItem.setObjectName("PlayerListItem")
-        PlayerListItem.resize(127, 28)
+        PlayerListItem.resize(128, 28)
         PlayerListItem.setMinimumSize(QtCore.QSize(0, 28))
         self.horizontalLayout = QtWidgets.QHBoxLayout(PlayerListItem)
         self.horizontalLayout.setContentsMargins(6, 6, 6, 6)
-        self.horizontalLayout.setSpacing(3)
+        self.horizontalLayout.setSpacing(0)
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.label_username = QtWidgets.QLabel(parent=PlayerListItem)
         self.label_username.setObjectName("label_username")
         self.horizontalLayout.addWidget(self.label_username)
+        self.icon_host = QtWidgets.QLabel(parent=PlayerListItem)
+        self.icon_host.setPixmap(QtGui.QPixmap(":/icons/host.png"))
+        self.icon_host.setObjectName("icon_host")
+        self.horizontalLayout.addWidget(self.icon_host)
+        self.horizontalLayout.setStretch(0, 1)
 
         self.retranslateUi(PlayerListItem)
         QtCore.QMetaObject.connectSlotsByName(PlayerListItem)
