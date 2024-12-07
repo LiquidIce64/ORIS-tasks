@@ -12,8 +12,8 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 class Ui_RoomListItem(object):
     def setupUi(self, RoomListItem):
         RoomListItem.setObjectName("RoomListItem")
-        RoomListItem.resize(400, 34)
-        RoomListItem.setMaximumSize(QtCore.QSize(16777215, 34))
+        RoomListItem.resize(150, 28)
+        RoomListItem.setMinimumSize(QtCore.QSize(0, 28))
         self.horizontalLayout = QtWidgets.QHBoxLayout(RoomListItem)
         self.horizontalLayout.setContentsMargins(6, 6, 6, 6)
         self.horizontalLayout.setSpacing(3)

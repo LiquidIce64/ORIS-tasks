@@ -103,11 +103,19 @@ class ClientServer:
 
     def disconnect(self):
         if self.__hosting:
-            self.broadcast({
+            try: self.broadcast({
                 "type": "event",
                 "event": "disconnect",
                 "body": "server closed"
             })
+            except: pass
+        elif self.__connected:
+            try: self.send({
+                "type": "event",
+                "event": "disconnect",
+                "body": "user disconnect"
+            })
+            except: pass
         self.__addr = None
         self.__hosting = False
         self.__connected = False

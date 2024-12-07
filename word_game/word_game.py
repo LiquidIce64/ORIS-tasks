@@ -41,8 +41,41 @@ class Server(QWidget):  # TODO
         pass
 
 
-class Room(QWidget):
-    pass
+class PlayerListItem(QWidget, gui.Ui_RoomListItem):
+    def __init__(self, room: Room, name: str):
+        super().__init__()
+        self.setupUi(self)
+        self.room = room
+        self.name = name
+
+        self.label_name.setText(self.name)
+
+        self.room.layout_players.addWidget(self)
+
+    def __del__(self):
+        self.room.layout_players.removeWidget(self)
+
+
+class Room(QWidget, gui.Ui_Room):
+    def __init__(self, main: Window, name: str, max_players: int, player_list: list[str]):
+        super().__init__()
+        self.setupUi(self)
+        self.main = main
+        self.players = {}
+
+        self.label_room_name.setText(name)
+        self.label_player_count.setText(f"{len(player_list)}/{max_players}")
+        for player_name in player_list:
+            self.players[player_name] = PlayerListItem(self, player_name)
+
+        self.btn_leave.clicked.connect(self.leave_room)
+
+    def leave_room(self):
+        self.main.comm.send_queue.put({
+            "type": "event",
+            "event": "leave-room"
+        })
+        self.main.leave_room()
 
 
 class RoomListItem(QWidget, gui.Ui_RoomListItem):
@@ -53,15 +86,18 @@ class RoomListItem(QWidget, gui.Ui_RoomListItem):
         self.name = name
         self.player_count = player_count
         self.max_players = max_players
+
         self.label_name.setText(name)
         self.label_playercount.setText(f"{self.player_count}/{self.max_players}")
+
         self.browser.layout_roomlist.addWidget(self)
 
     def mousePressEvent(self, event):
         self.select()
 
     def mouseDoubleClickEvent(self, event):
-        self.browser.btn_join.click()
+        self.select()
+        self.browser.join_room()
 
     def select(self):
         if self.browser.selected_room == self: return
@@ -88,16 +124,25 @@ class RoomListItem(QWidget, gui.Ui_RoomListItem):
 
 
 class RoomBrowser(QWidget, gui.Ui_RoomBrowser):
-    def __init__(self, main: Window):
+    def __init__(self, main: Window, username: str):
         super().__init__()
         self.setupUi(self)
         self.main = main
+        self.username = username
         self.rooms = {}
         self.selected_room: RoomListItem | None = None
 
+        self.btn_disconnect.clicked.connect(self.disconnect_from_server)
         self.btn_join.clicked.connect(self.join_room)
         self.btn_create.clicked.connect(self.create_room)
+
         self.main.comm.recv_signal.connect(self.on_recv_message)
+
+    def refresh(self):
+        self.main.comm.send_queue.put({
+            "type": "event",
+            "event": "room-list-upd"
+        })
 
     def update_list(self, update_info: dict):
         if update_info["reset"]:
@@ -115,18 +160,28 @@ class RoomBrowser(QWidget, gui.Ui_RoomBrowser):
         if msg["type"] == "event":
             if msg["event"] == "room-list-upd":
                 self.update_list(msg["body"])
+
             elif msg["event"] == "join-room":
                 self.setEnabled(True)
                 if msg["body"] == "room joined":
                     self.btn_join.setText("Join room")
-                    self.main.room = Room(self.main)
+                    self.main.join_room(
+                        name=self.selected_room.name,
+                        max_players=self.selected_room.max_players,
+                        player_list=msg["players"]
+                    )
                 else:
                     self.btn_join.setText(msg["body"])
+
             elif msg["event"] == "create-room":
                 self.setEnabled(True)
                 if msg["body"] == "room created":
                     self.btn_create.setText("Create room")
-                    self.main.room = Room(self.main)
+                    self.main.join_room(
+                        name=self.input_roomname.text(),
+                        max_players=self.input_playercount.value(),
+                        player_list=[self.username]
+                    )
                 else:
                     self.btn_create.setText(msg["body"])
 
@@ -152,6 +207,11 @@ class RoomBrowser(QWidget, gui.Ui_RoomBrowser):
             "name": self.input_roomname.text(),
             "max-players": self.input_playercount.value()
         })
+
+    @pyqtSlot()
+    def disconnect_from_server(self):
+        Thread(target=self.main.comm.socket.disconnect, daemon=True).start()
+        self.main.exit_to_menu()
 
     def __del__(self):
         self.main.comm.recv_signal.disconnect(self.on_recv_message)
@@ -203,23 +263,25 @@ class Menu(QWidget, gui.Ui_Menu):
             self.input_password.text()
         ), daemon=True).start()
 
-    @pyqtSlot(str)
-    def connect_finished(self, result: str):
+    @pyqtSlot(dict)
+    def connect_finished(self, result: dict):
         self.setEnabled(True)
         self.btn_connect.setText("Connect")
-        self.input_password.setProperty("highlight-incorrect", result == "auth-fail")
-        self.input_address.setProperty("highlight-incorrect", result == "timeout")
+        self.input_password.setProperty("highlight-incorrect", result["body"] == "auth failed")
+        self.input_address.setProperty("highlight-incorrect", result["event"] == "disconnect")
         self.setStyleSheet(STYLESHEET)
 
 
 class Communication(QObject):
+    connect_signal = pyqtSignal(dict)
+    host_signal = pyqtSignal(bool)
+    recv_signal = pyqtSignal(dict)
+    send_queue = SimpleQueue()
+    socket = ClientServer()
+
     def __init__(self):
         super().__init__()
-        self.connect_signal = pyqtSignal(str)
-        self.host_signal = pyqtSignal(bool)
-        self.recv_signal = pyqtSignal(dict)
-        self.send_queue = SimpleQueue()
-        self.socket = ClientServer()
+        Thread(target=self.send_messages, daemon=True).start()
 
     def connect_to_server(self, addr, username, password):
         try:
@@ -230,10 +292,14 @@ class Communication(QObject):
                 "username": username,
                 "password": password
             })
-            reply = self.socket.recv()
-            self.connect_signal.emit(reply["event"])
+            self.connect_signal.emit(self.socket.recv())
+            Thread(target=self.recv_messages, daemon=True).start()
         except:
-            self.connect_signal.emit("timeout")
+            self.connect_signal.emit({
+                "type": "event",
+                "event": "disconnect",
+                "body": "connection lost"
+            })
 
     def host_server(self, client_handling_func, addr):
         try:
@@ -252,9 +318,10 @@ class Communication(QObject):
                     self.socket.send(data)
             except: pass
 
-    def recv_messages(self, recipient=None):
+    def recv_messages(self, recipient=None, recipient_name=""):
         while self.socket.is_open():
             data = self.socket.recv(recipient)
+            data["from"] = recipient_name
             self.recv_signal.emit(data)
 
 
@@ -272,10 +339,10 @@ class Window(QMainWindow):
 
         self.setCentralWidget(self.menu)
 
-    @pyqtSlot(str)
-    def connect_finished(self, result: str):
-        if result != "accepted": return
-        self.room_browser = RoomBrowser(self)
+    @pyqtSlot(dict)
+    def connect_finished(self, result: dict):
+        if result["event"] != "connect" or result["body"] != "success": return
+        self.room_browser = RoomBrowser(self, result["username"])
         self.setCentralWidget(self.room_browser)
 
     @pyqtSlot(bool)
@@ -284,6 +351,21 @@ class Window(QMainWindow):
             self.setCentralWidget(self.server)
         else:
             self.server = None
+
+    def join_room(self, name: str, max_players: int, player_list: list[str]):
+        self.room = Room(self, name, max_players, player_list)
+        self.setCentralWidget(self.room)
+
+    def leave_room(self):
+        self.room_browser.refresh()
+        self.setCentralWidget(self.room_browser)
+        self.room = None
+
+    def exit_to_menu(self):
+        self.setCentralWidget(self.menu)
+        self.room = None
+        self.room_browser = None
+        self.server = None
 
 
 app = QApplication(sys.argv)

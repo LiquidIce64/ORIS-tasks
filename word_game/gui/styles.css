@@ -3,23 +3,32 @@
 	height: 20px;
 }
 
-#RoomListItem {
-    height: 28px;
+RoomListItem {
     background-color: #E0E0E0;
     border-radius: 6px;
 }
-#RoomListItem:hover {
+RoomListItem:hover {
     background-color: #D0D0D0;
 }
-#RoomListItem[selected=true] {
+RoomListItem[selected=true] {
+    background-color: #96C8FF;
+}
+
+PlayerListItem {
+    background-color: #E0E0E0;
+    border-radius: 6px;
+}
+PlayerListItem:hover {
+    background-color: #D0D0D0;
+}
+PlayerListItem[selected=true] {
     background-color: #96C8FF;
 }
 
 #ProgressBar {
-    height: 12px;
-    border-radius: 6px;
+    border-radius: 4px;
 }
 #ProgressBar::chunk {
-    border-radius: 6px;
-    background-color: #0078D4;
+    border-radius: 4px;
+    background-color: #96C8FF;
 }
