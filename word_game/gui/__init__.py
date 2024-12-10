@@ -6,3 +6,4 @@ from .room_list_item import Ui_RoomListItem
 from .room import Ui_Room
 from .player_list_item import Ui_PlayerListItem
 from .kick_dialog import Ui_KickDialog
+from .server import Ui_Server

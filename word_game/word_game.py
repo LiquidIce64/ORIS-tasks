@@ -1,6 +1,8 @@
 from __future__ import annotations
 
-import os
+import json
+from passlib.hash import pbkdf2_sha256 as sha256
+from socket import socket as socket_raw
 import sys
 from warnings import filterwarnings
 from threading import Thread
@@ -8,7 +10,7 @@ from queue import SimpleQueue
 from toolkit.networking import ClientServer
 
 import gui
-from PyQt6.QtCore import pyqtSignal, pyqtSlot, QObject, QTimer
+from PyQt6.QtCore import pyqtSignal, pyqtSlot, QObject, QTimer, QDir
 from PyQt6.QtWidgets import QApplication, QMainWindow, QWidget, QDialog, QMenu
 from PyQt6.QtGui import QPixmap
 
@@ -19,12 +21,8 @@ filterwarnings(action="ignore", message="sipPyTypeDict()", category=DeprecationW
 class Resources(QObject):
     def __init__(self):
         super().__init__()
-        icons_dir = os.path.join(os.path.abspath(os.curdir), "gui\\icons\\")
-        self.host = QPixmap(icons_dir + "host.png")
-
-
-STYLESHEET = open("gui/styles.css", "r").read()
-RESOURCES = Resources()
+        QDir.addSearchPath("icons", "gui/icons")
+        self.host = QPixmap("icons:host.png")
 
 
 def parse_address(address: str):
@@ -45,9 +43,186 @@ def parse_address(address: str):
     return address, port
 
 
-class Server(QWidget):  # TODO
-    def handle_connection(self, socket, client, addr):
-        pass
+class ServerRoom(QWidget):
+    def __init__(self, server: Server):
+        super().__init__()
+        self.server = server
+
+        self.players = {}
+        self.server.layout_roomlist.addWidget(self)
+
+    def __del__(self):
+        self.server.layout_roomlist.removeWidget(self)
+
+
+class ServerPlayerListItem(QWidget, gui.Ui_PlayerListItem):
+    def __init__(self, server: Server, name: str, is_host=False):
+        super().__init__()
+        self.setupUi(self)
+        self.server = server
+        self.name = name
+
+        context_menu = QMenu(self)
+        kick_action = context_menu.addAction("Kick")
+        kick_action.triggered.connect(self.kick)
+
+        self.icon_host.setPixmap(RESOURCES.host)
+        self.icon_host.setMaximumWidth(16 if is_host else 0)
+        self.label_username.setText(self.name)
+
+        self.server.layout_playerlist.addWidget(self)
+
+    def kick(self):
+        self.server.main.comm.send_queue.put(
+            ({
+                "type": "event",
+                "event": "kick",
+                "body": "Kicked by server"
+            }, self.server.clients[self.name])
+        )
+        self.server.remove_client(self.name)
+
+
+class Server(QWidget, gui.Ui_Server):
+    client_connect_signal = pyqtSignal(str)
+
+    def __init__(self, main: Window):
+        super().__init__()
+        self.setupUi(self)
+        self.main = main
+
+        self.clients: dict[str, socket_raw] = {}
+        self.browser_clients: dict[str, ServerPlayerListItem] = {}
+        self.room_clients: dict[str, ServerRoom] = {}
+        self.rooms = {}
+        self.room_list_full = {
+            "type": "event",
+            "event": "room-list-upd",
+            "body": {
+                "reset": True,
+                "updates": []
+            }
+        }
+        self.room_list_upd = []
+
+        self.update_timer = QTimer()
+        self.update_timer.timeout.connect(self.send_room_list_upd)
+
+        self.next_guest_id = 1
+        try:
+            self.passwords: dict = json.load(open("passwords.json", "r"))
+        except:
+            self.passwords = {}
+
+        self.btn_stop.clicked.connect(self.main.exit_to_menu)
+
+        self.client_connect_signal.connect(self.add_client)
+        self.main.comm.recv_signal.connect(self.on_recv_message)
+
+    def handle_connection(self, socket: ClientServer, client: socket_raw, addr):
+        print(addr)
+        connect_msg = socket.recv()
+        print(connect_msg)
+        if (
+            connect_msg["type"] != "event" or
+            connect_msg["event"] != "connect" or
+            "username" not in connect_msg or
+            "password" not in connect_msg
+        ):
+            print(addr, "cancelled")
+            client.close()
+            return
+
+        username = str(connect_msg["username"]).strip()
+        if len(username) == 0 or username.lower().startswith("guest"):
+            username = f"Guest_{self.next_guest_id}"
+            self.next_guest_id += 1
+        else:
+            password = str(connect_msg["password"])
+            if username in self.passwords:
+                if not sha256.verify(password, self.passwords[username]):
+                    socket.send({
+                        "type": "event",
+                        "event": "connect",
+                        "body": "auth failed"
+                    }, client)
+                    client.close()
+                    return
+            else:
+                self.passwords[username] = sha256.hash(password)
+
+        socket.send({
+            "type": "event",
+            "event": "connect",
+            "body": "success",
+            "username": username
+        }, client)
+        self.clients[username] = client
+        self.client_connect_signal.emit(username)
+        Thread(target=self.main.comm.recv_messages(client, username))
+
+    @pyqtSlot(str)
+    def add_client(self, username: str):
+        self.browser_clients[username] = ServerPlayerListItem(self, username)
+        self.label_player_count.setText(str(len(self.clients)))
+
+    def remove_client(self, username: str):
+        if self.browser_clients.pop(username, __default=None) is None:
+            if (room := self.room_clients.pop(username, __default=None)) is not None:
+                room.players.pop(username)
+                self.label_players_in_rooms.setText(str(len(self.room_clients)))
+        self.clients.pop(username, __default=None)
+        self.label_player_count.setText(str(len(self.clients)))
+
+    @pyqtSlot(dict)
+    def on_recv_message(self, msg: dict):
+        if msg["type"] == "event":
+            if msg["event"] == "room-list-upd":
+                self.send_room_list(msg["from"])
+            elif msg["event"] == "join-room":
+                pass
+            elif msg["event"] == "create-room":
+                pass
+            elif msg["event"] == "disconnect":
+                self.remove_client(msg["from"])
+
+    def send_room_list(self, username: str):
+        self.main.comm.send_queue.put(
+            (self.room_list_full, self.clients[username])
+        )
+
+    def send_room_list_upd(self):
+        if len(self.browser_clients) > 0:
+            upd = {
+                "type": "event",
+                "event": "room-list-upd",
+                "body": {
+                    "reset": False,
+                    "updates": self.room_list_upd
+                }
+            }
+            for client in self.browser_clients.values():
+                self.main.comm.send_queue.put(
+                    (upd, self.clients[client.name])
+                )
+
+        self.room_list_upd = []
+        self.room_list_full = {
+            "type": "event",
+            "event": "room-list-upd",
+            "body": {
+                "reset": True,
+                "updates": [{
+                    "action": "add",
+                    "name": room.name,
+                    "players": len(room.players),
+                    "max": room.max_players
+                } for room in self.rooms.values()]
+            }
+        }
+
+    def __del__(self):
+        json.dump(self.passwords, open("passwords.json", "w"))
 
 
 class KickDialog(QDialog, gui.Ui_KickDialog):
@@ -303,7 +478,7 @@ class RoomBrowser(QWidget, gui.Ui_RoomBrowser):
         self.rooms = {}
         self.selected_room: RoomListItem | None = None
 
-        self.btn_disconnect.clicked.connect(self.disconnect_from_server)
+        self.btn_disconnect.clicked.connect(self.main.exit_to_menu)
         self.btn_join.clicked.connect(self.join_room)
         self.btn_create.clicked.connect(self.create_room)
 
@@ -381,14 +556,6 @@ class RoomBrowser(QWidget, gui.Ui_RoomBrowser):
             "max-players": self.input_playercount.value()
         })
 
-    @pyqtSlot()
-    def disconnect_from_server(self):
-        Thread(target=self.main.comm.socket.disconnect, daemon=True).start()
-        self.main.exit_to_menu()
-
-    def __del__(self):
-        self.main.comm.recv_signal.disconnect(self.on_recv_message)
-
 
 class Menu(QWidget, gui.Ui_Menu):
     def __init__(self, main: Window):
@@ -441,7 +608,7 @@ class Menu(QWidget, gui.Ui_Menu):
         self.setEnabled(True)
         self.btn_connect.setText("Connect")
         self.input_password.setProperty("highlight-incorrect", result["body"] == "auth failed")
-        self.input_address.setProperty("highlight-incorrect", result["event"] == "disconnect")
+        self.input_address.setProperty("highlight-incorrect", result["event"] != "connect")
         self.setStyleSheet(STYLESHEET)
 
 
@@ -456,7 +623,7 @@ class Communication(QObject):
         super().__init__()
         Thread(target=self.send_messages, daemon=True).start()
 
-    def connect_to_server(self, addr, username, password):
+    def connect_to_server(self, addr, username: str, password: str):
         try:
             self.socket.connect(*addr)
             self.socket.send({
@@ -492,10 +659,12 @@ class Communication(QObject):
             except: pass
 
     def recv_messages(self, recipient=None, recipient_name=""):
-        while self.socket.is_open():
-            data = self.socket.recv(recipient)
-            data["from"] = recipient_name
-            self.recv_signal.emit(data)
+        try:
+            while self.socket.is_open():
+                data = self.socket.recv(recipient)
+                data["from"] = recipient_name
+                self.recv_signal.emit(data)
+        except: return
 
 
 class Window(QMainWindow):
@@ -535,14 +704,18 @@ class Window(QMainWindow):
         self.setCentralWidget(self.room_browser)
         self.room = None
 
+    @pyqtSlot()
     def exit_to_menu(self):
         self.setCentralWidget(self.menu)
         self.room = None
         self.room_browser = None
         self.server = None
+        Thread(target=self.comm.socket.disconnect, daemon=True).start()
 
 
 app = QApplication(sys.argv)
+STYLESHEET = open("gui/styles.css", "r").read()
+RESOURCES = Resources()
 app.setStyleSheet(STYLESHEET)
 window = Window()
 window.show()
