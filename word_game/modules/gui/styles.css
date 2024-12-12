@@ -25,6 +25,17 @@ PlayerListItem[selected=true] {
     background-color: #96C8FF;
 }
 
+ServerPlayerListItem {
+    background-color: #E0E0E0;
+    border-radius: 6px;
+}
+ServerPlayerListItem:hover {
+    background-color: #D0D0D0;
+}
+ServerPlayerListItem[selected=true] {
+    background-color: #96C8FF;
+}
+
 #ProgressBar {
     border-radius: 4px;
 }

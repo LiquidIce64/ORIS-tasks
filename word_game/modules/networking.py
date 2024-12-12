@@ -5,6 +5,24 @@ import threading
 import pickle
 
 
+def parse_address(address: str):
+    address_split = address.split(":")
+    if len(address_split) != 2 or not address_split[1].isdigit(): return
+
+    port = int(address_split[1])
+    if port < 49152 or port > 65535: return
+
+    address = address_split[0]
+    address_split = address.split(".")
+    if len(address_split) != 4: return
+    for part in address_split:
+        if not part.isdigit(): return
+        part = int(part)
+        if part < 0 or part > 255: return
+
+    return address, port
+
+
 class ClientServer:
     _BUFFER_SIZE = 1024
 
