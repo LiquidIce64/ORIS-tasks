@@ -1,3 +1,5 @@
+from typing import TYPE_CHECKING
+
 from passlib.hash import pbkdf2_sha256 as sha256
 from threading import Thread
 from socket import socket as socket_raw
@@ -11,11 +13,14 @@ from .player_list_item import ServerPlayerListItem
 from .room_list_item import ServerRoomListItem
 from .gui import Ui_Server
 
+if TYPE_CHECKING:
+    from .window import Window
+
 
 class Server(QWidget, Ui_Server):
     client_connect_signal = pyqtSignal(str)
 
-    def __init__(self, main):
+    def __init__(self, main: "Window"):
         super().__init__()
         self.setupUi(self)
         self.main = main

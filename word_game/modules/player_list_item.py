@@ -1,10 +1,16 @@
+from typing import TYPE_CHECKING
+
 from PyQt6.QtWidgets import QWidget, QMenu
 
 from .gui import Ui_PlayerListItem
 
+if TYPE_CHECKING:
+    from .room import Room
+    from .server import Server
+
 
 class PlayerListItem(QWidget, Ui_PlayerListItem):
-    def __init__(self, room, name: str):
+    def __init__(self, room: "Room", name: str):
         super().__init__()
         self.setupUi(self)
         self.room = room
@@ -51,7 +57,7 @@ class PlayerListItem(QWidget, Ui_PlayerListItem):
 
 
 class ServerPlayerListItem(QWidget, Ui_PlayerListItem):
-    def __init__(self, server, name: str, is_host=False):
+    def __init__(self, server: "Server", name: str, is_host=False):
         super().__init__()
         self.setupUi(self)
         self.setStyleSheet(server.main.stylesheet)

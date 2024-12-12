@@ -1,4 +1,5 @@
 from __future__ import annotations
+from typing import TYPE_CHECKING
 
 from PyQt6.QtCore import pyqtSlot
 from PyQt6.QtWidgets import QWidget
@@ -6,9 +7,12 @@ from PyQt6.QtWidgets import QWidget
 from .room_list_item import RoomListItem
 from .gui import Ui_RoomBrowser
 
+if TYPE_CHECKING:
+    from .window import Window
+
 
 class RoomBrowser(QWidget, Ui_RoomBrowser):
-    def __init__(self, main, username: str):
+    def __init__(self, main: "Window", username: str):
         super().__init__()
         self.setupUi(self)
         self.main = main

@@ -1,3 +1,5 @@
+from typing import TYPE_CHECKING
+
 from threading import Thread
 from .networking import parse_address
 
@@ -7,9 +9,12 @@ from PyQt6.QtWidgets import QWidget
 from .server import Server
 from .gui import Ui_Menu
 
+if TYPE_CHECKING:
+    from .window import Window
+
 
 class Menu(QWidget, Ui_Menu):
-    def __init__(self, main):
+    def __init__(self, main: "Window"):
         super().__init__()
         self.setupUi(self)
         self.main = main

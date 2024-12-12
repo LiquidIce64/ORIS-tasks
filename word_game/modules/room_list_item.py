@@ -1,10 +1,16 @@
+from typing import TYPE_CHECKING
+
 from PyQt6.QtWidgets import QWidget
 
 from .gui import Ui_RoomListItem
 
+if TYPE_CHECKING:
+    from .room_browser import RoomBrowser
+    from .server import Server
+
 
 class RoomListItem(QWidget, Ui_RoomListItem):
-    def __init__(self, browser, name: str, player_count: int, max_players: int):
+    def __init__(self, browser: "RoomBrowser", name: str, player_count: int, max_players: int):
         super().__init__()
         self.setupUi(self)
         self.browser = browser
@@ -50,7 +56,7 @@ class RoomListItem(QWidget, Ui_RoomListItem):
 
 
 class ServerRoomListItem(QWidget):
-    def __init__(self, server):
+    def __init__(self, server: "Server"):
         super().__init__()
         self.server = server
         self.setStyleSheet(self.server.main.stylesheet)

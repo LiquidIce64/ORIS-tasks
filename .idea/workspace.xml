@@ -4,33 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="004bf431-fb4f-4a0a-8912-e57b0897525c" name="Changes" comment="Merge branch 'main' of https://github.com/LiquidIce64/ORIS-tasks">
-      <change afterPath="$PROJECT_DIR$/word_game/modules/gui/file_index.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/ORIS-tasks.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ORIS-tasks.iml" afterDir="false" />
+    <list default="true" id="004bf431-fb4f-4a0a-8912-e57b0897525c" name="Changes" comment="Separated classes into multiple files">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/toolkit/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/toolkit/networking.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/gui/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/gui/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/gui/file_index.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/gui/icons/host.png" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/gui/icons/host.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/gui/kick_dialog.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/gui/kick_dialog.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/gui/kick_dialog.ui" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/gui/kick_dialog.ui" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/gui/menu.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/gui/menu.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/gui/menu.ui" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/gui/menu.ui" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/gui/player_list_item.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/gui/player_list_item.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/gui/player_list_item.ui" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/gui/player_list_item.ui" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/gui/recompile.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/gui/recompile.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/gui/room.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/gui/room.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/gui/room.ui" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/gui/room.ui" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/gui/room_browser.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/gui/room_browser.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/gui/room_browser.ui" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/gui/room_browser.ui" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/gui/room_list_item.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/gui/room_list_item.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/gui/room_list_item.ui" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/gui/room_list_item.ui" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/gui/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/gui/server.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/gui/server.ui" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/gui/server.ui" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/gui/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/gui/styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/word_game.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/word_game.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/menu.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/menu.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/player_list_item.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/player_list_item.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/room.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/room.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/room_browser.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/room_browser.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/room_list_item.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/room_list_item.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/server.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,32 +54,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.1.executor": "Run",
-    "Python.10.executor": "Run",
-    "Python.2.executor": "Run",
-    "Python.3.executor": "Run",
-    "Python.4.executor": "Run",
-    "Python.5.executor": "Run",
-    "Python.6.executor": "Run",
-    "Python.7.executor": "Run",
-    "Python.8.executor": "Run",
-    "Python.main.executor": "Run",
-    "Python.networking.executor": "Run",
-    "Python.player_list_item.executor": "Run",
-    "Python.recompile.executor": "Run",
-    "Python.word_game.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "Shell Script.Qt Designer.executor": "Run",
-    "Shell Script.Unnamed.executor": "Run",
-    "Shell Script.word_game.executor": "Run",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/gilya/PycharmProjects/ORIS-tasks/word_game",
-    "settings.editor.selected.configurable": "reference.idesettings.debugger.python"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.1.executor&quot;: &quot;Run&quot;,
+    &quot;Python.10.executor&quot;: &quot;Run&quot;,
+    &quot;Python.2.executor&quot;: &quot;Run&quot;,
+    &quot;Python.3.executor&quot;: &quot;Run&quot;,
+    &quot;Python.4.executor&quot;: &quot;Run&quot;,
+    &quot;Python.5.executor&quot;: &quot;Run&quot;,
+    &quot;Python.6.executor&quot;: &quot;Run&quot;,
+    &quot;Python.7.executor&quot;: &quot;Run&quot;,
+    &quot;Python.8.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.networking.executor&quot;: &quot;Run&quot;,
+    &quot;Python.player_list_item.executor&quot;: &quot;Run&quot;,
+    &quot;Python.recompile.executor&quot;: &quot;Run&quot;,
+    &quot;Python.word_game.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;Shell Script.Qt Designer.executor&quot;: &quot;Run&quot;,
+    &quot;Shell Script.Unnamed.executor&quot;: &quot;Run&quot;,
+    &quot;Shell Script.word_game.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/gilya/PycharmProjects/ORIS-tasks/word_game&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.idesettings.debugger.python&quot;
   }
-}]]></component>
+}</component>
   <component name="PyDebuggerOptionsProvider">
     <option name="myPyQtBackend" value="pyqt6" />
   </component>
@@ -117,17 +98,11 @@
       <recent name="C:\Users\gilya\Projects\PyCharm\ORIS-tasks\word_game\gui" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.word_game">
+  <component name="RunManager" selected="Shell Script.word_game">
     <list>
-      <item itemvalue="Python.word_game" />
       <item itemvalue="Shell Script.word_game" />
       <item itemvalue="Shell Script.Qt Designer" />
     </list>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Python.word_game" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -209,7 +184,15 @@
       <option name="project" value="LOCAL" />
       <updated>1733596434315</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Separated classes into multiple files">
+      <option name="closed" value="true" />
+      <created>1734019664880</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1734019664880</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -231,6 +214,7 @@
     <MESSAGE value="word game rooms finished" />
     <MESSAGE value="word game resources" />
     <MESSAGE value="Merge branch 'main' of https://github.com/LiquidIce64/ORIS-tasks" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge branch 'main' of https://github.com/LiquidIce64/ORIS-tasks" />
+    <MESSAGE value="Separated classes into multiple files" />
+    <option name="LAST_COMMIT_MESSAGE" value="Separated classes into multiple files" />
   </component>
 </project>

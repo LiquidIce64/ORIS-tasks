@@ -1,4 +1,5 @@
 from __future__ import annotations
+from typing import TYPE_CHECKING
 
 from PyQt6.QtCore import pyqtSlot, QTimer
 from PyQt6.QtWidgets import QWidget
@@ -7,9 +8,12 @@ from .player_list_item import PlayerListItem
 from .kick_dialog import KickDialog
 from .gui import Ui_Room
 
+if TYPE_CHECKING:
+    from .window import Window
+
 
 class Room(QWidget, Ui_Room):
-    def __init__(self, main, name: str, max_players: int, player_list: list[str], host: str):
+    def __init__(self, main: "Window", name: str, max_players: int, player_list: list[str], host: str):
         super().__init__()
         self.setupUi(self)
         self.main = main
