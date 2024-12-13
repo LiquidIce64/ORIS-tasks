@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file 'C:\Users\gilya\PycharmProjects\ORIS-tasks\word_game\gui\player_list_item.ui'
+# Form implementation generated from reading ui file 'C:\Users\gilya\Projects\PyCharm\ORIS-tasks\word_game\modules\gui\player_list_item.ui'
 #
 # Created by: PyQt6 UI code generator 6.4.2
 #
@@ -22,6 +22,7 @@ class Ui_PlayerListItem(object):
         self.label_username.setObjectName("label_username")
         self.horizontalLayout.addWidget(self.label_username)
         self.icon_host = QtWidgets.QLabel(parent=PlayerListItem)
+        self.icon_host.setPixmap(QtGui.QPixmap("res:/icons/host.png"))
         self.icon_host.setObjectName("icon_host")
         self.horizontalLayout.addWidget(self.icon_host)
         self.horizontalLayout.setStretch(0, 1)

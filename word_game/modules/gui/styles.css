@@ -3,36 +3,36 @@
 	height: 20px;
 }
 
-RoomListItem {
+#RoomListItem {
     background-color: #E0E0E0;
     border-radius: 6px;
 }
-RoomListItem:hover {
+#RoomListItem:hover {
     background-color: #D0D0D0;
 }
-RoomListItem[selected=true] {
+#RoomListItem[selected=true] {
     background-color: #96C8FF;
 }
 
-PlayerListItem {
+#PlayerListItem {
     background-color: #E0E0E0;
     border-radius: 6px;
 }
-PlayerListItem:hover {
+#PlayerListItem:hover {
     background-color: #D0D0D0;
 }
-PlayerListItem[selected=true] {
+#PlayerListItem[selected=true] {
     background-color: #96C8FF;
 }
 
-ServerPlayerListItem {
+#ServerPlayerListItem {
     background-color: #E0E0E0;
     border-radius: 6px;
 }
-ServerPlayerListItem:hover {
+#ServerPlayerListItem:hover {
     background-color: #D0D0D0;
 }
-ServerPlayerListItem[selected=true] {
+#ServerPlayerListItem[selected=true] {
     background-color: #96C8FF;
 }
 

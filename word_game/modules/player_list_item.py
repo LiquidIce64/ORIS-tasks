@@ -1,6 +1,10 @@
+from __future__ import annotations
+
 from typing import TYPE_CHECKING
 
+from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QWidget, QMenu
+from PyQt6.QtGui import QContextMenuEvent, QIcon
 
 from .gui import Ui_PlayerListItem
 
@@ -15,15 +19,19 @@ class PlayerListItem(QWidget, Ui_PlayerListItem):
         self.setupUi(self)
         self.room = room
         self.setStyleSheet(self.room.main.stylesheet)
+        self.setAttribute(Qt.WidgetAttribute.WA_StyleSheet)
+        self.setAttribute(Qt.WidgetAttribute.WA_StyledBackground)
         self.name = name
         self.is_you = self.name == self.room.main.room_browser.username
         self.ready = False
         self.has_host_actions = False
 
+        self.context_menu = QMenu(self)
+        self.context_menu.addAction(QIcon("res:/icons/kick"), "Kick").triggered.connect(self.kick)
+
         if self.room.host == self.room.main.room_browser.username:
             self.add_host_actions()
 
-        self.icon_host.setPixmap(self.room.main.resources.host)
         self.icon_host.setMaximumWidth(16 if self.room.host == name else 0)
         self.label_username.setText(self.name + " (you)" if self.is_you else self.name)
 
@@ -37,11 +45,12 @@ class PlayerListItem(QWidget, Ui_PlayerListItem):
         self.setStyleSheet(self.room.main.stylesheet)
 
     def add_host_actions(self):
-        if self.has_host_actions or self.is_you: return
-        self.has_host_actions = True
-        context_menu = QMenu(self)
-        kick_action = context_menu.addAction("Kick")
-        kick_action.triggered.connect(self.kick)
+        if not self.is_you:
+            self.has_host_actions = True
+
+    def contextMenuEvent(self, event: QContextMenuEvent):
+        if self.has_host_actions:
+            self.context_menu.exec(event.globalPos())
 
     def kick(self):
         self.room.main.comm.send_queue.put({
@@ -61,18 +70,21 @@ class ServerPlayerListItem(QWidget, Ui_PlayerListItem):
         super().__init__()
         self.setupUi(self)
         self.setStyleSheet(server.main.stylesheet)
+        self.setAttribute(Qt.WidgetAttribute.WA_StyleSheet)
+        self.setAttribute(Qt.WidgetAttribute.WA_StyledBackground)
         self.server = server
         self.name = name
 
-        context_menu = QMenu(self)
-        kick_action = context_menu.addAction("Kick")
-        kick_action.triggered.connect(self.kick)
+        self.context_menu = QMenu(self)
+        self.context_menu.addAction(QIcon("res:/icons/kick.png"), "Kick").triggered.connect(self.kick)
 
-        self.icon_host.setPixmap(self.server.main.resources.host)
         self.icon_host.setMaximumWidth(16 if is_host else 0)
         self.label_username.setText(self.name)
 
         self.server.layout_playerlist.addWidget(self)
+
+    def contextMenuEvent(self, event: QContextMenuEvent):
+        self.context_menu.exec(event.globalPos())
 
     def kick(self):
         self.server.main.comm.send_queue.put(

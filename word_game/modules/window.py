@@ -10,16 +10,14 @@ from .menu import Menu
 from .room_browser import RoomBrowser
 from .room import Room
 from .server import Server
-from .gui import Resources
 
 
 class Window(QMainWindow):
-    def __init__(self, stylesheet: str = "", resources: Resources = None):
+    def __init__(self, stylesheet: str = ""):
         super().__init__()
         self.default_parent = QWidget()
         self.stylesheet = stylesheet
         self.setStyleSheet(self.stylesheet)
-        self.resources = resources
         self.comm = Communication()
         self.menu = Menu(self)
         self.room_browser: RoomBrowser | None = None

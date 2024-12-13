@@ -1,6 +1,8 @@
 from .recompile import recompile_ui
 
-from .resources import Resources
+from PyQt6.QtCore import QDir
+QDir.addSearchPath("res", "modules/gui")
+
 from .menu import Ui_Menu
 from .room_browser import Ui_RoomBrowser
 from .room_list_item import Ui_RoomListItem

@@ -5,13 +5,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="004bf431-fb4f-4a0a-8912-e57b0897525c" name="Changes" comment="Separated classes into multiple files">
+      <change beforePath="$PROJECT_DIR$/.idea/ORIS-tasks.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ORIS-tasks.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/word_game.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/word_game.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/modules/menu.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/menu.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/gui/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/file_index.json" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/gui/file_index.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/kick_dialog.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/gui/kick_dialog.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/menu.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/gui/menu.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/player_list_item.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/gui/player_list_item.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/player_list_item.ui" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/gui/player_list_item.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/recompile.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/gui/recompile.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/resources.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/room.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/gui/room.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/room_browser.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/gui/room_browser.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/room_list_item.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/gui/room_list_item.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/gui/server.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/gui/styles.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/word_game/modules/player_list_item.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/player_list_item.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/modules/room.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/room.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/modules/room_browser.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/room_browser.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/word_game/modules/room_list_item.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/room_list_item.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/modules/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/server.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/window.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/window.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/word_game.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/word_game.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,12 +48,12 @@
     &quot;assignee&quot;: &quot;LiquidIce64&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/LiquidIce64/ORIS-tasks.git&quot;,
-    &quot;accountId&quot;: &quot;3055f347-3b02-49a9-8493-13d28d702737&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/LiquidIce64/ORIS-tasks.git",
+    "accountId": "2cc8e885-26a0-4cb0-8d35-6eb35f2397b3"
   }
-}</component>
+}]]></component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/PyCharmCE2024.1/python_stubs/-1910143935/PyQt6/QtCore/pyqtSignal.py" root0="FORCE_HIGHLIGHTING" />
   </component>
@@ -54,42 +68,42 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.1.executor&quot;: &quot;Run&quot;,
-    &quot;Python.10.executor&quot;: &quot;Run&quot;,
-    &quot;Python.2.executor&quot;: &quot;Run&quot;,
-    &quot;Python.3.executor&quot;: &quot;Run&quot;,
-    &quot;Python.4.executor&quot;: &quot;Run&quot;,
-    &quot;Python.5.executor&quot;: &quot;Run&quot;,
-    &quot;Python.6.executor&quot;: &quot;Run&quot;,
-    &quot;Python.7.executor&quot;: &quot;Run&quot;,
-    &quot;Python.8.executor&quot;: &quot;Run&quot;,
-    &quot;Python.main.executor&quot;: &quot;Run&quot;,
-    &quot;Python.networking.executor&quot;: &quot;Run&quot;,
-    &quot;Python.player_list_item.executor&quot;: &quot;Run&quot;,
-    &quot;Python.recompile.executor&quot;: &quot;Run&quot;,
-    &quot;Python.word_game.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;Shell Script.Qt Designer.executor&quot;: &quot;Run&quot;,
-    &quot;Shell Script.Unnamed.executor&quot;: &quot;Run&quot;,
-    &quot;Shell Script.word_game.executor&quot;: &quot;Run&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/gilya/PycharmProjects/ORIS-tasks/word_game&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.idesettings.debugger.python&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.1.executor": "Run",
+    "Python.10.executor": "Run",
+    "Python.2.executor": "Run",
+    "Python.3.executor": "Run",
+    "Python.4.executor": "Run",
+    "Python.5.executor": "Run",
+    "Python.6.executor": "Run",
+    "Python.7.executor": "Run",
+    "Python.8.executor": "Run",
+    "Python.main.executor": "Run",
+    "Python.networking.executor": "Run",
+    "Python.player_list_item.executor": "Run",
+    "Python.recompile.executor": "Run",
+    "Python.word_game.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "Shell Script.Qt Designer.executor": "Run",
+    "Shell Script.Unnamed.executor": "Run",
+    "Shell Script.word_game.executor": "Run",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/gilya/Projects/PyCharm/ORIS-tasks/word_game/modules/gui/icons",
+    "settings.editor.selected.configurable": "Errors"
   }
-}</component>
+}]]></component>
   <component name="PyDebuggerOptionsProvider">
     <option name="myPyQtBackend" value="pyqt6" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\gilya\Projects\PyCharm\ORIS-tasks\word_game\modules\gui\icons" />
       <recent name="C:\Users\gilya\Projects\PyCharm\ORIS-tasks\word_game" />
       <recent name="C:\Users\gilya\Projects\PyCharm\ORIS-tasks\word_game\gui\icons" />
       <recent name="C:\Users\gilya\Projects\PyCharm\ORIS-tasks\toolkit" />
       <recent name="C:\Users\gilya\Projects\PyCharm\ORIS-tasks" />
-      <recent name="C:\Users\gilya\Projects\PyCharm\ORIS-tasks\threads" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\gilya\PycharmProjects\ORIS-tasks\word_game\modules" />
@@ -99,10 +113,38 @@
     </key>
   </component>
   <component name="RunManager" selected="Shell Script.word_game">
+    <configuration name="player_list_item" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="ORIS-tasks" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/word_game/modules/gui" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/word_game/modules/gui/player_list_item.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <list>
+      <item itemvalue="Python.player_list_item" />
       <item itemvalue="Shell Script.word_game" />
       <item itemvalue="Shell Script.Qt Designer" />
     </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.player_list_item" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>

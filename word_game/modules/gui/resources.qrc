@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="icons">
+    <file alias="host.png">icons/host.png</file>
+    <file alias="kick.png">icons/kick.png</file>
+  </qresource>
+</RCC>

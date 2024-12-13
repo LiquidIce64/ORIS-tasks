@@ -1,5 +1,6 @@
 from typing import TYPE_CHECKING
 
+from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QWidget
 
 from .gui import Ui_RoomListItem
@@ -15,6 +16,8 @@ class RoomListItem(QWidget, Ui_RoomListItem):
         self.setupUi(self)
         self.browser = browser
         self.setStyleSheet(self.browser.main.stylesheet)
+        self.setAttribute(Qt.WidgetAttribute.WA_StyleSheet)
+        self.setAttribute(Qt.WidgetAttribute.WA_StyledBackground)
         self.name = name
         self.player_count = player_count
         self.max_players = max_players
@@ -60,6 +63,8 @@ class ServerRoomListItem(QWidget):
         super().__init__()
         self.server = server
         self.setStyleSheet(self.server.main.stylesheet)
+        self.setAttribute(Qt.WidgetAttribute.WA_StyleSheet)
+        self.setAttribute(Qt.WidgetAttribute.WA_StyledBackground)
 
         self.players = {}
         self.server.layout_roomlist.addWidget(self)

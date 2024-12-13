@@ -1,5 +1,6 @@
 import os
 import json
+import re
 
 
 def recompile_ui():
@@ -17,7 +18,12 @@ def recompile_ui():
         index[file.name] = last_modified
         index_changed = True
         print(f"Recompiling {file.name}...")
-        os.system(f"pyuic6 {file.path} -o {file.path[:-2] + 'py'} -x")
+        new_path = file.path[:-2] + 'py'
+        os.system(f"pyuic6 {file.path} -o {new_path} -x")
+
+        s = open(new_path, "r").read()
+        s = re.sub(r'(?<=")(?=:/[^"\n]*")', "res", s)
+        open(new_path, "w").write(s)
 
     if index_changed:
         json.dump(index, open(os.path.join(directory, "file_index.json"), "w"))
