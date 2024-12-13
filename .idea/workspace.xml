@@ -4,17 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="004bf431-fb4f-4a0a-8912-e57b0897525c" name="Changes" comment="fixed nested widget styles not showing + integrated resources with designer">
+    <list default="true" id="004bf431-fb4f-4a0a-8912-e57b0897525c" name="Changes" comment="disconnect logic + menu style">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/word_game/modules/communication.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/communication.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/file_index.json" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/gui/file_index.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/menu.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/gui/menu.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/menu.ui" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/gui/menu.ui" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/gui/styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/modules/kick_dialog.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/dialogs.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/word_game/modules/networking.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/networking.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/word_game/modules/player_list_item.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/player_list_item.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/modules/room.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/room.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/word_game/modules/room_browser.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/room_browser.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/word_game/modules/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/server.py" afterDir="false" />
     </list>
@@ -104,38 +98,10 @@
     </key>
   </component>
   <component name="RunManager" selected="Shell Script.word_game">
-    <configuration name="player_list_item" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="ORIS-tasks" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/word_game/modules/gui" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/word_game/modules/gui/player_list_item.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <list>
-      <item itemvalue="Python.player_list_item" />
       <item itemvalue="Shell Script.word_game" />
       <item itemvalue="Shell Script.Qt Designer" />
     </list>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Python.player_list_item" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -233,7 +199,15 @@
       <option name="project" value="LOCAL" />
       <updated>1734113922486</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="disconnect logic + menu style">
+      <option name="closed" value="true" />
+      <created>1734120185810</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1734120185810</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -257,6 +231,7 @@
     <MESSAGE value="Merge branch 'main' of https://github.com/LiquidIce64/ORIS-tasks" />
     <MESSAGE value="Separated classes into multiple files" />
     <MESSAGE value="fixed nested widget styles not showing + integrated resources with designer" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed nested widget styles not showing + integrated resources with designer" />
+    <MESSAGE value="disconnect logic + menu style" />
+    <option name="LAST_COMMIT_MESSAGE" value="disconnect logic + menu style" />
   </component>
 </project>

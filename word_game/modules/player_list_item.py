@@ -90,11 +90,9 @@ class ServerPlayerListItem(QWidget, Ui_PlayerListItem):
         self.icon_host.setMaximumWidth(16 if is_host else 0)
 
     def kick(self):
-        self.server.main.comm.send_queue.put(
-            ({
+        client = self.server.clients[self.name]
+        self.server.main.comm.send_queue.put(({
                 "type": "event",
                 "event": "disconnect",
                 "body": "Kicked from server"
-            }, self.server.clients[self.name])
-        )
-        self.server.clients[self.name].close()
+        }, client))

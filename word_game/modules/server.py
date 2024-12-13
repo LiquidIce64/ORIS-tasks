@@ -42,6 +42,7 @@ class Server(QWidget, Ui_Server):
 
         self.update_timer = QTimer()
         self.update_timer.timeout.connect(self.send_room_list_upd)
+        self.update_timer.start(10000)
 
         self.next_guest_id = 1
         try:
@@ -55,11 +56,11 @@ class Server(QWidget, Ui_Server):
         self.main.comm.recv_signal.connect(self.on_recv_message)
 
     def handle_connection(self, socket: ClientServer, client: socket_raw, addr):
-        print(addr)
-        connect_msg = socket.recv()
-        print(connect_msg)
+        connect_msg = socket.recv(client)
         if (
+            "type" not in connect_msg or
             connect_msg["type"] != "event" or
+            "event" not in connect_msg or
             connect_msg["event"] != "connect" or
             "username" not in connect_msg or
             "password" not in connect_msg
@@ -94,7 +95,8 @@ class Server(QWidget, Ui_Server):
         }, client)
         self.clients[username] = client
         self.client_connect_signal.emit(username)
-        Thread(target=self.main.comm.recv_messages(client, username))
+        print(f"{username} connected from {addr}")
+        Thread(target=self.main.comm.recv_messages(client, username), daemon=True).start()
 
     @pyqtSlot(str)
     def add_client(self, username: str):
@@ -115,19 +117,28 @@ class Server(QWidget, Ui_Server):
     def on_recv_message(self, msg: dict):
         if msg["type"] == "event":
             if msg["event"] == "room-list-upd":
-                self.send_room_list(msg["from"])
+                self.main.comm.send_queue.put(
+                    (self.room_list_full, self.clients[msg["from"]])
+                )
+
             elif msg["event"] == "join-room":
-                pass
+                self.main.comm.send_queue.put(({
+                    "type": "event",
+                    "event": "join-room",
+                    "body": self.join_room(msg["body"])
+                }, self.clients[msg["from"]]))
+
             elif msg["event"] == "create-room":
-                pass
+                self.main.comm.send_queue.put(({
+                    "type": "event",
+                    "event": "create-room",
+                    "body": self.create_room(msg["body"])
+                }, self.clients[msg["from"]]))
+
             elif msg["event"] == "disconnect":
                 self.remove_client(msg["from"])
 
-    def send_room_list(self, username: str):
-        self.main.comm.send_queue.put(
-            (self.room_list_full, self.clients[username])
-        )
-
+    @pyqtSlot()
     def send_room_list_upd(self):
         if len(self.browser_clients) > 0:
             upd = {
@@ -158,7 +169,29 @@ class Server(QWidget, Ui_Server):
             }
         }
 
+    def join_room(self, room_name: str):
+        if room_name not in self.rooms: return "Room not found"
+        room = self.rooms[room_name]
+        if len(room.players) >= room.max_players: return "Room full"
+
+        # TODO
+
+        return "Room joined"
+
+    def create_room(self, room_info: dict):
+        if "name" not in room_info or "max-players" not in room_info: return "Error"
+        name = room_info["name"]
+        max_players = room_info["max-players"]
+        if name in self.rooms: return "Room already exists"
+        if not (2 <= max_players <= 64): return "Error"
+        self.rooms[name] = ServerRoomListItem(self)
+
+        # TODO
+
+        return "Room created"
+
     def deleteLater(self):
         json.dump(self.passwords, open("passwords.json", "w"))
+        self.update_timer.stop()
         self.main.server = None
         super().deleteLater()

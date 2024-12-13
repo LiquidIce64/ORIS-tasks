@@ -53,26 +53,27 @@ class RoomBrowser(QWidget, Ui_RoomBrowser):
 
             elif msg["event"] == "join-room":
                 self.setEnabled(True)
-                if msg["body"] == "room joined":
+                if msg["body"] is dict:
+                    room_info = msg["body"]
                     self.btn_join.setText("Join room")
                     self.main.join_room(
                         name=self.selected_room.name,
                         max_players=self.selected_room.max_players,
-                        player_list=msg["players"],
-                        host=msg["host"]
+                        player_list=room_info["players"],
+                        host=room_info["host"]
                     )
                 else:
                     self.btn_join.setText(msg["body"])
 
             elif msg["event"] == "create-room":
                 self.setEnabled(True)
-                if msg["body"] == "room created":
+                if msg["body"] == "Room created":
                     self.btn_create.setText("Create room")
                     self.main.join_room(
                         name=self.input_roomname.text(),
                         max_players=self.input_playercount.value(),
                         player_list=[self.username],
-                        host=msg["host"]
+                        host=self.username
                     )
                 else:
                     self.btn_create.setText(msg["body"])
@@ -89,7 +90,7 @@ class RoomBrowser(QWidget, Ui_RoomBrowser):
         self.main.comm.send_queue.put({
             "type": "event",
             "event": "join-room",
-            "name": self.selected_room.name
+            "body": self.selected_room.name
         })
 
     @pyqtSlot()
@@ -100,8 +101,10 @@ class RoomBrowser(QWidget, Ui_RoomBrowser):
         self.main.comm.send_queue.put({
             "type": "event",
             "event": "create-room",
-            "name": self.input_roomname.text(),
-            "max-players": self.input_playercount.value()
+            "body": {
+                "name": self.input_roomname.text(),
+                "max-players": self.input_playercount.value()
+            }
         })
 
     def deleteLater(self):

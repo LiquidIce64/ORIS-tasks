@@ -49,18 +49,17 @@ class Communication(QObject):
         while True:
             data = self.send_queue.get()
             try:
-                if data is tuple:
-                    self.socket.send(*data)
-                else:
+                if data is dict:
                     self.socket.send(data)
-            except: pass
+                else:
+                    self.socket.send(data[0], data[1])
+            except Exception as e: print(f"[WARN] Exception while sending data\nData: {data}\nException: {e}")
 
     def recv_messages(self, recipient=None, recipient_name=""):
         try:
             while self.socket.is_open():
                 data = self.socket.recv(recipient)
                 if recipient is not None: data["from"] = recipient_name
-                print(data)
                 self.recv_signal.emit(data)
                 if data["type"] == "event" and data["event"] == "disconnect":
                     break
