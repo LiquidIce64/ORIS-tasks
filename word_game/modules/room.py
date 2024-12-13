@@ -5,7 +5,7 @@ from PyQt6.QtCore import pyqtSlot, QTimer
 from PyQt6.QtWidgets import QWidget
 
 from .player_list_item import PlayerListItem
-from .kick_dialog import KickDialog
+from .dialogs import KickDialog
 from .gui import Ui_Room
 
 if TYPE_CHECKING:
@@ -98,7 +98,7 @@ class Room(QWidget, Ui_Room):
                 self.update_countdown()
             elif msg["event"] == "kick":
                 self.main.leave_room()
-                KickDialog(msg["body"])
+                KickDialog(msg["body"]).exec()
 
     def next_turn(self, turn_info: dict):
         if "word" in turn_info:
@@ -153,3 +153,7 @@ class Room(QWidget, Ui_Room):
             "event": "leave-room"
         })
         self.main.leave_room()
+
+    def deleteLater(self):
+        self.main.room = None
+        super().deleteLater()

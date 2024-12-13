@@ -76,7 +76,7 @@ class ClientServer:
                 client, addr = self.__sock.accept()
                 self._clients[addr] = client
                 threading.Thread(target=client_handling_func, args=(self, client, addr), daemon=True).start()
-        except ConnectionError:
+        except:
             if self.is_open():
                 raise RuntimeError("Server socket closed abruptly")
 
@@ -114,7 +114,7 @@ class ClientServer:
             res = {
                 "type": "event",
                 "event": "disconnect",
-                "body": "connection lost"
+                "body": "Connection lost"
             }
 
         return res
@@ -124,14 +124,14 @@ class ClientServer:
             try: self.broadcast({
                 "type": "event",
                 "event": "disconnect",
-                "body": "server closed"
+                "body": "Server closed"
             })
             except: pass
         elif self.__connected:
             try: self.send({
                 "type": "event",
                 "event": "disconnect",
-                "body": "user disconnect"
+                "body": "User disconnect"
             })
             except: pass
         self.__addr = None
@@ -147,26 +147,3 @@ class ClientServer:
 
     def __del__(self):
         self.disconnect()
-
-
-if __name__ == '__main__':
-    if input("select mode (1-server, 2-client): ") == "1":
-        s = ClientServer()
-
-        def handle_client(self: ClientServer, client: socket.socket, address: typing.Tuple[str, int]):
-            print("Sending hello")
-            self.send(self.str_to_msg("Hello"), client)
-            print("Waiting for client")
-            print("Received from client:", self.recv(client))
-
-        s.host(handle_client)
-        print("Server running")
-    else:
-        c = ClientServer()
-        c.connect()
-        print("Connected to server")
-        print("Received from server:", c.recv())
-        print("Sending hi")
-        c.send(c.str_to_msg("hi"))
-
-    input()

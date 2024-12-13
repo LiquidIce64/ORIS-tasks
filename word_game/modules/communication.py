@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from threading import Thread
 from queue import SimpleQueue
 from .networking import ClientServer
@@ -10,7 +12,7 @@ class Communication(QObject):
     host_signal = pyqtSignal(bool)
     recv_signal = pyqtSignal(dict)
     send_queue = SimpleQueue()
-    socket = ClientServer()
+    socket: ClientServer | None = None
 
     def __init__(self):
         super().__init__()
@@ -18,7 +20,7 @@ class Communication(QObject):
 
     def connect_to_server(self, addr, username: str, password: str):
         try:
-            print(self.socket)
+            self.socket = ClientServer()
             self.socket.connect(*addr)
             self.socket.send({
                 "type": "event",
@@ -37,6 +39,7 @@ class Communication(QObject):
 
     def host_server(self, client_handling_func, addr):
         try:
+            self.socket = ClientServer()
             self.socket.host(client_handling_func, *addr)
             self.host_signal.emit(True)
         except:

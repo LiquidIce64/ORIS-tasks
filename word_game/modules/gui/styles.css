@@ -3,36 +3,28 @@
 	height: 20px;
 }
 
-#RoomListItem {
-    background-color: #E0E0E0;
-    border-radius: 6px;
+#frame_menu {
+	background-color: #E0E0E0;
+	border-radius: 20px;
 }
-#RoomListItem:hover {
-    background-color: #D0D0D0;
+#frame_menu QLineEdit, #frame_menu QPushButton {
+	background-color: white;
+	border-radius: 10px;
+	padding: 10px;
+	font-size: 14px;
 }
-#RoomListItem[selected=true] {
-    background-color: #96C8FF;
-}
-
-#PlayerListItem {
-    background-color: #E0E0E0;
-    border-radius: 6px;
-}
-#PlayerListItem:hover {
-    background-color: #D0D0D0;
-}
-#PlayerListItem[selected=true] {
-    background-color: #96C8FF;
+#frame_menu QPushButton:hover {
+	background-color: #D0D0D0;
 }
 
-#ServerPlayerListItem {
+#RoomListItem, #PlayerListItem, #ServerPlayerListItem {
     background-color: #E0E0E0;
     border-radius: 6px;
 }
-#ServerPlayerListItem:hover {
+#RoomListItem:hover, #PlayerListItem:hover, #ServerPlayerListItem:hover {
     background-color: #D0D0D0;
 }
-#ServerPlayerListItem[selected=true] {
+#RoomListItem[selected=true], #PlayerListItem[selected=true], #ServerPlayerListItem[selected=true] {
     background-color: #96C8FF;
 }
 

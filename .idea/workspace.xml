@@ -4,28 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="004bf431-fb4f-4a0a-8912-e57b0897525c" name="Changes" comment="Separated classes into multiple files">
-      <change beforePath="$PROJECT_DIR$/.idea/ORIS-tasks.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ORIS-tasks.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/word_game.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/word_game.xml" afterDir="false" />
+    <list default="true" id="004bf431-fb4f-4a0a-8912-e57b0897525c" name="Changes" comment="fixed nested widget styles not showing + integrated resources with designer">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/modules/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/gui/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/communication.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/communication.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/word_game/modules/gui/file_index.json" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/gui/file_index.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/kick_dialog.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/gui/kick_dialog.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/word_game/modules/gui/menu.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/gui/menu.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/player_list_item.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/gui/player_list_item.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/player_list_item.ui" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/gui/player_list_item.ui" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/recompile.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/gui/recompile.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/resources.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/room.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/gui/room.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/room_browser.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/gui/room_browser.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/room_list_item.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/gui/room_list_item.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/gui/server.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/menu.ui" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/gui/menu.ui" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/word_game/modules/gui/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/gui/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/kick_dialog.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/dialogs.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/networking.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/networking.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/word_game/modules/player_list_item.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/player_list_item.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/modules/room_list_item.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/room_list_item.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/modules/window.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/window.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/word_game.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/word_game.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/room.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/room.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/room_browser.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/room_browser.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/server.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -234,7 +225,15 @@
       <option name="project" value="LOCAL" />
       <updated>1734019664880</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="fixed nested widget styles not showing + integrated resources with designer">
+      <option name="closed" value="true" />
+      <created>1734113922486</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1734113922486</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -257,6 +256,7 @@
     <MESSAGE value="word game resources" />
     <MESSAGE value="Merge branch 'main' of https://github.com/LiquidIce64/ORIS-tasks" />
     <MESSAGE value="Separated classes into multiple files" />
-    <option name="LAST_COMMIT_MESSAGE" value="Separated classes into multiple files" />
+    <MESSAGE value="fixed nested widget styles not showing + integrated resources with designer" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed nested widget styles not showing + integrated resources with designer" />
   </component>
 </project>

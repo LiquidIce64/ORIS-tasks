@@ -4,6 +4,7 @@ from typing import TYPE_CHECKING
 from PyQt6.QtCore import pyqtSlot
 from PyQt6.QtWidgets import QWidget
 
+from .dialogs import DisconnectDialog
 from .room_list_item import RoomListItem
 from .gui import Ui_RoomBrowser
 
@@ -78,6 +79,7 @@ class RoomBrowser(QWidget, Ui_RoomBrowser):
 
             elif msg["event"] == "disconnect":
                 self.main.exit_to_menu()
+                DisconnectDialog(msg["body"]).exec()
 
     @pyqtSlot()
     def join_room(self):
@@ -101,3 +103,7 @@ class RoomBrowser(QWidget, Ui_RoomBrowser):
             "name": self.input_roomname.text(),
             "max-players": self.input_playercount.value()
         })
+
+    def deleteLater(self):
+        self.main.room_browser = None
+        super().deleteLater()

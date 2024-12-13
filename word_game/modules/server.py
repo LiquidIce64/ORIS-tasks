@@ -103,7 +103,7 @@ class Server(QWidget, Ui_Server):
 
     def remove_client(self, username: str):
         if username in self.browser_clients:
-            self.browser_clients.pop(username)
+            self.browser_clients.pop(username).deleteLater()
         elif username in self.room_clients:
             room = self.room_clients.pop(username)
             room.players.pop(username).deleteLater()
@@ -160,4 +160,5 @@ class Server(QWidget, Ui_Server):
 
     def deleteLater(self):
         json.dump(self.passwords, open("passwords.json", "w"))
+        self.main.server = None
         super().deleteLater()

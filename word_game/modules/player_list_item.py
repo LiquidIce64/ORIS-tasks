@@ -27,7 +27,7 @@ class PlayerListItem(QWidget, Ui_PlayerListItem):
         self.has_host_actions = False
 
         self.context_menu = QMenu(self)
-        self.context_menu.addAction(QIcon("res:/icons/kick"), "Kick").triggered.connect(self.kick)
+        self.context_menu.addAction(QIcon("res:/icons/kick"), "Kick from room").triggered.connect(self.kick)
 
         if self.room.host == self.room.main.room_browser.username:
             self.add_host_actions()
@@ -76,9 +76,9 @@ class ServerPlayerListItem(QWidget, Ui_PlayerListItem):
         self.name = name
 
         self.context_menu = QMenu(self)
-        self.context_menu.addAction(QIcon("res:/icons/kick.png"), "Kick").triggered.connect(self.kick)
+        self.context_menu.addAction(QIcon("res:/icons/kick.png"), "Kick from server").triggered.connect(self.kick)
 
-        self.icon_host.setMaximumWidth(16 if is_host else 0)
+        self.set_host(is_host)
         self.label_username.setText(self.name)
 
         self.server.layout_playerlist.addWidget(self)
@@ -86,12 +86,15 @@ class ServerPlayerListItem(QWidget, Ui_PlayerListItem):
     def contextMenuEvent(self, event: QContextMenuEvent):
         self.context_menu.exec(event.globalPos())
 
+    def set_host(self, is_host: bool):
+        self.icon_host.setMaximumWidth(16 if is_host else 0)
+
     def kick(self):
         self.server.main.comm.send_queue.put(
             ({
                 "type": "event",
-                "event": "kick",
-                "body": "Kicked by server"
+                "event": "disconnect",
+                "body": "Kicked from server"
             }, self.server.clients[self.name])
         )
-        self.server.remove_client(self.name)
+        self.server.clients[self.name].close()
