@@ -19,7 +19,7 @@ class RoomBrowser(QWidget, Ui_RoomBrowser):
         self.main = main
         self.setStyleSheet(self.main.stylesheet)
         self.username = username
-        self.rooms = {}
+        self.rooms: dict[str, RoomListItem] = {}
         self.selected_room: RoomListItem | None = None
 
         self.btn_disconnect.clicked.connect(self.main.exit_to_menu)
@@ -39,7 +39,7 @@ class RoomBrowser(QWidget, Ui_RoomBrowser):
             self.rooms.clear()
         for upd in update_info["updates"]:
             if upd["action"] == "del":
-                if upd["name"] in self.rooms: self.rooms.pop(upd["name"])
+                if upd["name"] in self.rooms: self.rooms.pop(upd["name"]).deleteLater()
             elif upd["action"] == "add":
                 self.rooms[upd["name"]] = RoomListItem(self, upd["name"], upd["players"], upd["max"])
             elif upd["action"] == "upd":
@@ -53,14 +53,12 @@ class RoomBrowser(QWidget, Ui_RoomBrowser):
 
             elif msg["event"] == "join-room":
                 self.setEnabled(True)
-                if msg["body"] is dict:
-                    room_info = msg["body"]
+                if msg["body"] is list:
                     self.btn_join.setText("Join room")
                     self.main.join_room(
                         name=self.selected_room.name,
                         max_players=self.selected_room.max_players,
-                        player_list=room_info["players"],
-                        host=room_info["host"]
+                        player_list=msg["body"]
                     )
                 else:
                     self.btn_join.setText(msg["body"])
@@ -72,8 +70,7 @@ class RoomBrowser(QWidget, Ui_RoomBrowser):
                     self.main.join_room(
                         name=self.input_roomname.text(),
                         max_players=self.input_playercount.value(),
-                        player_list=[self.username],
-                        host=self.username
+                        player_list=[{"name": self.username, "ready": False, "host": True}]
                     )
                 else:
                     self.btn_create.setText(msg["body"])
@@ -95,14 +92,15 @@ class RoomBrowser(QWidget, Ui_RoomBrowser):
 
     @pyqtSlot()
     def create_room(self):
-        if len(self.input_roomname.text().strip()) == 0: return
+        name = self.input_roomname.text().strip()
+        if len(name) == 0: return
         self.setEnabled(False)
         self.btn_create.setText("Creating...")
         self.main.comm.send_queue.put({
             "type": "event",
             "event": "create-room",
             "body": {
-                "name": self.input_roomname.text(),
+                "name": name,
                 "max-players": self.input_playercount.value()
             }
         })

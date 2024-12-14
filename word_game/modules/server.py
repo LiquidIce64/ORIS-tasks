@@ -29,7 +29,7 @@ class Server(QWidget, Ui_Server):
         self.clients: dict[str, socket_raw] = {}
         self.browser_clients: dict[str, ServerPlayerListItem] = {}
         self.room_clients: dict[str, ServerRoomListItem] = {}
-        self.rooms = {}
+        self.rooms: dict[str, ServerRoomListItem] = {}
         self.room_list_full = {
             "type": "event",
             "event": "room-list-upd",
@@ -108,7 +108,7 @@ class Server(QWidget, Ui_Server):
             self.browser_clients.pop(username).deleteLater()
         elif username in self.room_clients:
             room = self.room_clients.pop(username)
-            room.players.pop(username).deleteLater()
+            room.remove_player(username).deleteLater()
             self.label_players_in_rooms.setText(str(len(self.room_clients)))
         if username in self.clients: self.clients.pop(username)
         self.label_player_count.setText(str(len(self.clients)))
@@ -125,14 +125,14 @@ class Server(QWidget, Ui_Server):
                 self.main.comm.send_queue.put(({
                     "type": "event",
                     "event": "join-room",
-                    "body": self.join_room(msg["body"])
+                    "body": self.join_room(msg["body"], msg["from"])
                 }, self.clients[msg["from"]]))
 
             elif msg["event"] == "create-room":
                 self.main.comm.send_queue.put(({
                     "type": "event",
                     "event": "create-room",
-                    "body": self.create_room(msg["body"])
+                    "body": self.create_room(msg["body"], msg["from"])
                 }, self.clients[msg["from"]]))
 
             elif msg["event"] == "disconnect":
@@ -169,24 +169,48 @@ class Server(QWidget, Ui_Server):
             }
         }
 
-    def join_room(self, room_name: str):
+    def join_room(self, room_name: str, username: str):
         if room_name not in self.rooms: return "Room not found"
         room = self.rooms[room_name]
         if len(room.players) >= room.max_players: return "Room full"
+        if username not in self.browser_clients: return "Error"
 
-        # TODO
+        player_item = self.browser_clients.pop(username)
+        self.layout_playerlist.removeWidget(player_item)
+        room.add_player(player_item)
+        self.room_clients[username] = room
+        self.label_players_in_rooms.setText(str(len(self.room_clients)))
 
-        return "Room joined"
+        return [{
+            "name": player.name,
+            "ready": player.ready,
+            "host": player.host
+        } for player in room.players.values()]
 
-    def create_room(self, room_info: dict):
+    def leave_room(self, username: str):
+        if username not in self.room_clients: return
+        room = self.room_clients.pop(username)
+        player_item = room.remove_player(username)
+
+        self.browser_clients[username] = player_item
+        self.layout_playerlist.addWidget(player_item)
+        self.label_players_in_rooms.setText(str(len(self.room_clients)))
+
+    def create_room(self, room_info: dict, host: str):
         if "name" not in room_info or "max-players" not in room_info: return "Error"
         name = room_info["name"]
         max_players = room_info["max-players"]
         if name in self.rooms: return "Room already exists"
         if not (2 <= max_players <= 64): return "Error"
-        self.rooms[name] = ServerRoomListItem(self)
+        if host not in self.browser_clients: return "Error"
 
-        # TODO
+        host_item = self.browser_clients.pop(host)
+        self.layout_playerlist.removeWidget(host_item)
+
+        room = ServerRoomListItem(self, name, max_players, host_item)
+        self.rooms[name] = room
+        self.room_clients[host_item.name] = room
+        self.label_players_in_rooms.setText(str(len(self.room_clients)))
 
         return "Room created"
 

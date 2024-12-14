@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import types
 from threading import Thread
 from queue import SimpleQueue
 from .networking import ClientServer
@@ -49,11 +50,13 @@ class Communication(QObject):
         while True:
             data = self.send_queue.get()
             try:
-                if data is dict:
+                if isinstance(data, dict):
                     self.socket.send(data)
-                else:
+                elif isinstance(data, tuple):
                     self.socket.send(data[0], data[1])
-            except Exception as e: print(f"[WARN] Exception while sending data\nData: {data}\nException: {e}")
+                else:
+                    print(f"[WARN] Unknown message type encountered while sending data\nData: {data}")
+            except Exception as e: print(f"[WARN] Exception while sending data\nData: {data}\nException: {e.with_traceback(None)}")
 
     def recv_messages(self, recipient=None, recipient_name=""):
         try:

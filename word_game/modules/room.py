@@ -13,18 +13,17 @@ if TYPE_CHECKING:
 
 
 class Room(QWidget, Ui_Room):
-    def __init__(self, main: "Window", name: str, max_players: int, player_list: list[str], host: str):
+    def __init__(self, main: "Window", name: str, max_players: int, player_list: list[dict]):
         super().__init__()
         self.setupUi(self)
         self.main = main
         self.setStyleSheet(self.main.stylesheet)
 
         self.max_players = max_players
-        self.players = {}
+        self.players: dict[str, PlayerListItem] = {}
         self.ready_players = 0
         self.current_player: PlayerListItem | None = None
         self.used_words = []
-        self.host = host
 
         self.countdown = 3
         self.countdown_timer = QTimer()
@@ -34,8 +33,10 @@ class Room(QWidget, Ui_Room):
         self.turn_timer.timeout.connect(self.update_turn_timer)
 
         self.label_room_name.setText(name)
-        for player_name in player_list:
-            self.players[player_name] = PlayerListItem(self, player_name)
+        for player_info in player_list:
+            name = player_info["name"]
+            if player_info["host"]: self.host = name
+            self.players[name] = PlayerListItem(self, name, player_info["ready"])
         self.label_player_count.setText(f"{len(self.players)}/{self.max_players}")
 
         self.btn_leave.clicked.connect(self.leave_room)
