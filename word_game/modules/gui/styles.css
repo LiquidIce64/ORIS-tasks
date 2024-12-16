@@ -28,10 +28,10 @@
     background-color: #96C8FF;
 }
 
-#ProgressBar {
+QProgressBar {
     border-radius: 4px;
 }
-#ProgressBar::chunk {
+QProgressBar::chunk {
     border-radius: 4px;
     background-color: #96C8FF;
 }

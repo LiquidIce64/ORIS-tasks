@@ -139,11 +139,22 @@ class Server(QWidget, Ui_Server):
                         "body": self.create_room(msg["body"], msg["from"])
                     }, self.clients[msg["from"]]))
 
+                elif msg["event"] == "ready":
+                    if msg["from"] not in self.room_clients: return
+                    self.room_clients[msg["from"]].set_ready(msg["from"], msg["body"])
+
                 elif msg["event"] == "disconnect":
                     self.remove_client(msg["from"])
 
                 elif msg["event"] == "kick":
                     self.kick_from_room(msg["body"], msg["from"])
+
+            elif msg["type"] == "word":
+                if msg["from"] in self.room_clients:
+                    room = self.room_clients[msg["from"]]
+                    if room.game is not None:
+                        room.game.submit_word(msg["word"], msg["from"])
+
         except KeyError:
             print(f"[WARN] Invalid keys in message, skipping...\nMessage: {msg}")
 
@@ -183,6 +194,7 @@ class Server(QWidget, Ui_Server):
         if room_name not in self.rooms: return "Room not found"
         room = self.rooms[room_name]
         if len(room.players) >= room.max_players: return "Room full"
+        if room.game is not None: return "Game already started"
         if username not in self.browser_clients: return "Error"
 
         player_item = self.browser_clients.pop(username)

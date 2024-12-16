@@ -31,6 +31,7 @@ class Room(QWidget, Ui_Room):
         self.turn_time = 0
         self.turn_timer = QTimer()
         self.turn_timer.timeout.connect(self.update_turn_timer)
+        self.game_started = False
 
         self.label_room_name.setText(name)
         for player_info in player_list:
@@ -49,14 +50,16 @@ class Room(QWidget, Ui_Room):
     @pyqtSlot()
     def update_countdown(self):
         self.countdown_timer.stop()
+        if self.game_started: return
         self.label_game_state.setText(f"Starting in {self.countdown}...")
-        self.countdown -= 1
         if self.countdown > 0:
+            self.countdown -= 1
             self.countdown_timer.start(1000)
 
     @pyqtSlot()
     def update_turn_timer(self):
         self.timer_progress.setValue(self.turn_time)
+        self.timer_progress.repaint()
         if self.turn_time > 0:
             self.turn_time -= 1
         else:
@@ -76,8 +79,12 @@ class Room(QWidget, Ui_Room):
                     self.players.pop(upd["name"]).deleteLater()
                 if self.current_player is not None and self.current_player.name == upd["name"]:
                     self.current_player: PlayerListItem | None = None
+                self.countdown_timer.stop()
+                if not self.game_started: self.label_game_state.setText("Waiting for players...")
             elif upd["action"] == "add":
                 self.players[upd["name"]] = PlayerListItem(self, upd["name"])
+                self.countdown_timer.stop()
+                self.label_game_state.setText("Waiting for players...")
             elif upd["action"] == "upd":
                 if "ready" in upd:
                     self.players[upd["name"]].set_ready(upd["ready"])
@@ -92,12 +99,20 @@ class Room(QWidget, Ui_Room):
     def on_recv_message(self, msg: dict):
         if msg["type"] == "event":
             if msg["event"] == "turn":
+                if not self.game_started:
+                    self.game_started = True
+                    for player in self.players.values():
+                        player.set_ready(False)
+                    self.btn_ready.setEnabled(False)
                 self.next_turn(msg["body"])
+
             elif msg["event"] == "player-list-upd":
                 self.update_list(msg["body"])
+
             elif msg["event"] == "start-countdown":
                 self.countdown = 3
                 self.update_countdown()
+
             elif msg["event"] == "kick":
                 self.main.leave_room()
                 KickDialog(msg["body"], self.main).exec()
@@ -133,7 +148,6 @@ class Room(QWidget, Ui_Room):
             self.input_word.setPlaceholderText("This word has already been used")
         else:
             self.input_word.setPlaceholderText("Type your word here...")
-            self.used_words.append(word_lower)
             self.main.comm.send_queue.put({
                 "type": "word",
                 "word": word
@@ -143,6 +157,7 @@ class Room(QWidget, Ui_Room):
 
     @pyqtSlot(bool)
     def ready_clicked(self, toggled: bool):
+        self.btn_ready.setText("Ready" if toggled else "Not Ready")
         self.main.comm.send_queue.put({
             "type": "event",
             "event": "ready",

@@ -1,10 +1,13 @@
+from __future__ import annotations
+
 from typing import TYPE_CHECKING
 
-from PyQt6.QtCore import Qt
+from PyQt6.QtCore import Qt, QTimer, pyqtSlot
 from PyQt6.QtWidgets import QWidget
 
-from .gui import Ui_RoomListItem, Ui_ServerRoomListItem
 from .player_list_item import ServerPlayerListItem
+from .gui import Ui_RoomListItem, Ui_ServerRoomListItem
+from .game import Game
 
 if TYPE_CHECKING:
     from .room_browser import RoomBrowser
@@ -70,6 +73,8 @@ class ServerRoomListItem(QWidget, Ui_ServerRoomListItem):
         self.name = name
         self.players: dict[str, ServerPlayerListItem] = {host_item.name: host_item}
         self.max_players = max_players
+        self.ready_players = 0
+        self.game: Game | None = None
         host_item.set_host(True)
 
         self.server.room_list_upd.append({
@@ -78,6 +83,9 @@ class ServerRoomListItem(QWidget, Ui_ServerRoomListItem):
             "players": 1,
             "max": self.max_players
         })
+
+        self.countdown_timer = QTimer()
+        self.countdown_timer.timeout.connect(self.start_game)
 
         self.setStyleSheet(self.server.main.stylesheet)
         self.setAttribute(Qt.WidgetAttribute.WA_StyleSheet)
@@ -88,6 +96,43 @@ class ServerRoomListItem(QWidget, Ui_ServerRoomListItem):
 
         self.layout_player_list.addWidget(host_item)
         self.server.layout_roomlist.addWidget(self)
+
+    @pyqtSlot()
+    def start_game(self):
+        self.countdown_timer.stop()
+        for player in self.players.values():
+            player.ready = False
+        self.ready_players = 0
+        self.game = Game(self)
+
+    def check_ready(self):
+        if self.ready_players == len(self.players):
+            self.broadcast({
+                "type": "event",
+                "event": "start-countdown"
+            })
+            self.countdown_timer.start(3000)
+        else:
+            self.countdown_timer.stop()
+
+    def set_ready(self, username: str, ready: bool):
+        prev_ready = self.players[username].ready
+        if prev_ready == ready: return
+        if prev_ready and not ready:
+            self.ready_players -= 1
+        else:
+            self.ready_players += 1
+        self.players[username].ready = ready
+        self.broadcast({
+            "type": "event",
+            "event": "player-list-upd",
+            "body": [{
+                "action": "upd",
+                "name": username,
+                "ready": ready
+            }]
+        })
+        self.check_ready()
 
     def broadcast(self, msg: dict):
         for player in self.players.values():
@@ -110,6 +155,7 @@ class ServerRoomListItem(QWidget, Ui_ServerRoomListItem):
             "name": self.name,
             "players": len(self.players)
         })
+        self.countdown_timer.stop()
 
     def remove_player(self, username: str, room_deleting=False):
         updates = [{
@@ -118,7 +164,9 @@ class ServerRoomListItem(QWidget, Ui_ServerRoomListItem):
         }]
         player_item = self.players.pop(username)
         self.layout_player_list.removeWidget(player_item)
-        player_item.ready = False
+        if player_item.ready:
+            player_item.ready = False
+            self.ready_players -= 1
 
         if room_deleting: return player_item
 
@@ -145,9 +193,16 @@ class ServerRoomListItem(QWidget, Ui_ServerRoomListItem):
             "event": "player-list-upd",
             "body": updates
         })
+        self.check_ready()
+
+        if self.game is not None:
+            self.game.remove_player(username)
+
         return player_item
 
     def deleteLater(self):
+        self.countdown_timer.stop()
+        if self.game is not None: self.game.deleteLater()
         self.broadcast({
             "type": "event",
             "event": "kick",
