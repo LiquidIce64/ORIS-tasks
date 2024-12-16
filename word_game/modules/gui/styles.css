@@ -28,6 +28,14 @@
     background-color: #96C8FF;
 }
 
+#ServerRoomListItem {
+    background-color: #FFFFFF;
+    border-radius: 6px;
+}
+#ServerRoomListItem[selected=true]{
+    background-color: #96C8FF;
+}
+
 QProgressBar {
     border-radius: 4px;
 }

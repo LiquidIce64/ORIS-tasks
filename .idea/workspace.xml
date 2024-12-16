@@ -4,10 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="004bf431-fb4f-4a0a-8912-e57b0897525c" name="Changes" comment="room changing logic">
+    <list default="true" id="004bf431-fb4f-4a0a-8912-e57b0897525c" name="Changes" comment="player readying and game logic">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/file_index.json" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/gui/file_index.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/server_room_list_item.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/gui/server_room_list_item.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/server_room_list_item.ui" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/gui/server_room_list_item.ui" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/word_game/modules/gui/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/gui/styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/modules/room.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/room.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/word_game/modules/room_list_item.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/room_list_item.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/word_game/modules/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/server.py" afterDir="false" />
     </list>
@@ -252,7 +254,15 @@
       <option name="project" value="LOCAL" />
       <updated>1734342456701</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="player readying and game logic">
+      <option name="closed" value="true" />
+      <created>1734364574795</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1734364574795</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -281,6 +291,7 @@
     <MESSAGE value="server rooms (incomplete)" />
     <MESSAGE value="re-added type checking for backward-import classes" />
     <MESSAGE value="room changing logic" />
-    <option name="LAST_COMMIT_MESSAGE" value="room changing logic" />
+    <MESSAGE value="player readying and game logic" />
+    <option name="LAST_COMMIT_MESSAGE" value="player readying and game logic" />
   </component>
 </project>

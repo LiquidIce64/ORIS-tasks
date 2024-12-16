@@ -4,6 +4,7 @@ from typing import TYPE_CHECKING
 
 from PyQt6.QtCore import Qt, QTimer, pyqtSlot
 from PyQt6.QtWidgets import QWidget
+from PyQt6.QtGui import QPixmap
 
 from .player_list_item import ServerPlayerListItem
 from .gui import Ui_RoomListItem, Ui_ServerRoomListItem
@@ -94,8 +95,25 @@ class ServerRoomListItem(QWidget, Ui_ServerRoomListItem):
         self.label_name.setText(name)
         self.label_playercount.setText(f"{len(self.players)}/{self.max_players}")
 
+        self.arrow_up = QPixmap("res:/icons/arrow_up.png")
+        self.arrow_down = QPixmap("res:/icons/arrow_down.png")
+        self.icon_arrow.setPixmap(self.arrow_up)
+        self.frame_player_list.setMaximumHeight(0)
+
+        self.icon_arrow.mousePressEvent =\
+            self.label_name.mousePressEvent =\
+            self.label_playercount.mousePressEvent = lambda *_: self.collapse()
+
         self.layout_player_list.addWidget(host_item)
         self.server.layout_roomlist.addWidget(self)
+
+    def collapse(self):
+        if self.frame_player_list.maximumHeight() == 0:
+            self.frame_player_list.setMaximumHeight(16777215)
+            self.icon_arrow.setPixmap(self.arrow_down)
+        else:
+            self.frame_player_list.setMaximumHeight(0)
+            self.icon_arrow.setPixmap(self.arrow_up)
 
     @pyqtSlot()
     def start_game(self):

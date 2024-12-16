@@ -86,6 +86,7 @@ class Server(QWidget, Ui_Server):
                     return
             else:
                 self.passwords[username] = sha256.hash(password)
+                json.dump(self.passwords, open("passwords.json", "w"))
 
         socket.send({
             "type": "event",
@@ -217,7 +218,6 @@ class Server(QWidget, Ui_Server):
         self.browser_clients[username] = player_item
         self.layout_playerlist.addWidget(player_item)
         self.label_players_in_rooms.setText(str(len(self.room_clients)))
-        print(f"{username} left the room")
 
     def create_room(self, room_info: dict, host: str):
         if "name" not in room_info or "max-players" not in room_info: return "Error"
@@ -252,7 +252,6 @@ class Server(QWidget, Ui_Server):
         print(f"{username} kicked from room")
 
     def deleteLater(self):
-        json.dump(self.passwords, open("passwords.json", "w"))
         msg = {
             "type": "event",
             "event": "disconnect",

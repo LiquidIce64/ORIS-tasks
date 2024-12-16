@@ -46,6 +46,8 @@ class Ui_ServerRoomListItem(object):
         self.frame_player_list.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.frame_player_list.setObjectName("frame_player_list")
         self.layout_player_list = QtWidgets.QVBoxLayout(self.frame_player_list)
+        self.layout_player_list.setContentsMargins(3, 10, 3, 0)
+        self.layout_player_list.setSpacing(3)
         self.layout_player_list.setObjectName("layout_player_list")
         self.layout_room_list_item.addWidget(self.frame_player_list, 1, 0, 1, 3)
 
