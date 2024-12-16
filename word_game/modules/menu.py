@@ -7,7 +7,7 @@ from PyQt6.QtCore import pyqtSlot
 from PyQt6.QtWidgets import QWidget
 
 from .server import Server
-from .gui import Ui_Menu
+from .gui import Ui_Menu, STYLESHEET
 
 if TYPE_CHECKING:
     from .window import Window
@@ -30,7 +30,7 @@ class Menu(QWidget, Ui_Menu):
         addr = parse_address(self.input_address.text())
         self.input_password.setProperty("highlight-incorrect", False)
         self.input_address.setProperty("highlight-incorrect", addr is None)
-        self.input_address.setStyleSheet(self.main.stylesheet)
+        self.setStyleSheet(STYLESHEET)
         if addr is None: return
         self.setEnabled(False)
         self.btn_host.setText("Hosting...")
@@ -42,14 +42,14 @@ class Menu(QWidget, Ui_Menu):
         self.setEnabled(True)
         self.btn_host.setText("Host server")
         self.input_address.setProperty("highlight-incorrect", not success)
-        self.setStyleSheet(self.main.stylesheet)
+        self.setStyleSheet(STYLESHEET)
 
     @pyqtSlot()
     def connect_clicked(self):
         addr = parse_address(self.input_address.text())
         self.input_password.setProperty("highlight-incorrect", False)
         self.input_address.setProperty("highlight-incorrect", addr is None)
-        self.setStyleSheet(self.main.stylesheet)
+        self.setStyleSheet(STYLESHEET)
         if addr is None: return
         self.btn_connect.setText("Connecting...")
         self.setEnabled(False)
@@ -65,4 +65,4 @@ class Menu(QWidget, Ui_Menu):
         self.btn_connect.setText("Connect")
         self.input_password.setProperty("highlight-incorrect", result["body"] == "auth failed")
         self.input_address.setProperty("highlight-incorrect", result["event"] != "connect")
-        self.setStyleSheet(self.main.stylesheet)
+        self.setStyleSheet(STYLESHEET)

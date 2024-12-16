@@ -17,7 +17,6 @@ class RoomBrowser(QWidget, Ui_RoomBrowser):
         super().__init__()
         self.setupUi(self)
         self.main = main
-        self.setStyleSheet(self.main.stylesheet)
         self.username = username
         self.rooms: dict[str, RoomListItem] = {}
         self.selected_room: RoomListItem | None = None

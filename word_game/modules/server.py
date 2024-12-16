@@ -24,7 +24,6 @@ class Server(QWidget, Ui_Server):
         super().__init__()
         self.setupUi(self)
         self.main = main
-        self.setStyleSheet(self.main.stylesheet)
 
         self.clients: dict[str, socket_raw] = {}
         self.browser_clients: dict[str, ServerPlayerListItem] = {}

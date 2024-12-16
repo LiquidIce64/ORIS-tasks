@@ -118,7 +118,7 @@ class ClientServer:
 
     def __repr__(self):
         if self.is_open():
-            return f"Open {'Server' if self.__hosting else 'Client'} ({self.__addr[0]}:{self.__addr[1]})"
+            return f"Open {'Server' if self.__hosting else 'Client'}"
         return "Closed ClientServer"
 
     def __del__(self):

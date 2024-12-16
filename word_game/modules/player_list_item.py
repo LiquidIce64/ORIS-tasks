@@ -6,7 +6,7 @@ from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QWidget, QMenu
 from PyQt6.QtGui import QContextMenuEvent, QIcon
 
-from .gui import Ui_PlayerListItem
+from .gui import Ui_PlayerListItem, STYLESHEET
 
 if TYPE_CHECKING:
     from .room import Room
@@ -30,12 +30,13 @@ class PlayerListItem(QWidget, Ui_PlayerListItem):
         self.context_menu.addAction(QIcon("res:/icons/kick.png"), "Kick from room").triggered.connect(self.kick)
 
         if ready: self.setProperty("selected", ready)
-        self.setStyleSheet(self.room.main.stylesheet)
-        self.setAttribute(Qt.WidgetAttribute.WA_StyleSheet)
-        self.setAttribute(Qt.WidgetAttribute.WA_StyledBackground)
 
         self.icon_host.setMaximumWidth(16 if self.room.host == name else 0)
         self.label_username.setText(self.name + " (you)" if self.is_you else self.name)
+
+        self.setStyleSheet(STYLESHEET)
+        self.setAttribute(Qt.WidgetAttribute.WA_StyleSheet)
+        self.setAttribute(Qt.WidgetAttribute.WA_StyledBackground)
 
         self.room.layout_players.addWidget(self)
 
@@ -44,7 +45,7 @@ class PlayerListItem(QWidget, Ui_PlayerListItem):
         elif not self.ready and ready: self.room.ready_players += 1
         self.ready = ready
         self.setProperty("selected", ready)
-        self.setStyleSheet(self.room.main.stylesheet)
+        self.setStyleSheet(STYLESHEET)
 
     def add_host_actions(self):
         if not self.is_you:
@@ -71,9 +72,6 @@ class ServerPlayerListItem(QWidget, Ui_PlayerListItem):
     def __init__(self, server: "Server", name: str):
         super().__init__()
         self.setupUi(self)
-        self.setStyleSheet(server.main.stylesheet)
-        self.setAttribute(Qt.WidgetAttribute.WA_StyleSheet)
-        self.setAttribute(Qt.WidgetAttribute.WA_StyledBackground)
         self.server = server
         self.name = name
         self.ready = False
@@ -84,6 +82,10 @@ class ServerPlayerListItem(QWidget, Ui_PlayerListItem):
 
         self.icon_host.setMaximumWidth(0)
         self.label_username.setText(self.name)
+
+        self.setStyleSheet(STYLESHEET)
+        self.setAttribute(Qt.WidgetAttribute.WA_StyleSheet)
+        self.setAttribute(Qt.WidgetAttribute.WA_StyledBackground)
 
         self.server.layout_playerlist.addWidget(self)
 

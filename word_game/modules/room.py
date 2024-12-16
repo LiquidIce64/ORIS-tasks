@@ -17,7 +17,6 @@ class Room(QWidget, Ui_Room):
         super().__init__()
         self.setupUi(self)
         self.main = main
-        self.setStyleSheet(self.main.stylesheet)
 
         self.max_players = max_players
         self.players: dict[str, PlayerListItem] = {}
