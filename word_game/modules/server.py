@@ -42,7 +42,7 @@ class Server(QWidget, Ui_Server):
 
         self.update_timer = QTimer()
         self.update_timer.timeout.connect(self.send_room_list_upd)
-        self.update_timer.start(10000)
+        self.update_timer.start(5000)
 
         self.next_guest_id = 1
         try:
@@ -115,31 +115,41 @@ class Server(QWidget, Ui_Server):
 
     @pyqtSlot(dict)
     def on_recv_message(self, msg: dict):
-        if msg["type"] == "event":
-            if msg["event"] == "room-list-upd":
-                self.main.comm.send_queue.put(
-                    (self.room_list_full, self.clients[msg["from"]])
-                )
+        try:
+            if msg["type"] == "event":
+                if msg["event"] == "room-list-upd":
+                    self.main.comm.send_queue.put(
+                        (self.room_list_full, self.clients[msg["from"]])
+                    )
 
-            elif msg["event"] == "join-room":
-                self.main.comm.send_queue.put(({
-                    "type": "event",
-                    "event": "join-room",
-                    "body": self.join_room(msg["body"], msg["from"])
-                }, self.clients[msg["from"]]))
+                elif msg["event"] == "join-room":
+                    self.main.comm.send_queue.put(({
+                        "type": "event",
+                        "event": "join-room",
+                        "body": self.join_room(msg["body"], msg["from"])
+                    }, self.clients[msg["from"]]))
 
-            elif msg["event"] == "create-room":
-                self.main.comm.send_queue.put(({
-                    "type": "event",
-                    "event": "create-room",
-                    "body": self.create_room(msg["body"], msg["from"])
-                }, self.clients[msg["from"]]))
+                elif msg["event"] == "leave-room":
+                    self.leave_room(msg["from"])
 
-            elif msg["event"] == "disconnect":
-                self.remove_client(msg["from"])
+                elif msg["event"] == "create-room":
+                    self.main.comm.send_queue.put(({
+                        "type": "event",
+                        "event": "create-room",
+                        "body": self.create_room(msg["body"], msg["from"])
+                    }, self.clients[msg["from"]]))
+
+                elif msg["event"] == "disconnect":
+                    self.remove_client(msg["from"])
+
+                elif msg["event"] == "kick":
+                    self.kick_from_room(msg["body"], msg["from"])
+        except KeyError:
+            print(f"[WARN] Invalid keys in message, skipping...\nMessage: {msg}")
 
     @pyqtSlot()
     def send_room_list_upd(self):
+        print("Sending room list update...")
         if len(self.browser_clients) > 0:
             upd = {
                 "type": "event",
@@ -195,6 +205,7 @@ class Server(QWidget, Ui_Server):
         self.browser_clients[username] = player_item
         self.layout_playerlist.addWidget(player_item)
         self.label_players_in_rooms.setText(str(len(self.room_clients)))
+        print(f"{username} left the room")
 
     def create_room(self, room_info: dict, host: str):
         if "name" not in room_info or "max-players" not in room_info: return "Error"
@@ -214,8 +225,29 @@ class Server(QWidget, Ui_Server):
 
         return "Room created"
 
+    def kick_from_room(self, username, from_username):
+        if from_username not in self.room_clients: return
+        if username not in self.room_clients: return
+        room = self.room_clients[from_username]
+        if not room.players[from_username].host: return
+        if username not in room.players: return
+        self.leave_room(username)
+        self.main.comm.send_queue.put(({
+            "type": "event",
+            "event": "kick",
+            "body": "Kicked by host"
+        }, self.clients[username]))
+        print(f"{username} kicked from room")
+
     def deleteLater(self):
         json.dump(self.passwords, open("passwords.json", "w"))
+        msg = {
+            "type": "event",
+            "event": "disconnect",
+            "body": "Server closed"
+        }
+        for client in self.clients.values():
+            self.main.comm.send_queue.put((msg, client))
         self.update_timer.stop()
         self.main.server = None
         super().deleteLater()

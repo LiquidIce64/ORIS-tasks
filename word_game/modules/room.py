@@ -72,8 +72,9 @@ class Room(QWidget, Ui_Room):
     def update_list(self, updates: list):
         for upd in updates:
             if upd["action"] == "del":
-                if upd["name"] in self.players: self.players.pop(upd["name"])
-                if self.current_player.name == upd["name"]:
+                if upd["name"] in self.players:
+                    self.players.pop(upd["name"]).deleteLater()
+                if self.current_player is not None and self.current_player.name == upd["name"]:
                     self.current_player: PlayerListItem | None = None
             elif upd["action"] == "add":
                 self.players[upd["name"]] = PlayerListItem(self, upd["name"])
@@ -99,7 +100,7 @@ class Room(QWidget, Ui_Room):
                 self.update_countdown()
             elif msg["event"] == "kick":
                 self.main.leave_room()
-                KickDialog(msg["body"]).exec()
+                KickDialog(msg["body"], self.main).exec()
 
     def next_turn(self, turn_info: dict):
         if "word" in turn_info:
@@ -148,6 +149,7 @@ class Room(QWidget, Ui_Room):
             "body": toggled
         })
 
+    @pyqtSlot()
     def leave_room(self):
         self.main.comm.send_queue.put({
             "type": "event",

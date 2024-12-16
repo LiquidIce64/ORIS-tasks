@@ -27,7 +27,7 @@ class PlayerListItem(QWidget, Ui_PlayerListItem):
             self.add_host_actions()
 
         self.context_menu = QMenu(self)
-        self.context_menu.addAction(QIcon("res:/icons/kick"), "Kick from room").triggered.connect(self.kick)
+        self.context_menu.addAction(QIcon("res:/icons/kick.png"), "Kick from room").triggered.connect(self.kick)
 
         if ready: self.setProperty("selected", ready)
         self.setStyleSheet(self.room.main.stylesheet)

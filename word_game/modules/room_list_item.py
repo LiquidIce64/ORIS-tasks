@@ -40,12 +40,14 @@ class RoomListItem(QWidget, Ui_RoomListItem):
         if self.browser.selected_room == self: return
         if self.browser.selected_room is not None:
             self.browser.selected_room.deselect()
+        self.browser.selected_room = self
         self.browser.btn_join.setEnabled(True)
         self.browser.btn_join.setText("Join room")
         self.setProperty("selected", True)
         self.setStyleSheet(self.browser.main.stylesheet)
 
     def deselect(self):
+        self.browser.selected_room = None
         self.browser.btn_join.setEnabled(False)
         self.setProperty("selected", False)
         self.setStyleSheet(self.browser.main.stylesheet)
@@ -84,6 +86,7 @@ class ServerRoomListItem(QWidget, Ui_ServerRoomListItem):
         self.label_name.setText(name)
         self.label_playercount.setText(f"{len(self.players)}/{self.max_players}")
 
+        self.layout_player_list.addWidget(host_item)
         self.server.layout_roomlist.addWidget(self)
 
     def broadcast(self, msg: dict):
@@ -129,7 +132,7 @@ class ServerRoomListItem(QWidget, Ui_ServerRoomListItem):
                     "name": new_host.name,
                     "host": True
                 })
-        if len(self.players) > 0: self.deleteLater()
+        if len(self.players) == 0: self.deleteLater()
 
         self.label_playercount.setText(f"{len(self.players)}/{self.max_players}")
         self.server.room_list_upd.append({

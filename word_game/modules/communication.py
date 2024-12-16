@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import types
 from threading import Thread
 from queue import SimpleQueue
 from .networking import ClientServer

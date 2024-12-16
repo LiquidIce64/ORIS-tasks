@@ -28,6 +28,8 @@ class RoomBrowser(QWidget, Ui_RoomBrowser):
 
         self.main.comm.recv_signal.connect(self.on_recv_message)
 
+        self.refresh()
+
     def refresh(self):
         self.main.comm.send_queue.put({
             "type": "event",
@@ -36,6 +38,8 @@ class RoomBrowser(QWidget, Ui_RoomBrowser):
 
     def update_list(self, update_info: dict):
         if update_info["reset"]:
+            for room in self.rooms.values():
+                room.deleteLater()
             self.rooms.clear()
         for upd in update_info["updates"]:
             if upd["action"] == "del":
@@ -43,7 +47,7 @@ class RoomBrowser(QWidget, Ui_RoomBrowser):
             elif upd["action"] == "add":
                 self.rooms[upd["name"]] = RoomListItem(self, upd["name"], upd["players"], upd["max"])
             elif upd["action"] == "upd":
-                self.rooms[upd["name"]].update_player_count(upd["players"])
+                if upd["name"] in self.rooms: self.rooms[upd["name"]].update_player_count(upd["players"])
 
     @pyqtSlot(dict)
     def on_recv_message(self, msg: dict):
@@ -53,15 +57,17 @@ class RoomBrowser(QWidget, Ui_RoomBrowser):
 
             elif msg["event"] == "join-room":
                 self.setEnabled(True)
-                if msg["body"] is list:
+                if isinstance(msg["body"], list):
                     self.btn_join.setText("Join room")
                     self.main.join_room(
                         name=self.selected_room.name,
                         max_players=self.selected_room.max_players,
                         player_list=msg["body"]
                     )
-                else:
+                elif isinstance(msg["body"], str):
                     self.btn_join.setText(msg["body"])
+                else:
+                    print(f"[WARN] Unexpected response received while joining room ({msg['body']})")
 
             elif msg["event"] == "create-room":
                 self.setEnabled(True)
@@ -77,7 +83,7 @@ class RoomBrowser(QWidget, Ui_RoomBrowser):
 
             elif msg["event"] == "disconnect":
                 self.main.exit_to_menu()
-                DisconnectDialog(msg["body"]).exec()
+                DisconnectDialog(msg["body"], self.main).exec()
 
     @pyqtSlot()
     def join_room(self):
