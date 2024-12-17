@@ -13,6 +13,15 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">#ServerRoomListItem {
+	background-color: white;
+	border-radius: 10px;
+}
+
+QLabel {background: transparent}
+QFrame {background: transparent}</string>
+  </property>
   <layout class="QGridLayout" name="layout_room_list_item">
    <property name="leftMargin">
     <number>10</number>

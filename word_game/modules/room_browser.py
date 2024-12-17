@@ -1,7 +1,7 @@
 from __future__ import annotations
 from typing import TYPE_CHECKING
 
-from PyQt6.QtCore import pyqtSlot
+from PyQt6.QtCore import Qt, pyqtSlot
 from PyQt6.QtWidgets import QWidget
 
 from .dialogs import DisconnectDialog
@@ -20,6 +20,8 @@ class RoomBrowser(QWidget, Ui_RoomBrowser):
         self.username = username
         self.rooms: dict[str, RoomListItem] = {}
         self.selected_room: RoomListItem | None = None
+
+        self.setAttribute(Qt.WidgetAttribute.WA_StyledBackground)
 
         self.btn_disconnect.clicked.connect(self.main.exit_to_menu)
         self.btn_join.clicked.connect(self.join_room)

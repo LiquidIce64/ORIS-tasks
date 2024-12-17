@@ -14,94 +14,111 @@ class Ui_Server(object):
         Server.setObjectName("Server")
         Server.resize(500, 300)
         Server.setMinimumSize(QtCore.QSize(500, 300))
-        self.horizontalLayout = QtWidgets.QHBoxLayout(Server)
-        self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
-        self.horizontalLayout.setSpacing(0)
-        self.horizontalLayout.setObjectName("horizontalLayout")
-        self.frame_browser = QtWidgets.QFrame(parent=Server)
-        self.frame_browser.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
-        self.frame_browser.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
-        self.frame_browser.setObjectName("frame_browser")
-        self._2 = QtWidgets.QVBoxLayout(self.frame_browser)
-        self._2.setObjectName("_2")
-        self.scrollArea = QtWidgets.QScrollArea(parent=self.frame_browser)
-        self.scrollArea.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOn)
-        self.scrollArea.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
-        self.scrollArea.setWidgetResizable(True)
-        self.scrollArea.setObjectName("scrollArea")
-        self.scrollAreaWidgetContents = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 292, 278))
-        self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
-        self.verticalLayout = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents)
-        self.verticalLayout.setSpacing(0)
-        self.verticalLayout.setObjectName("verticalLayout")
-        self.layout_roomlist = QtWidgets.QVBoxLayout()
-        self.layout_roomlist.setSpacing(3)
-        self.layout_roomlist.setObjectName("layout_roomlist")
-        self.verticalLayout.addLayout(self.layout_roomlist)
-        spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
-        self.verticalLayout.addItem(spacerItem)
-        self.scrollArea.setWidget(self.scrollAreaWidgetContents)
-        self._2.addWidget(self.scrollArea)
-        self.horizontalLayout.addWidget(self.frame_browser)
-        self.line = QtWidgets.QFrame(parent=Server)
-        self.line.setFrameShape(QtWidgets.QFrame.Shape.VLine)
-        self.line.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
-        self.line.setObjectName("line")
-        self.horizontalLayout.addWidget(self.line)
-        self.frame_sidepanel = QtWidgets.QFrame(parent=Server)
-        self.frame_sidepanel.setMinimumSize(QtCore.QSize(0, 0))
-        self.frame_sidepanel.setObjectName("frame_sidepanel")
-        self.gridLayout = QtWidgets.QGridLayout(self.frame_sidepanel)
-        self.gridLayout.setContentsMargins(9, 9, 9, 9)
-        self.gridLayout.setObjectName("gridLayout")
-        self.label_3 = QtWidgets.QLabel(parent=self.frame_sidepanel)
+        Server.setStyleSheet("#Server, QScrollArea QWidget {background-color: #DFE0E2}\n"
+"\n"
+"QPushButton {\n"
+"    color: black;\n"
+"    background-color: #85D2FF;\n"
+"    border-radius: 10px;\n"
+"    padding: 4px;\n"
+"}\n"
+"QPushButton:hover {background-color: #5CC3FF}\n"
+"QPushButton:disabled {\n"
+"    background-color: #D6F0FF;\n"
+"    color: #40404F;\n"
+"}\n"
+"\n"
+"QScrollArea {\n"
+"    border: 1px solid #9EA1A9;\n"
+"    border-radius: 10px;\n"
+"    padding: 5px;\n"
+"}\n"
+"\n"
+"QScrollBar,\n"
+"QScrollBar::sub-line, QScrollBar::sub-page,\n"
+"QScrollBar::add-line, QScrollBar::add-page\n"
+"{\n"
+"    background: transparent;\n"
+"    border: none;\n"
+"}\n"
+"QScrollBar::handle {\n"
+"    background-color: #9EA1A9;\n"
+"    border-radius: 2px;\n"
+"    margin: 6px;\n"
+"}\n"
+"QScrollBar::handle:hover {\n"
+"    border-radius: 4px;\n"
+"    margin: 4px;\n"
+"}\n"
+"")
+        self.gridLayout_2 = QtWidgets.QGridLayout(Server)
+        self.gridLayout_2.setContentsMargins(10, 10, 10, 10)
+        self.gridLayout_2.setHorizontalSpacing(10)
+        self.gridLayout_2.setObjectName("gridLayout_2")
+        self.label = QtWidgets.QLabel(parent=Server)
+        self.label.setObjectName("label")
+        self.gridLayout_2.addWidget(self.label, 2, 2, 1, 1)
+        self.label_3 = QtWidgets.QLabel(parent=Server)
         self.label_3.setObjectName("label_3")
-        self.gridLayout.addWidget(self.label_3, 2, 0, 1, 2)
-        self.label_player_count = QtWidgets.QLabel(parent=self.frame_sidepanel)
+        self.gridLayout_2.addWidget(self.label_3, 0, 2, 1, 2)
+        self.label_players_in_rooms = QtWidgets.QLabel(parent=Server)
+        self.label_players_in_rooms.setMinimumSize(QtCore.QSize(30, 16))
+        self.label_players_in_rooms.setMaximumSize(QtCore.QSize(30, 16))
+        self.label_players_in_rooms.setAlignment(QtCore.Qt.AlignmentFlag.AlignRight|QtCore.Qt.AlignmentFlag.AlignTrailing|QtCore.Qt.AlignmentFlag.AlignVCenter)
+        self.label_players_in_rooms.setObjectName("label_players_in_rooms")
+        self.gridLayout_2.addWidget(self.label_players_in_rooms, 3, 3, 1, 1)
+        self.label_player_count = QtWidgets.QLabel(parent=Server)
         self.label_player_count.setMinimumSize(QtCore.QSize(30, 16))
         self.label_player_count.setMaximumSize(QtCore.QSize(30, 16))
         self.label_player_count.setAlignment(QtCore.Qt.AlignmentFlag.AlignRight|QtCore.Qt.AlignmentFlag.AlignTrailing|QtCore.Qt.AlignmentFlag.AlignVCenter)
         self.label_player_count.setObjectName("label_player_count")
-        self.gridLayout.addWidget(self.label_player_count, 6, 1, 1, 1)
-        self.scrollArea_2 = QtWidgets.QScrollArea(parent=self.frame_sidepanel)
+        self.gridLayout_2.addWidget(self.label_player_count, 2, 3, 1, 1)
+        self.btn_stop = QtWidgets.QPushButton(parent=Server)
+        self.btn_stop.setObjectName("btn_stop")
+        self.gridLayout_2.addWidget(self.btn_stop, 4, 2, 1, 2)
+        self.scrollArea_2 = QtWidgets.QScrollArea(parent=Server)
+        self.scrollArea_2.setMinimumSize(QtCore.QSize(160, 0))
+        self.scrollArea_2.setFrameShape(QtWidgets.QFrame.Shape.NoFrame)
         self.scrollArea_2.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOn)
         self.scrollArea_2.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
         self.scrollArea_2.setWidgetResizable(True)
         self.scrollArea_2.setObjectName("scrollArea_2")
-        self.scrollAreaWidgetContents_3 = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents_3.setGeometry(QtCore.QRect(0, 0, 129, 184))
-        self.scrollAreaWidgetContents_3.setObjectName("scrollAreaWidgetContents_3")
-        self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents_3)
+        self.scrollList = QtWidgets.QWidget()
+        self.scrollList.setGeometry(QtCore.QRect(0, 0, 131, 172))
+        self.scrollList.setObjectName("scrollList")
+        self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.scrollList)
         self.verticalLayout_3.setSpacing(0)
         self.verticalLayout_3.setObjectName("verticalLayout_3")
         self.layout_playerlist = QtWidgets.QVBoxLayout()
         self.layout_playerlist.setSpacing(3)
         self.layout_playerlist.setObjectName("layout_playerlist")
         self.verticalLayout_3.addLayout(self.layout_playerlist)
-        spacerItem1 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
-        self.verticalLayout_3.addItem(spacerItem1)
-        self.scrollArea_2.setWidget(self.scrollAreaWidgetContents_3)
-        self.gridLayout.addWidget(self.scrollArea_2, 3, 0, 1, 2)
-        self.btn_stop = QtWidgets.QPushButton(parent=self.frame_sidepanel)
-        self.btn_stop.setObjectName("btn_stop")
-        self.gridLayout.addWidget(self.btn_stop, 9, 0, 1, 2)
-        self.label_players_in_rooms = QtWidgets.QLabel(parent=self.frame_sidepanel)
-        self.label_players_in_rooms.setMinimumSize(QtCore.QSize(30, 16))
-        self.label_players_in_rooms.setMaximumSize(QtCore.QSize(30, 16))
-        self.label_players_in_rooms.setAlignment(QtCore.Qt.AlignmentFlag.AlignRight|QtCore.Qt.AlignmentFlag.AlignTrailing|QtCore.Qt.AlignmentFlag.AlignVCenter)
-        self.label_players_in_rooms.setObjectName("label_players_in_rooms")
-        self.gridLayout.addWidget(self.label_players_in_rooms, 7, 1, 1, 1)
-        self.label_2 = QtWidgets.QLabel(parent=self.frame_sidepanel)
+        spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
+        self.verticalLayout_3.addItem(spacerItem)
+        self.scrollArea_2.setWidget(self.scrollList)
+        self.gridLayout_2.addWidget(self.scrollArea_2, 1, 2, 1, 2)
+        self.label_2 = QtWidgets.QLabel(parent=Server)
         self.label_2.setObjectName("label_2")
-        self.gridLayout.addWidget(self.label_2, 7, 0, 1, 1)
-        self.label = QtWidgets.QLabel(parent=self.frame_sidepanel)
-        self.label.setObjectName("label")
-        self.gridLayout.addWidget(self.label, 6, 0, 1, 1)
-        self.gridLayout.setColumnStretch(0, 1)
-        self.horizontalLayout.addWidget(self.frame_sidepanel)
-        self.horizontalLayout.setStretch(0, 2)
-        self.horizontalLayout.setStretch(2, 1)
+        self.gridLayout_2.addWidget(self.label_2, 3, 2, 1, 1)
+        self.scrollArea = QtWidgets.QScrollArea(parent=Server)
+        self.scrollArea.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOn)
+        self.scrollArea.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        self.scrollArea.setWidgetResizable(True)
+        self.scrollArea.setObjectName("scrollArea")
+        self.scrollList_2 = QtWidgets.QWidget()
+        self.scrollList_2.setGeometry(QtCore.QRect(0, 0, 281, 268))
+        self.scrollList_2.setObjectName("scrollList_2")
+        self.verticalLayout = QtWidgets.QVBoxLayout(self.scrollList_2)
+        self.verticalLayout.setSpacing(0)
+        self.verticalLayout.setObjectName("verticalLayout")
+        self.layout_roomlist = QtWidgets.QVBoxLayout()
+        self.layout_roomlist.setSpacing(3)
+        self.layout_roomlist.setObjectName("layout_roomlist")
+        self.verticalLayout.addLayout(self.layout_roomlist)
+        spacerItem1 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
+        self.verticalLayout.addItem(spacerItem1)
+        self.scrollArea.setWidget(self.scrollList_2)
+        self.gridLayout_2.addWidget(self.scrollArea, 0, 0, 5, 1)
 
         self.retranslateUi(Server)
         QtCore.QMetaObject.connectSlotsByName(Server)
@@ -109,12 +126,12 @@ class Ui_Server(object):
     def retranslateUi(self, Server):
         _translate = QtCore.QCoreApplication.translate
         Server.setWindowTitle(_translate("Server", "Form"))
+        self.label.setText(_translate("Server", "Players connected:"))
         self.label_3.setText(_translate("Server", "Players browsing:"))
+        self.label_players_in_rooms.setText(_translate("Server", "0"))
         self.label_player_count.setText(_translate("Server", "0"))
         self.btn_stop.setText(_translate("Server", "Stop Server"))
-        self.label_players_in_rooms.setText(_translate("Server", "0"))
         self.label_2.setText(_translate("Server", "Players in rooms:"))
-        self.label.setText(_translate("Server", "Players connected:"))
 
 
 if __name__ == "__main__":

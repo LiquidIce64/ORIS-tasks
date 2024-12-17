@@ -13,6 +13,13 @@ class Ui_ServerRoomListItem(object):
     def setupUi(self, ServerRoomListItem):
         ServerRoomListItem.setObjectName("ServerRoomListItem")
         ServerRoomListItem.resize(300, 100)
+        ServerRoomListItem.setStyleSheet("#ServerRoomListItem {\n"
+"    background-color: white;\n"
+"    border-radius: 10px;\n"
+"}\n"
+"\n"
+"QLabel {background: transparent}\n"
+"QFrame {background: transparent}")
         self.layout_room_list_item = QtWidgets.QGridLayout(ServerRoomListItem)
         self.layout_room_list_item.setContentsMargins(10, 10, 10, 10)
         self.layout_room_list_item.setSpacing(0)

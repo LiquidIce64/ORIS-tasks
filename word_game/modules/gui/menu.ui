@@ -20,7 +20,28 @@
    <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true"/>
+   <string notr="true">#Menu {background-color: #DFE0E2}
+
+QFrame {
+	background-color: #C9CBCF;
+	border-radius: 20px;
+}
+
+QLineEdit, QPushButton {
+	color: black;
+	border-radius: 10px;
+	padding: 10px;
+	font-size: 14px;
+}
+QLineEdit {background-color: white}
+QLineEdit[highlight-incorrect=true] {border: 1px solid red}
+
+QPushButton {background-color: #85D2FF}
+QPushButton:hover {background-color: #5CC3FF}
+QPushButton:disabled {
+	background-color: #D6F0FF;
+	color: #40404F;
+}</string>
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout">
    <item>

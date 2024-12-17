@@ -34,7 +34,7 @@ class Ui_KickDialog(object):
         self.btn_ok = QtWidgets.QDialogButtonBox(parent=KickDialog)
         self.btn_ok.setOrientation(QtCore.Qt.Orientation.Horizontal)
         self.btn_ok.setStandardButtons(QtWidgets.QDialogButtonBox.StandardButton.Ok)
-        self.btn_ok.setCenterButtons(False)
+        self.btn_ok.setCenterButtons(True)
         self.btn_ok.setObjectName("btn_ok")
         self.verticalLayout.addWidget(self.btn_ok)
 

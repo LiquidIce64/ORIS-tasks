@@ -7,7 +7,7 @@ from PyQt6.QtWidgets import QWidget
 from PyQt6.QtGui import QPixmap
 
 from .player_list_item import ServerPlayerListItem
-from .gui import Ui_RoomListItem, Ui_ServerRoomListItem, STYLESHEET
+from .gui import Ui_RoomListItem, Ui_ServerRoomListItem
 from .game import Game
 
 if TYPE_CHECKING:
@@ -24,7 +24,6 @@ class RoomListItem(QWidget, Ui_RoomListItem):
         self.player_count = player_count
         self.max_players = max_players
 
-        self.setStyleSheet(STYLESHEET)
         self.setAttribute(Qt.WidgetAttribute.WA_StyleSheet)
         self.setAttribute(Qt.WidgetAttribute.WA_StyledBackground)
 
@@ -48,13 +47,13 @@ class RoomListItem(QWidget, Ui_RoomListItem):
         self.browser.btn_join.setEnabled(True)
         self.browser.btn_join.setText("Join room")
         self.setProperty("selected", True)
-        self.setStyleSheet(STYLESHEET)
+        self.setStyleSheet(self.styleSheet())
 
     def deselect(self):
         self.browser.selected_room = None
         self.browser.btn_join.setEnabled(False)
         self.setProperty("selected", False)
-        self.setStyleSheet(STYLESHEET)
+        self.setStyleSheet(self.styleSheet())
 
     def update_player_count(self, player_count: int):
         self.player_count = player_count
@@ -88,7 +87,6 @@ class ServerRoomListItem(QWidget, Ui_ServerRoomListItem):
         self.countdown_timer = QTimer()
         self.countdown_timer.timeout.connect(self.start_game)
 
-        self.setStyleSheet(STYLESHEET)
         self.setAttribute(Qt.WidgetAttribute.WA_StyleSheet)
         self.setAttribute(Qt.WidgetAttribute.WA_StyledBackground)
 

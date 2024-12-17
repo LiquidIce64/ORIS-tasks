@@ -1,7 +1,7 @@
 from __future__ import annotations
 from typing import TYPE_CHECKING
 
-from PyQt6.QtCore import pyqtSlot, QTimer
+from PyQt6.QtCore import Qt, pyqtSlot, QTimer
 from PyQt6.QtWidgets import QWidget
 
 from .player_list_item import PlayerListItem
@@ -38,6 +38,8 @@ class Room(QWidget, Ui_Room):
             if player_info["host"]: self.host = name
             self.players[name] = PlayerListItem(self, name, player_info["ready"])
         self.label_player_count.setText(f"{len(self.players)}/{self.max_players}")
+
+        self.setAttribute(Qt.WidgetAttribute.WA_StyledBackground)
 
         self.btn_leave.clicked.connect(self.leave_room)
         self.btn_ready.clicked.connect(self.ready_clicked)

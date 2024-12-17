@@ -6,7 +6,7 @@ from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QWidget, QMenu
 from PyQt6.QtGui import QContextMenuEvent, QIcon
 
-from .gui import Ui_PlayerListItem, STYLESHEET
+from .gui import Ui_PlayerListItem
 
 if TYPE_CHECKING:
     from .room import Room
@@ -34,7 +34,6 @@ class PlayerListItem(QWidget, Ui_PlayerListItem):
         self.icon_host.setMaximumWidth(16 if self.room.host == name else 0)
         self.label_username.setText(self.name + " (you)" if self.is_you else self.name)
 
-        self.setStyleSheet(STYLESHEET)
         self.setAttribute(Qt.WidgetAttribute.WA_StyleSheet)
         self.setAttribute(Qt.WidgetAttribute.WA_StyledBackground)
 
@@ -45,7 +44,7 @@ class PlayerListItem(QWidget, Ui_PlayerListItem):
         elif not self.ready and ready: self.room.ready_players += 1
         self.ready = ready
         self.setProperty("selected", ready)
-        self.setStyleSheet(STYLESHEET)
+        self.setStyleSheet(self.styleSheet())
 
     def add_host_actions(self):
         if not self.is_you:
@@ -83,7 +82,6 @@ class ServerPlayerListItem(QWidget, Ui_PlayerListItem):
         self.icon_host.setMaximumWidth(0)
         self.label_username.setText(self.name)
 
-        self.setStyleSheet(STYLESHEET)
         self.setAttribute(Qt.WidgetAttribute.WA_StyleSheet)
         self.setAttribute(Qt.WidgetAttribute.WA_StyledBackground)
 

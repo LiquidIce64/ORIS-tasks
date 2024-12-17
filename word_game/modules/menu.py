@@ -3,11 +3,11 @@ from typing import TYPE_CHECKING
 from threading import Thread
 from .networking import parse_address
 
-from PyQt6.QtCore import pyqtSlot
+from PyQt6.QtCore import Qt, pyqtSlot
 from PyQt6.QtWidgets import QWidget
 
 from .server import Server
-from .gui import Ui_Menu, STYLESHEET
+from .gui import Ui_Menu
 
 if TYPE_CHECKING:
     from .window import Window
@@ -18,6 +18,8 @@ class Menu(QWidget, Ui_Menu):
         super().__init__()
         self.setupUi(self)
         self.main = main
+
+        self.setAttribute(Qt.WidgetAttribute.WA_StyledBackground)
 
         self.btn_connect.clicked.connect(self.connect_clicked)
         self.btn_host.clicked.connect(self.host_clicked)
@@ -30,7 +32,7 @@ class Menu(QWidget, Ui_Menu):
         addr = parse_address(self.input_address.text())
         self.input_password.setProperty("highlight-incorrect", False)
         self.input_address.setProperty("highlight-incorrect", addr is None)
-        self.setStyleSheet(STYLESHEET)
+        self.setStyleSheet(self.styleSheet())
         if addr is None: return
         self.setEnabled(False)
         self.btn_host.setText("Hosting...")
@@ -42,14 +44,14 @@ class Menu(QWidget, Ui_Menu):
         self.setEnabled(True)
         self.btn_host.setText("Host server")
         self.input_address.setProperty("highlight-incorrect", not success)
-        self.setStyleSheet(STYLESHEET)
+        self.setStyleSheet(self.styleSheet())
 
     @pyqtSlot()
     def connect_clicked(self):
         addr = parse_address(self.input_address.text())
         self.input_password.setProperty("highlight-incorrect", False)
         self.input_address.setProperty("highlight-incorrect", addr is None)
-        self.setStyleSheet(STYLESHEET)
+        self.setStyleSheet(self.styleSheet())
         if addr is None: return
         self.btn_connect.setText("Connecting...")
         self.setEnabled(False)
@@ -65,4 +67,4 @@ class Menu(QWidget, Ui_Menu):
         self.btn_connect.setText("Connect")
         self.input_password.setProperty("highlight-incorrect", result["body"] == "auth failed")
         self.input_address.setProperty("highlight-incorrect", result["event"] != "connect")
-        self.setStyleSheet(STYLESHEET)
+        self.setStyleSheet(self.styleSheet())

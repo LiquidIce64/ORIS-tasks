@@ -14,6 +14,15 @@ class Ui_RoomListItem(object):
         RoomListItem.setObjectName("RoomListItem")
         RoomListItem.resize(150, 28)
         RoomListItem.setMinimumSize(QtCore.QSize(0, 28))
+        RoomListItem.setStyleSheet("#RoomListItem {\n"
+"    background-color: #C9CBCF;\n"
+"    border-radius: 10px;\n"
+"}\n"
+"#RoomListItem:hover {background-color: #B3B6BC}\n"
+"#RoomListItem[selected=true] {background-color: #85D2FF}\n"
+"#RoomListItem[selected=true]:hover {background-color: #5CC3FF}\n"
+"\n"
+"QLabel {background: transparent}")
         self.horizontalLayout = QtWidgets.QHBoxLayout(RoomListItem)
         self.horizontalLayout.setContentsMargins(6, 6, 6, 6)
         self.horizontalLayout.setSpacing(3)

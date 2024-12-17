@@ -14,7 +14,28 @@ class Ui_Menu(object):
         Menu.setObjectName("Menu")
         Menu.resize(500, 300)
         Menu.setMinimumSize(QtCore.QSize(500, 300))
-        Menu.setStyleSheet("")
+        Menu.setStyleSheet("#Menu {background-color: #DFE0E2}\n"
+"\n"
+"QFrame {\n"
+"    background-color: #C9CBCF;\n"
+"    border-radius: 20px;\n"
+"}\n"
+"\n"
+"QLineEdit, QPushButton {\n"
+"    color: black;\n"
+"    border-radius: 10px;\n"
+"    padding: 10px;\n"
+"    font-size: 14px;\n"
+"}\n"
+"QLineEdit {background-color: white}\n"
+"QLineEdit[highlight-incorrect=true] {border: 1px solid red}\n"
+"\n"
+"QPushButton {background-color: #85D2FF}\n"
+"QPushButton:hover {background-color: #5CC3FF}\n"
+"QPushButton:disabled {\n"
+"    background-color: #D6F0FF;\n"
+"    color: #40404F;\n"
+"}")
         self.horizontalLayout = QtWidgets.QHBoxLayout(Menu)
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.frame_menu = QtWidgets.QFrame(parent=Menu)

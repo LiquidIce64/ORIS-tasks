@@ -14,6 +14,27 @@ class Ui_PlayerListItem(object):
         PlayerListItem.setObjectName("PlayerListItem")
         PlayerListItem.resize(128, 28)
         PlayerListItem.setMinimumSize(QtCore.QSize(0, 28))
+        PlayerListItem.setStyleSheet("#PlayerListItem {\n"
+"    background-color: #C9CBCF;\n"
+"    border-radius: 10px;\n"
+"}\n"
+"#PlayerListItem:hover {background-color: #B3B6BC}\n"
+"#PlayerListItem[selected=true] {background-color: #85D2FF}\n"
+"#PlayerListItem[selected=true]:hover {background-color: #5CC3FF}\n"
+"\n"
+"QLabel {background: transparent}\n"
+"\n"
+"QMenu {\n"
+"    background-color: white;\n"
+"    color: black;\n"
+"}\n"
+"QMenu::item, QMenu::icon {\n"
+"    border-radius: 10px;\n"
+"    padding: 5px;\n"
+"}\n"
+"QMenu::item:selected {\n"
+"    background-color: #EAECEC;\n"
+"}")
         self.horizontalLayout = QtWidgets.QHBoxLayout(PlayerListItem)
         self.horizontalLayout.setContentsMargins(6, 6, 6, 6)
         self.horizontalLayout.setSpacing(0)

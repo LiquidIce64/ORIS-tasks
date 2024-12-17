@@ -10,7 +10,6 @@ from .menu import Menu
 from .room_browser import RoomBrowser
 from .room import Room
 from .server import Server
-from .gui import STYLESHEET
 
 
 class Window(QMainWindow):
@@ -26,7 +25,6 @@ class Window(QMainWindow):
         self.comm.connect_signal.connect(self.connect_finished)
         self.comm.host_signal.connect(self.host_finished)
 
-        self.setStyleSheet(STYLESHEET)
         self.setWindowTitle("WordGame")
         self.setCentralWidget(self.menu)
 

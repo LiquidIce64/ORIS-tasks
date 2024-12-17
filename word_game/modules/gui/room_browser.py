@@ -14,23 +14,64 @@ class Ui_RoomBrowser(object):
         RoomBrowser.setObjectName("RoomBrowser")
         RoomBrowser.resize(500, 300)
         RoomBrowser.setMinimumSize(QtCore.QSize(500, 300))
-        self.layout_browser = QtWidgets.QHBoxLayout(RoomBrowser)
-        self.layout_browser.setContentsMargins(0, 0, 0, 0)
-        self.layout_browser.setSpacing(0)
-        self.layout_browser.setObjectName("layout_browser")
-        self.frame_browser = QtWidgets.QFrame(parent=RoomBrowser)
-        self.frame_browser.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
-        self.frame_browser.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
-        self.frame_browser.setObjectName("frame_browser")
-        self._2 = QtWidgets.QVBoxLayout(self.frame_browser)
-        self._2.setObjectName("_2")
-        self.scrollArea = QtWidgets.QScrollArea(parent=self.frame_browser)
+        RoomBrowser.setStyleSheet("#RoomBrowser, QScrollArea QWidget {background-color: #DFE0E2}\n"
+"\n"
+"QLineEdit, QPushButton {\n"
+"    color: black;\n"
+"    border-radius: 10px;\n"
+"    padding: 4px;\n"
+"    height: 16px;\n"
+"}\n"
+"QLineEdit {background-color: white}\n"
+"QPushButton {background-color: #85D2FF}\n"
+"QPushButton:hover {background-color: #5CC3FF}\n"
+"QPushButton:disabled {\n"
+"    background-color: #D6F0FF;\n"
+"    color: #40404F;\n"
+"}\n"
+"\n"
+"QScrollArea {\n"
+"    border: 1px solid #9EA1A9;\n"
+"    border-radius: 10px;\n"
+"    padding: 5px;\n"
+"}\n"
+"\n"
+"QScrollBar,\n"
+"QScrollBar::sub-line, QScrollBar::sub-page,\n"
+"QScrollBar::add-line, QScrollBar::add-page\n"
+"{\n"
+"    background: transparent;\n"
+"    border: none;\n"
+"}\n"
+"QScrollBar::handle {\n"
+"    background-color: #9EA1A9;\n"
+"    border-radius: 2px;\n"
+"    margin: 6px;\n"
+"}\n"
+"QScrollBar::handle:hover {\n"
+"    border-radius: 4px;\n"
+"    margin: 4px;\n"
+"}\n"
+"")
+        self.gridLayout = QtWidgets.QGridLayout(RoomBrowser)
+        self.gridLayout.setContentsMargins(10, 10, 10, 10)
+        self.gridLayout.setHorizontalSpacing(10)
+        self.gridLayout.setObjectName("gridLayout")
+        self.label_playercount = QtWidgets.QLabel(parent=RoomBrowser)
+        self.label_playercount.setMinimumSize(QtCore.QSize(70, 0))
+        self.label_playercount.setObjectName("label_playercount")
+        self.gridLayout.addWidget(self.label_playercount, 1, 1, 1, 1)
+        self.btn_join = QtWidgets.QPushButton(parent=RoomBrowser)
+        self.btn_join.setEnabled(False)
+        self.btn_join.setObjectName("btn_join")
+        self.gridLayout.addWidget(self.btn_join, 4, 1, 1, 2)
+        self.scrollArea = QtWidgets.QScrollArea(parent=RoomBrowser)
         self.scrollArea.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOn)
         self.scrollArea.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
         self.scrollAreaWidgetContents = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 322, 278))
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 321, 268))
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout.setSpacing(0)
@@ -42,50 +83,27 @@ class Ui_RoomBrowser(object):
         spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
         self.verticalLayout.addItem(spacerItem)
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
-        self._2.addWidget(self.scrollArea)
-        self.layout_browser.addWidget(self.frame_browser)
-        self.line = QtWidgets.QFrame(parent=RoomBrowser)
-        self.line.setFrameShape(QtWidgets.QFrame.Shape.VLine)
-        self.line.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
-        self.line.setObjectName("line")
-        self.layout_browser.addWidget(self.line)
-        self.frame_sidepanel = QtWidgets.QFrame(parent=RoomBrowser)
-        self.frame_sidepanel.setObjectName("frame_sidepanel")
-        self.layout_sidepanel = QtWidgets.QVBoxLayout(self.frame_sidepanel)
-        self.layout_sidepanel.setContentsMargins(9, 9, 9, 9)
-        self.layout_sidepanel.setObjectName("layout_sidepanel")
-        self.layout_create_room = QtWidgets.QGridLayout()
-        self.layout_create_room.setSizeConstraint(QtWidgets.QLayout.SizeConstraint.SetDefaultConstraint)
-        self.layout_create_room.setObjectName("layout_create_room")
-        self.input_playercount = QtWidgets.QSpinBox(parent=self.frame_sidepanel)
+        self.gridLayout.addWidget(self.scrollArea, 0, 0, 6, 1)
+        self.input_roomname = QtWidgets.QLineEdit(parent=RoomBrowser)
+        self.input_roomname.setMinimumSize(QtCore.QSize(0, 0))
+        self.input_roomname.setObjectName("input_roomname")
+        self.gridLayout.addWidget(self.input_roomname, 0, 1, 1, 2)
+        self.btn_disconnect = QtWidgets.QPushButton(parent=RoomBrowser)
+        self.btn_disconnect.setObjectName("btn_disconnect")
+        self.gridLayout.addWidget(self.btn_disconnect, 5, 1, 1, 2)
+        self.input_playercount = QtWidgets.QSpinBox(parent=RoomBrowser)
         self.input_playercount.setMinimumSize(QtCore.QSize(40, 0))
         self.input_playercount.setMinimum(2)
         self.input_playercount.setMaximum(64)
         self.input_playercount.setProperty("value", 8)
         self.input_playercount.setObjectName("input_playercount")
-        self.layout_create_room.addWidget(self.input_playercount, 1, 1, 1, 1)
-        self.btn_create = QtWidgets.QPushButton(parent=self.frame_sidepanel)
+        self.gridLayout.addWidget(self.input_playercount, 1, 2, 1, 1)
+        self.btn_create = QtWidgets.QPushButton(parent=RoomBrowser)
         self.btn_create.setObjectName("btn_create")
-        self.layout_create_room.addWidget(self.btn_create, 2, 0, 1, 2)
-        self.label_playercount = QtWidgets.QLabel(parent=self.frame_sidepanel)
-        self.label_playercount.setMinimumSize(QtCore.QSize(70, 0))
-        self.label_playercount.setObjectName("label_playercount")
-        self.layout_create_room.addWidget(self.label_playercount, 1, 0, 1, 1)
-        self.input_roomname = QtWidgets.QLineEdit(parent=self.frame_sidepanel)
-        self.input_roomname.setMinimumSize(QtCore.QSize(0, 0))
-        self.input_roomname.setObjectName("input_roomname")
-        self.layout_create_room.addWidget(self.input_roomname, 0, 0, 1, 2)
-        self.layout_sidepanel.addLayout(self.layout_create_room)
+        self.gridLayout.addWidget(self.btn_create, 2, 1, 1, 2)
         spacerItem1 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
-        self.layout_sidepanel.addItem(spacerItem1)
-        self.btn_join = QtWidgets.QPushButton(parent=self.frame_sidepanel)
-        self.btn_join.setEnabled(False)
-        self.btn_join.setObjectName("btn_join")
-        self.layout_sidepanel.addWidget(self.btn_join)
-        self.btn_disconnect = QtWidgets.QPushButton(parent=self.frame_sidepanel)
-        self.btn_disconnect.setObjectName("btn_disconnect")
-        self.layout_sidepanel.addWidget(self.btn_disconnect)
-        self.layout_browser.addWidget(self.frame_sidepanel)
+        self.gridLayout.addItem(spacerItem1, 3, 1, 1, 2)
+        self.gridLayout.setRowStretch(0, 1)
 
         self.retranslateUi(RoomBrowser)
         QtCore.QMetaObject.connectSlotsByName(RoomBrowser)
@@ -93,11 +111,11 @@ class Ui_RoomBrowser(object):
     def retranslateUi(self, RoomBrowser):
         _translate = QtCore.QCoreApplication.translate
         RoomBrowser.setWindowTitle(_translate("RoomBrowser", "Form"))
-        self.btn_create.setText(_translate("RoomBrowser", "Create room"))
         self.label_playercount.setText(_translate("RoomBrowser", "Max players"))
-        self.input_roomname.setPlaceholderText(_translate("RoomBrowser", "Room name"))
         self.btn_join.setText(_translate("RoomBrowser", "Join room"))
+        self.input_roomname.setPlaceholderText(_translate("RoomBrowser", "Room name"))
         self.btn_disconnect.setText(_translate("RoomBrowser", "Disconnect"))
+        self.btn_create.setText(_translate("RoomBrowser", "Create room"))
 
 
 if __name__ == "__main__":

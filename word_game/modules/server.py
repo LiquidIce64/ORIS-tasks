@@ -6,7 +6,7 @@ from socket import socket as socket_raw
 import json
 from .networking import ClientServer
 
-from PyQt6.QtCore import pyqtSlot, pyqtSignal, QTimer
+from PyQt6.QtCore import Qt, pyqtSlot, pyqtSignal, QTimer
 from PyQt6.QtWidgets import QWidget
 
 from .player_list_item import ServerPlayerListItem
@@ -48,6 +48,8 @@ class Server(QWidget, Ui_Server):
             self.passwords: dict = json.load(open("passwords.json", "r"))
         except:
             self.passwords = {}
+
+        self.setAttribute(Qt.WidgetAttribute.WA_StyledBackground)
 
         self.btn_stop.clicked.connect(self.main.exit_to_menu)
 

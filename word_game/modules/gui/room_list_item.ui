@@ -19,6 +19,17 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">#RoomListItem {
+	background-color: #C9CBCF;
+	border-radius: 10px;
+}
+#RoomListItem:hover {background-color: #B3B6BC}
+#RoomListItem[selected=true] {background-color: #85D2FF}
+#RoomListItem[selected=true]:hover {background-color: #5CC3FF}
+
+QLabel {background: transparent}</string>
+  </property>
   <layout class="QHBoxLayout" name="horizontalLayout">
    <property name="spacing">
     <number>3</number>
