@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file 'C:\Users\gilya\PycharmProjects\ORIS-tasks\word_game\modules\gui\room.ui'
+# Form implementation generated from reading ui file 'C:\Users\gilya\Projects\PyCharm\ORIS-tasks\word_game\modules\gui\room.ui'
 #
 # Created by: PyQt6 UI code generator 6.4.2
 #

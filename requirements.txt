@@ -1,0 +1,5 @@
+PyQt6~=6.4.2
+pyqt6-tools~=6.4.2.3.3
+PyOpenGL~=3.1.7
+passlib~=1.7.4
+numpy~=2.0.2
