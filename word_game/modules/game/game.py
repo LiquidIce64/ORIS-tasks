@@ -19,12 +19,14 @@ class Game(QObject):
         self.map_borders = np.zeros((map_size * map_size,), dtype=np.int32)
         self.map_units: list[Unit | None] = [None] * (map_size * map_size)
         self.map_cells: list[Cell | None] = [None] * (map_size * map_size)
-        self.map_borders_changed = True
-        self.map_units_changed = True
-        self.map_cells_changed = True
 
         self.selected_tile = QPoint(-1, -1)
         self.possible_moves = []
+
+        self.map_borders_changed = True
+        self.map_units_changed = True
+        self.map_cells_changed = True
+        self.selection_changed = True
 
         Castle(self, 1, 1, 0)
         Castle(self, map_size - 2, map_size - 2, 1)
@@ -36,6 +38,11 @@ class Game(QObject):
         Unit(self, 5, 1, 2, 1)
         Unit(self, 5, 2, 0, 2)
         Unit(self, 4, 2, 9, 3)
+        self.selected_tile = QPoint(8, 1)
+        self.possible_moves = [
+            [8, 2, False],
+            [8, 3, True]
+        ]
 
         self.widget = GameWidget(self)
 

@@ -30,6 +30,7 @@ class GameWidget(QOpenGLWidget):
         self.tex_ground: QOpenGLTexture | None = None
         self.tex_units: QOpenGLTexture | None = None
         self.tex_cells: QOpenGLTexture | None = None
+        self.tex_selection: QOpenGLTexture | None = None
 
         self.fbo_render: QOpenGLFramebufferObject | None = None
         self.fbo_scaled: QOpenGLFramebufferObject | None = None
@@ -39,8 +40,10 @@ class GameWidget(QOpenGLWidget):
         self.buf_borders = None
         self.buf_units = None
         self.buf_cells = None
+        self.buf_selection = None
         self.data_units = None
         self.data_cells = None
+        self.data_selection = None
 
         super().__init__()
 
@@ -102,8 +105,7 @@ class GameWidget(QOpenGLWidget):
         self.prog_instanced.bind()
         self.prog_map.setUniformValue("texture", 0)
         self.prog_map.setUniformValue("map_size", self.game.map_size)
-        self.buf_units = gl.glGenBuffers(1)
-        self.buf_cells = gl.glGenBuffers(1)
+        self.buf_units, self.buf_cells, self.buf_selection = gl.glGenBuffers(3)
 
     def initGeometry(self):
         quad_vertices = np.array([
@@ -129,16 +131,17 @@ class GameWidget(QOpenGLWidget):
 
     @staticmethod
     def loadTexture(filename: str):
-        texture = QOpenGLTexture(QImage(filename))
+        texture = QOpenGLTexture(QImage("textures:" + filename))
         texture.setMagnificationFilter(QOpenGLTexture.Filter.Nearest)
         texture.setMinificationFilter(QOpenGLTexture.Filter.Nearest)
         texture.setWrapMode(QOpenGLTexture.WrapMode.Repeat)
         return texture
 
     def initTextures(self):
-        self.tex_ground = self.loadTexture("textures:ground.png")
-        self.tex_units = self.loadTexture("textures:units.png")
-        self.tex_cells = self.loadTexture("textures:cells.png")
+        self.tex_ground = self.loadTexture("ground.png")
+        self.tex_units = self.loadTexture("units.png")
+        self.tex_cells = self.loadTexture("cells.png")
+        self.tex_selection = self.loadTexture("selection.png")
 
     def updateData(self):
         if self.game.map_borders_changed:
@@ -164,6 +167,17 @@ class GameWidget(QOpenGLWidget):
             gl.glBindBuffer(gl.GL_SHADER_STORAGE_BUFFER, self.buf_cells)
             gl.glBufferData(gl.GL_SHADER_STORAGE_BUFFER, self.data_cells, gl.GL_DYNAMIC_DRAW)
 
+        if self.game.selection_changed:
+            self.game.selection_changed = False
+            self.data_selection = np.array(
+                [[self.game.selected_tile.x(), self.game.selected_tile.y(), 0, 4]] +
+                [
+                    [move[0], move[1], 0, 6 if move[2] else 5]
+                    for move in self.game.possible_moves if move is not None
+                ], dtype=np.float32)
+            gl.glBindBuffer(gl.GL_SHADER_STORAGE_BUFFER, self.buf_selection)
+            gl.glBufferData(gl.GL_SHADER_STORAGE_BUFFER, self.data_selection, gl.GL_DYNAMIC_DRAW)
+
     def paintGL(self):
         self.updateData()
         self.fbo_render.bind()
@@ -180,9 +194,12 @@ class GameWidget(QOpenGLWidget):
         # Instanced
         self.prog_instanced.bind()
         self.vbo_quad.bind()
+        # Selection
+        self.tex_selection.bind()
+        gl.glBindBufferBase(gl.GL_SHADER_STORAGE_BUFFER, 3, self.buf_selection)
+        gl.glDrawArraysInstanced(gl.GL_QUADS, 0, 4, len(self.data_selection))
         # Units
         self.tex_units.bind()
-        gl.glBindBuffer(gl.GL_SHADER_STORAGE_BUFFER, self.buf_units)
         gl.glBindBufferBase(gl.GL_SHADER_STORAGE_BUFFER, 3, self.buf_units)
         gl.glDrawArraysInstanced(gl.GL_QUADS, 0, 4, len(self.data_units))
         # Cells

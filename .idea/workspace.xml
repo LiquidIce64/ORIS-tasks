@@ -4,18 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="004bf431-fb4f-4a0a-8912-e57b0897525c" name="Changes" comment="moved stylesheet to gui package">
+    <list default="true" id="004bf431-fb4f-4a0a-8912-e57b0897525c" name="Changes" comment="fixed issues with OS scaling">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/modules/game.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/file_index.json" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/gui/file_index.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/kick_dialog.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/gui/kick_dialog.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/menu.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/gui/menu.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/player_list_item.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/gui/player_list_item.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/room.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/gui/room.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/room_browser.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/gui/room_browser.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/room_list_item.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/gui/room_list_item.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/gui/server.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/server_room_list_item.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/gui/server_room_list_item.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/game/game.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/game/game.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/game/game_widget.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/game/game_widget.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/game/shaders/instanced.frag" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/game/shaders/instanced.frag" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,12 +37,12 @@
     &quot;assignee&quot;: &quot;LiquidIce64&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/LiquidIce64/ORIS-tasks.git&quot;,
-    &quot;accountId&quot;: &quot;2cc8e885-26a0-4cb0-8d35-6eb35f2397b3&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/LiquidIce64/ORIS-tasks.git",
+    "accountId": "ccf3961b-d4ff-4e01-82bf-938f299e8844"
   }
-}</component>
+}]]></component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$USER_HOME$/AppData/Local/JetBrains/PyCharmCE2024.1/python_stubs/-1910143935/PyQt6/QtCore/pyqtSignal.py" root0="FORCE_HIGHLIGHTING" />
   </component>
@@ -82,6 +75,7 @@
     "Python.recompile.executor": "Run",
     "Python.word_game.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
     "Shell Script.OpenGL Test.executor": "Run",
     "Shell Script.Qt Designer.executor": "Run",
     "Shell Script.Unnamed.executor": "Run",
@@ -113,7 +107,7 @@
   </component>
   <component name="RunManager" selected="Shell Script.OpenGL Test">
     <configuration name="OpenGL Test" type="ShConfigurationType">
-      <option name="SCRIPT_TEXT" value="..\.venv\Scripts\python.exe modules\game\game.py" />
+      <option name="SCRIPT_TEXT" value="..\venv\Scripts\python.exe modules\game\game.py" />
       <option name="INDEPENDENT_SCRIPT_PATH" value="false" />
       <option name="SCRIPT_PATH" value="$PROJECT_DIR$/venv/Scripts/python.exe" />
       <option name="SCRIPT_OPTIONS" value="C:\Users\gilya\PycharmProjects\ORIS-tasks\word_game\word_game.py" />
@@ -166,7 +160,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-337b0a7a993a-31b6be0877a2-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-241.19416.19" />
+        <option value="bundled-python-sdk-495700d161d3-aa17d162503b-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-243.22562.220" />
       </set>
     </attachedChunks>
   </component>
@@ -307,7 +301,15 @@
       <option name="project" value="LOCAL" />
       <updated>1734372371236</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="fixed issues with OS scaling">
+      <option name="closed" value="true" />
+      <created>1736427762965</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1736427762965</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -339,6 +341,7 @@
     <MESSAGE value="player readying and game logic" />
     <MESSAGE value="collapsing room player lists on server + minor tweaks" />
     <MESSAGE value="moved stylesheet to gui package" />
-    <option name="LAST_COMMIT_MESSAGE" value="moved stylesheet to gui package" />
+    <MESSAGE value="fixed issues with OS scaling" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed issues with OS scaling" />
   </component>
 </project>

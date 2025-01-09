@@ -8,8 +8,8 @@ const vec3[] team_colors = {
     { 1.0f, 0.0f, 1.0f },
 
     { 1.0f, 1.0f, 1.0f },
-    { 0.9f, 0.9f, 1.0f },
-    { 1.0f, 0.9f, 0.9f }
+    { 0.6f, 1.0f, 1.0f },
+    { 1.0f, 0.6f, 0.6f }
 };
 
 uniform int map_size;
