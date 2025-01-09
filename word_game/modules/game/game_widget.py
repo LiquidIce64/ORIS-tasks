@@ -77,7 +77,7 @@ class GameWidget(QOpenGLWidget):
         return program
 
     def ScaleFBO(self):
-        w = self.width()
+        w = self.width() * self.devicePixelRatio()
         size = 1
         while size < w: size *= 2
         if size != w: size *= 2
@@ -195,7 +195,7 @@ class GameWidget(QOpenGLWidget):
         gl.glBindFramebuffer(gl.GL_DRAW_FRAMEBUFFER, self.defaultFramebufferObject())
         gl.glBlitFramebuffer(
             0, 0, self.fbo_scaled.width(), self.fbo_scaled.height(),
-            0, 0, self.width(), self.height(),
+            0, 0, int(self.width() * self.devicePixelRatio() + 0.5), int(self.height() * self.devicePixelRatio() + 0.5),
             gl.GL_COLOR_BUFFER_BIT, gl.GL_LINEAR
         )
 
