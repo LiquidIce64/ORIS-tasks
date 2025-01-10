@@ -81,9 +81,8 @@ class Game(QObject):
 
         for unit in self.map_units:
             if unit is None: continue
-            if unit.team != self.current_turn: continue
             unit.has_moved = False
-            unit.can_select = True
+            unit.can_select = unit.team == self.current_turn
 
 
 if __name__ == '__main__':

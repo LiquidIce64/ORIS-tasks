@@ -152,8 +152,12 @@ class GameWidget(QOpenGLWidget):
         if self.game.map_units_changed:
             self.game.map_units_changed = False
             self.data_units = np.array([
-                [unit.location.x(), unit.location.y(), unit.UNIT_TYPE, unit.team]
-                for unit in self.game.map_units if unit is not None
+                [
+                    unit.location.x(),
+                    unit.location.y(),
+                    unit.UNIT_TYPE,
+                    -unit.team - 1 if unit.can_select else unit.team
+                ] for unit in self.game.map_units if unit is not None
             ], dtype=np.float32)
             gl.glBindBuffer(gl.GL_SHADER_STORAGE_BUFFER, self.buf_units)
             gl.glBufferData(gl.GL_SHADER_STORAGE_BUFFER, self.data_units, gl.GL_DYNAMIC_DRAW)
