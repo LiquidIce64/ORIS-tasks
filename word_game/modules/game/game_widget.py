@@ -152,7 +152,7 @@ class GameWidget(QOpenGLWidget):
         if self.game.map_units_changed:
             self.game.map_units_changed = False
             self.data_units = np.array([
-                [unit.location.x(), unit.location.y(), unit.unit_type, unit.team]
+                [unit.location.x(), unit.location.y(), unit.UNIT_TYPE, unit.team]
                 for unit in self.game.map_units if unit is not None
             ], dtype=np.float32)
             gl.glBindBuffer(gl.GL_SHADER_STORAGE_BUFFER, self.buf_units)
@@ -161,7 +161,7 @@ class GameWidget(QOpenGLWidget):
         if self.game.map_cells_changed:
             self.game.map_cells_changed = False
             self.data_cells = np.array([
-                [cell.location.x(), cell.location.y(), cell.cell_type, cell.team]
+                [cell.location.x(), cell.location.y(), cell.CELL_TYPE, cell.team]
                 for cell in self.game.map_cells if cell is not None
             ], dtype=np.float32)
             gl.glBindBuffer(gl.GL_SHADER_STORAGE_BUFFER, self.buf_cells)

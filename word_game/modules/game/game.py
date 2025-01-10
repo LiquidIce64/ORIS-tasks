@@ -6,9 +6,8 @@ import numpy as np
 from PyQt6.QtCore import Qt, QObject, QPoint
 
 from game_widget import GameWidget
-from base_unit import Unit
-from base_cell import Cell
-from castle import Castle
+from units import Unit
+from cells import Cell, Castle
 
 
 class Game(QObject):
@@ -20,6 +19,7 @@ class Game(QObject):
         self.map_units: list[Unit | None] = [None] * (map_size * map_size)
         self.map_cells: list[Cell | None] = [None] * (map_size * map_size)
 
+        self.current_turn = 0
         self.selected_tile = QPoint(-1, -1)
         self.possible_moves: dict[tuple[int, int], bool] = {}
 
@@ -32,12 +32,6 @@ class Game(QObject):
         Castle(self, map_size - 2, map_size - 2, 1)
         Castle(self, map_size - 2, 1, 2)
         Castle(self, 1, map_size - 2, 3)
-
-        # DEBUG
-        Unit(self, 4, 1, 1, 0)
-        Unit(self, 5, 1, 2, 1)
-        Unit(self, 5, 2, 0, 2)
-        Unit(self, 4, 2, 9, 3)
 
         self.widget = GameWidget(self)
 
@@ -67,7 +61,7 @@ class Game(QObject):
             if x == self.selected_tile.x() and y == self.selected_tile.y():
                 self.clear_selection()
             elif (x, y) in self.possible_moves:
-                self.map_units[self.map_coord(self.selected_tile)].move(x, y)
+                self.map_units[self.map_coord(self.selected_tile)].move(x, y, self.possible_moves[x, y])
             elif (unit := self.map_units[i]) is not None:
                 unit.select()
             elif (cell := self.map_cells[i]) is not None:
@@ -81,6 +75,15 @@ class Game(QObject):
         self.selected_tile = QPoint(-1, -1)
         self.possible_moves.clear()
         self.selection_changed = True
+
+    def next_turn(self):
+        self.current_turn = (self.current_turn + 1) % 4
+
+        for unit in self.map_units:
+            if unit is None: continue
+            if unit.team != self.current_turn: continue
+            unit.has_moved = False
+            unit.can_select = True
 
 
 if __name__ == '__main__':
