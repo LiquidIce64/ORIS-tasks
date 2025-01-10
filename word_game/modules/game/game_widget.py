@@ -172,8 +172,8 @@ class GameWidget(QOpenGLWidget):
             self.data_selection = np.array(
                 [[self.game.selected_tile.x(), self.game.selected_tile.y(), 0, 4]] +
                 [
-                    [move[0], move[1], 0, 6 if move[2] else 5]
-                    for move in self.game.possible_moves if move is not None
+                    [pos[0], pos[1], 0, 6 if is_attack else 5]
+                    for pos, is_attack in self.game.possible_moves.items()
                 ], dtype=np.float32)
             gl.glBindBuffer(gl.GL_SHADER_STORAGE_BUFFER, self.buf_selection)
             gl.glBufferData(gl.GL_SHADER_STORAGE_BUFFER, self.data_selection, gl.GL_DYNAMIC_DRAW)
@@ -194,18 +194,18 @@ class GameWidget(QOpenGLWidget):
         # Instanced
         self.prog_instanced.bind()
         self.vbo_quad.bind()
-        # Selection
-        self.tex_selection.bind()
-        gl.glBindBufferBase(gl.GL_SHADER_STORAGE_BUFFER, 3, self.buf_selection)
-        gl.glDrawArraysInstanced(gl.GL_QUADS, 0, 4, len(self.data_selection))
-        # Units
-        self.tex_units.bind()
-        gl.glBindBufferBase(gl.GL_SHADER_STORAGE_BUFFER, 3, self.buf_units)
-        gl.glDrawArraysInstanced(gl.GL_QUADS, 0, 4, len(self.data_units))
         # Cells
         self.tex_cells.bind()
         gl.glBindBufferBase(gl.GL_SHADER_STORAGE_BUFFER, 3, self.buf_cells)
         gl.glDrawArraysInstanced(gl.GL_QUADS, 0, 4, len(self.data_cells))
+        # Units
+        self.tex_units.bind()
+        gl.glBindBufferBase(gl.GL_SHADER_STORAGE_BUFFER, 3, self.buf_units)
+        gl.glDrawArraysInstanced(gl.GL_QUADS, 0, 4, len(self.data_units))
+        # Selection
+        self.tex_selection.bind()
+        gl.glBindBufferBase(gl.GL_SHADER_STORAGE_BUFFER, 3, self.buf_selection)
+        gl.glDrawArraysInstanced(gl.GL_QUADS, 0, 4, len(self.data_selection))
 
         QOpenGLFramebufferObject.blitFramebuffer(self.fbo_scaled, self.fbo_render)
         gl.glBindFramebuffer(gl.GL_READ_FRAMEBUFFER, self.fbo_scaled.handle())

@@ -14,3 +14,5 @@ class Cell:
         self.team = team
         game.map_cells[game.map_coord(self.location)] = self
         game.map_cells_changed = True
+
+    def select(self): ...

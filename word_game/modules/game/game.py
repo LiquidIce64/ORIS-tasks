@@ -21,7 +21,7 @@ class Game(QObject):
         self.map_cells: list[Cell | None] = [None] * (map_size * map_size)
 
         self.selected_tile = QPoint(-1, -1)
-        self.possible_moves = []
+        self.possible_moves: dict[tuple[int, int], bool] = {}
 
         self.map_borders_changed = True
         self.map_units_changed = True
@@ -38,11 +38,6 @@ class Game(QObject):
         Unit(self, 5, 1, 2, 1)
         Unit(self, 5, 2, 0, 2)
         Unit(self, 4, 2, 9, 3)
-        self.selected_tile = QPoint(8, 1)
-        self.possible_moves = [
-            [8, 2, False],
-            [8, 3, True]
-        ]
 
         self.widget = GameWidget(self)
 
@@ -69,9 +64,23 @@ class Game(QObject):
         y = int(y * self.map_size)
         i = x + self.map_size * y
         if btn == btn.LeftButton:
-            self.map_borders[i] = (self.map_borders[i] + 1) % 5
-            self.map_borders_changed = True
+            if x == self.selected_tile.x() and y == self.selected_tile.y():
+                self.clear_selection()
+            elif (x, y) in self.possible_moves:
+                self.map_units[self.map_coord(self.selected_tile)].move(x, y)
+            elif (unit := self.map_units[i]) is not None:
+                unit.select()
+            elif (cell := self.map_cells[i]) is not None:
+                cell.select()
+            else:
+                self.clear_selection()
+
             self.widget.repaint()
+
+    def clear_selection(self):
+        self.selected_tile = QPoint(-1, -1)
+        self.possible_moves.clear()
+        self.selection_changed = True
 
 
 if __name__ == '__main__':
