@@ -19,7 +19,9 @@ class Game(QObject):
         self.map_units: list[Unit | None] = [None] * (map_size * map_size)
         self.map_cells: list[Cell | None] = [None] * (map_size * map_size)
 
-        self.current_turn = 0
+        self.remaining_teams = [0, 1, 2, 3]
+        self.current_team = 0
+        self.current_turn_idx = 0
         self.selected_tile = QPoint(-1, -1)
         self.possible_moves: dict[tuple[int, int], bool] = {}
 
@@ -68,7 +70,9 @@ class Game(QObject):
                 cell.select()
             else:
                 self.clear_selection()
-
+            self.widget.repaint()
+        elif btn == btn.RightButton:
+            self.next_turn()
             self.widget.repaint()
 
     def clear_selection(self):
@@ -77,12 +81,27 @@ class Game(QObject):
         self.selection_changed = True
 
     def next_turn(self):
-        self.current_turn = (self.current_turn + 1) % 4
+        self.clear_selection()
+        self.current_turn_idx = (self.current_turn_idx + 1) % len(self.remaining_teams)
+        self.current_team = self.remaining_teams[self.current_turn_idx]
 
         for unit in self.map_units:
             if unit is None: continue
             unit.has_moved = False
-            unit.can_select = unit.team == self.current_turn
+            unit.can_select = unit.team == self.current_team
+
+        self.map_units_changed = True
+
+    def remove_team(self, team: int):
+        self.remaining_teams.remove(team)
+        if self.current_team >= team: self.current_turn_idx -= 1
+        for i in range(len(self.map_units)):
+            if (unit := self.map_units[i]) is not None and unit.team == team: self.map_units[i] = None
+            if (cell := self.map_cells[i]) is not None and cell.team == team: self.map_cells[i] = None
+            if self.map_borders[i] == team + 1: self.map_borders[i] = 0
+        self.map_units_changed = True
+        self.map_cells_changed = True
+        self.map_borders_changed = True
 
 
 if __name__ == '__main__':

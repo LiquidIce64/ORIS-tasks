@@ -22,7 +22,7 @@ class Unit:
         game.map_units_changed = True
 
     def select(self):
-        if not self.can_select or self.game.current_turn != self.team:
+        if not self.can_select or self.game.current_team != self.team:
             self.game.clear_selection()
             return
 
@@ -47,15 +47,19 @@ class Unit:
         if x < 0 or x >= self.game.map_size or\
            y < 0 or y >= self.game.map_size or\
            x == self.location.x() and y == self.location.y(): return -1
-        unit = self.game.map_units[self.game.map_coord(x, y)]
-        if unit is None: return 0
-        if unit.team == self.team: return -1
-        return 1
+        i = self.game.map_coord(x, y)
+        if (unit := self.game.map_units[i]) is not None:
+            return -1 if unit.team == self.team else 1
+        if (cell := self.game.map_cells[i]) is not None:
+            return 0 if cell.team == self.team else (1 if cell.DAMAGEABLE else 0)
+        return 0
 
     def move(self, x: int, y: int, is_attack=False):
         self.game.clear_selection()
         if is_attack:
-            self.game.map_units[self.game.map_coord(x, y)].apply_damage(self.ATTACK_DAMAGE)
+            i = self.game.map_coord(x, y)
+            if (unit := self.game.map_units[i]) is not None: unit.apply_damage(self.ATTACK_DAMAGE)
+            elif (cell := self.game.map_cells[i]) is not None: cell.apply_damage(self.ATTACK_DAMAGE)
             self.has_moved = True
             self.can_select = False
         else:
@@ -88,6 +92,7 @@ class Settler(Unit):
         if not is_attack:
             self.game.map_borders[self.game.map_coord(x, y)] = self.team + 1
             self.game.map_borders_changed = True
+            self.apply_damage(2)
 
 
 class Warrior(Unit):
