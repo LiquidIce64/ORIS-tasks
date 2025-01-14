@@ -28,7 +28,10 @@
 #PlayerListItem[selected=true] {background-color: #85D2FF}
 #PlayerListItem[selected=true]:hover {background-color: #5CC3FF}
 
-QLabel {background: transparent}
+QLabel {
+	color: black;
+	background: transparent;
+}
 
 QMenu {
     background-color: white;

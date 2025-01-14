@@ -12,6 +12,7 @@ from PyQt6.QtWidgets import QWidget
 from .player_list_item import ServerPlayerListItem
 from .room_list_item import ServerRoomListItem
 from .gui import Ui_Server
+from .game import GameServer
 
 if TYPE_CHECKING:
     from .window import Window
@@ -151,14 +152,19 @@ class Server(QWidget, Ui_Server):
                 elif msg["event"] == "kick":
                     self.kick_from_room(msg["body"], msg["from"])
 
-            elif msg["type"] == "word":
+            elif msg["type"] == "game-event":
                 if msg["from"] in self.room_clients:
                     room = self.room_clients[msg["from"]]
-                    if room.game is not None:
-                        room.game.submit_word(msg["word"], msg["from"])
+                    if room.game_started and room.game.remaining_teams[msg["from"]] == room.game.current_team:
+                        if msg["game-event"] == "move":
+                            room.game.make_move(msg["body"])
+                        elif msg["game-event"] == "turn":
+                            room.game.next_turn()
+                        elif msg["game-event"] == "create-unit":
+                            room.game.create_unit(msg["body"], msg["from"])
 
-        except KeyError:
-            print(f"[WARN] Invalid keys in message, skipping...\nMessage: {msg}")
+        except KeyError as e:
+            print(f"[WARN] Invalid keys in message, skipping...\nMessage: {msg}\nError: {e}")
 
     @pyqtSlot()
     def send_room_list_upd(self):
@@ -196,7 +202,7 @@ class Server(QWidget, Ui_Server):
         if room_name not in self.rooms: return "Room not found"
         room = self.rooms[room_name]
         if len(room.players) >= room.max_players: return "Room full"
-        if room.game is not None: return "Game already started"
+        if room.game_started: return "Game already started"
         if username not in self.browser_clients: return "Error"
 
         player_item = self.browser_clients.pop(username)

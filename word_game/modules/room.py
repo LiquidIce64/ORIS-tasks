@@ -6,6 +6,7 @@ from PyQt6.QtWidgets import QWidget
 
 from .player_list_item import PlayerListItem
 from .dialogs import KickDialog
+from .game import Game
 from .gui import Ui_Room
 
 if TYPE_CHECKING:
@@ -43,10 +44,11 @@ class Room(QWidget, Ui_Room):
 
         self.btn_leave.clicked.connect(self.leave_room)
         self.btn_ready.clicked.connect(self.ready_clicked)
-        self.btn_submit.clicked.connect(self.submit_word)
-        self.input_word.returnPressed.connect(self.submit_word)
 
         self.main.comm.recv_signal.connect(self.on_recv_message)
+
+        self.game = Game(self.main.comm)
+        self.layout_game.addWidget(self.game)
 
     @pyqtSlot()
     def update_countdown(self):
@@ -79,7 +81,8 @@ class Room(QWidget, Ui_Room):
                 if upd["name"] in self.players:
                     self.players.pop(upd["name"]).deleteLater()
                 if self.current_player is not None and self.current_player.name == upd["name"]:
-                    self.current_player: PlayerListItem | None = None
+                    self.current_player = None
+                self.game.remove_team(upd["name"])
                 self.countdown_timer.stop()
                 if not self.game_started: self.label_game_state.setText("Waiting for players...")
             elif upd["action"] == "add":
@@ -96,18 +99,19 @@ class Room(QWidget, Ui_Room):
                     self.set_host(upd["name"])
         self.label_player_count.setText(f"{len(self.players)}/{self.max_players}")
 
+    def start_game(self):
+        self.game_started = True
+        for i, player in enumerate(self.players.values()):
+            player.set_ready(False)
+            self.game.remaining_teams[player.name] = i
+        self.btn_ready.setEnabled(False)
+        self.btn_ready.setText("End turn")
+        self.game.start_game()
+
     @pyqtSlot(dict)
     def on_recv_message(self, msg: dict):
         if msg["type"] == "event":
-            if msg["event"] == "turn":
-                if not self.game_started:
-                    self.game_started = True
-                    for player in self.players.values():
-                        player.set_ready(False)
-                    self.btn_ready.setEnabled(False)
-                self.next_turn(msg["body"])
-
-            elif msg["event"] == "player-list-upd":
+            if msg["event"] == "player-list-upd":
                 self.update_list(msg["body"])
 
             elif msg["event"] == "start-countdown":
@@ -117,53 +121,47 @@ class Room(QWidget, Ui_Room):
             elif msg["event"] == "kick":
                 self.main.leave_room()
                 KickDialog(msg["body"], self.main).exec()
+        elif msg["type"] == "game-event":
+            if msg["game-event"] == "move":
+                self.game.make_move(msg["body"])
 
-    def next_turn(self, turn_info: dict):
-        if "word" in turn_info:
-            self.output_words.append(turn_info["word"])
-            self.used_words.append(turn_info["word"].lower())
-        self.btn_ready.setEnabled(False)
-        self.turn_time = 3000
+            elif msg["game-event"] == "turn":
+                if not self.game_started: self.start_game()
+                self.next_turn(msg["body"])
+
+            elif msg["game-event"] == "create-unit":
+                self.game.create_unit(msg["body"])
+
+    def next_turn(self, next_player: str):
+        self.turn_time = 12000
         self.turn_timer.start(10)
-        your_turn = turn_info["player"] == self.main.room_browser.username
-        if your_turn:
+        if next_player == self.main.room_browser.username:
             self.label_game_state.setText("Your turn")
-            self.btn_submit.setEnabled(True)
-            self.input_word.setEnabled(True)
-            self.input_word.setFocus()
+            self.btn_ready.setEnabled(True)
+            self.game.next_turn(next_player)
         else:
-            self.label_game_state.setText(f"{turn_info['player']}'s turn")
+            self.label_game_state.setText(f"{next_player}'s turn")
+            self.btn_ready.setEnabled(False)
+            self.game.next_turn(-1)
         if self.current_player is not None: self.current_player.set_ready(False)
-        self.current_player = self.players[turn_info["player"]]
+        self.current_player = self.players[next_player]
         self.current_player.set_ready(True)
-
-    @pyqtSlot()
-    def submit_word(self):
-        word = self.input_word.text().strip()
-        if len(word) == 0: return
-        self.input_word.clear()
-        word_lower = word.lower()
-        if self.used_words and not word_lower.startswith(self.used_words[-1][-1]):
-            self.input_word.setPlaceholderText("Word's first letter must match last word's last letter")
-        elif word_lower in self.used_words:
-            self.input_word.setPlaceholderText("This word has already been used")
-        else:
-            self.input_word.setPlaceholderText("Type your word here...")
-            self.main.comm.send_queue.put({
-                "type": "word",
-                "word": word
-            })
-            self.input_word.setEnabled(False)
-            self.btn_submit.setEnabled(False)
 
     @pyqtSlot(bool)
     def ready_clicked(self, toggled: bool):
-        self.btn_ready.setText("Ready" if toggled else "Not Ready")
-        self.main.comm.send_queue.put({
-            "type": "event",
-            "event": "ready",
-            "body": toggled
-        })
+        if self.game_started:
+            self.btn_ready.setEnabled(False)
+            self.main.comm.send_queue.put({
+                "type": "game-event",
+                "game-event": "turn"
+            })
+        else:
+            self.btn_ready.setText("Ready" if toggled else "Not Ready")
+            self.main.comm.send_queue.put({
+                "type": "event",
+                "event": "ready",
+                "body": toggled
+            })
 
     @pyqtSlot()
     def leave_room(self):

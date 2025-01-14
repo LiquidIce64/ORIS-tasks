@@ -20,7 +20,7 @@ if TYPE_CHECKING:
     from .game import Game
 
 
-class GameWidget(QOpenGLWidget):
+class GameRenderer(QOpenGLWidget):
     def __init__(self, game: "Game"):
         self.game = game
 
@@ -54,7 +54,7 @@ class GameWidget(QOpenGLWidget):
         pos = event.pos()
         x = pos.x() / self.width()
         y = 1.0 - pos.y() / self.height()
-        self.game.on_click(x, y, event.button())
+        self.game.on_game_widget_click(x, y, event.button())
 
     def initializeGL(self):
         prof = QOpenGLVersionProfile()
@@ -222,3 +222,6 @@ class GameWidget(QOpenGLWidget):
 
     def resizeGL(self, w, h):
         self.ScaleFBO()
+
+    def heightForWidth(self, width):
+        return width

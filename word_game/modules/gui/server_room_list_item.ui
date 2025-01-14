@@ -19,7 +19,10 @@
 	border-radius: 10px;
 }
 
-QLabel {background: transparent}
+QLabel {
+	color: black;
+	background: transparent;
+}
 QFrame {background: transparent}</string>
   </property>
   <layout class="QGridLayout" name="layout_room_list_item">

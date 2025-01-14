@@ -1,27 +1,35 @@
 from __future__ import annotations
-from typing import overload
+from typing import overload, TYPE_CHECKING
 
 import numpy as np
 
-from PyQt6.QtCore import Qt, QObject, QPoint
+from PyQt6.QtCore import Qt, QPoint
+from PyQt6.QtWidgets import QWidget
 
-from game_widget import GameWidget
-from units import Unit
-from cells import Cell, Castle
+from .gui import Ui_Game
+
+from .game_renderer import GameRenderer
+from .units import Unit, UNIT_TYPES
+from .cells import Cell, Castle
+
+if TYPE_CHECKING:
+    from word_game.modules.communication import Communication
 
 
-class Game(QObject):
-    def __init__(self, map_size=16):
+class Game(QWidget, Ui_Game):
+    def __init__(self, comm: "Communication", map_size=16):
         super().__init__()
+        self.setupUi(self)
+
+        self.comm = comm
         self.map_size = map_size
 
         self.map_borders = np.zeros((map_size * map_size,), dtype=np.int32)
         self.map_units: list[Unit | None] = [None] * (map_size * map_size)
         self.map_cells: list[Cell | None] = [None] * (map_size * map_size)
 
-        self.remaining_teams = [0, 1, 2, 3]
-        self.current_team = 0
-        self.current_turn_idx = 0
+        self.remaining_teams: dict[str, int] = {}
+        self.current_team = -1
         self.selected_tile = QPoint(-1, -1)
         self.possible_moves: dict[tuple[int, int], bool] = {}
 
@@ -30,12 +38,16 @@ class Game(QObject):
         self.map_cells_changed = True
         self.selection_changed = True
 
-        Castle(self, 1, 1, 0)
-        Castle(self, map_size - 2, map_size - 2, 1)
-        Castle(self, map_size - 2, 1, 2)
-        Castle(self, 1, map_size - 2, 3)
+        self.renderer = GameRenderer(self)
+        self.layout_renderer.addWidget(self.renderer)
 
-        self.widget = GameWidget(self)
+    def start_game(self):
+        for team, pos in zip(self.remaining_teams.values(), [
+            (1, 1),
+            (self.map_size - 2, self.map_size - 2),
+            (self.map_size - 2, 1),
+            (1, self.map_size - 2)
+        ]): Castle(self, pos[0], pos[1], team)
 
     @overload
     def map_coord(self, pos: QPoint) -> int: ...
@@ -55,7 +67,7 @@ class Game(QObject):
             x, y = args
             return x + y * self.map_size
 
-    def on_click(self, x, y, btn: Qt.MouseButton):
+    def on_game_widget_click(self, x, y, btn: Qt.MouseButton):
         x = int(x * self.map_size)
         y = int(y * self.map_size)
         i = x + self.map_size * y
@@ -63,27 +75,47 @@ class Game(QObject):
             if x == self.selected_tile.x() and y == self.selected_tile.y():
                 self.clear_selection()
             elif (x, y) in self.possible_moves:
-                self.map_units[self.map_coord(self.selected_tile)].move(x, y, self.possible_moves[x, y])
+                is_attack = self.possible_moves[x, y]
+                unit_idx = self.map_coord(self.selected_tile)
+                self.map_units[unit_idx].move(x, y, is_attack)
+                self.comm.send_queue.put({
+                    "type": "game-event",
+                    "game-event": "move",
+                    "body": {
+                        "unit": unit_idx,
+                        "args": (x, y, is_attack)
+                    }
+                })
             elif (unit := self.map_units[i]) is not None:
                 unit.select()
             elif (cell := self.map_cells[i]) is not None:
                 cell.select()
             else:
                 self.clear_selection()
-            self.widget.repaint()
-        elif btn == btn.RightButton:
-            self.next_turn()
-            self.widget.repaint()
+            self.renderer.repaint()
 
     def clear_selection(self):
         self.selected_tile = QPoint(-1, -1)
         self.possible_moves.clear()
         self.selection_changed = True
 
-    def next_turn(self):
+    def make_move(self, move_info: dict):
+        try:
+            unit: Unit = self.map_units[move_info["unit"]]
+            x, y, is_attack = move_info["args"]
+            x = int(x)
+            y = int(y)
+            is_attack = bool(is_attack)
+            unit.move(x, y, is_attack)
+            self.renderer.repaint()
+        except: return
+
+    def next_turn(self, next_team_or_player):
         self.clear_selection()
-        self.current_turn_idx = (self.current_turn_idx + 1) % len(self.remaining_teams)
-        self.current_team = self.remaining_teams[self.current_turn_idx]
+        if isinstance(next_team_or_player, int):
+            self.current_team = next_team_or_player
+        else:
+            self.current_team = self.remaining_teams[next_team_or_player]
 
         for unit in self.map_units:
             if unit is None: continue
@@ -91,10 +123,30 @@ class Game(QObject):
             unit.can_select = unit.team == self.current_team
 
         self.map_units_changed = True
+        self.renderer.repaint()
 
-    def remove_team(self, team: int):
-        self.remaining_teams.remove(team)
-        if self.current_team >= team: self.current_turn_idx -= 1
+    def create_unit(self, unit_info: dict):
+        try:
+            x, y = unit_info["pos"]
+            unit = UNIT_TYPES[unit_info["type"]](self, x, y, unit_info["team"])
+            unit.can_select = False
+            self.renderer.repaint()
+        except: raise Exception()
+
+    def remove_team(self, team_or_player):
+        if isinstance(team_or_player, int):
+            team = team_or_player
+            for k, v in self.remaining_teams.items():
+                if v == team:
+                    username = k
+                    break
+            else: return
+        else:
+            username: str = team_or_player
+            if username not in self.remaining_teams: return
+            team = self.remaining_teams[username]
+        self.remaining_teams.pop(username)
+
         for i in range(len(self.map_units)):
             if (unit := self.map_units[i]) is not None and unit.team == team: self.map_units[i] = None
             if (cell := self.map_cells[i]) is not None and cell.team == team: self.map_cells[i] = None
@@ -102,36 +154,8 @@ class Game(QObject):
         self.map_units_changed = True
         self.map_cells_changed = True
         self.map_borders_changed = True
+        self.renderer.repaint()
 
-
-if __name__ == '__main__':
-    from warnings import filterwarnings
-
-    from PyQt6.QtCore import QDir
-    from PyQt6.QtWidgets import QApplication, QMainWindow
-
-    QDir.addSearchPath("textures", "modules/game/textures")
-    QDir.addSearchPath("shaders", "modules/game/shaders")
-
-    filterwarnings(action="ignore", message="sipPyTypeDict()", category=DeprecationWarning)
-
-
-    class MainWindow(QMainWindow):
-        def __init__(self):
-            super().__init__()
-            self.resize(512, 512)
-            self.setWindowTitle('OpenGL Test')
-            self.game = Game()
-            self.setCentralWidget(self.game.widget)
-
-        def resizeEvent(self, event):
-            w, h = self.width(), self.height()
-            if w == h: return
-            new_size = min(w, h)
-            self.resize(new_size, new_size)
-
-
-    app = QApplication([])
-    win = MainWindow()
-    win.show()
-    app.exec()
+    def resizeEvent(self, event):
+        new_size = min(self.frame_renderer_outside.width(), self.frame_renderer_outside.height()) - 2
+        self.frame_renderer.setMaximumSize(new_size, new_size)

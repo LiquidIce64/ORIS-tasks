@@ -8,7 +8,7 @@ from PyQt6.QtGui import QPixmap
 
 from .player_list_item import ServerPlayerListItem
 from .gui import Ui_RoomListItem, Ui_ServerRoomListItem
-from .game import Game
+from .game import GameServer
 
 if TYPE_CHECKING:
     from .room_browser import RoomBrowser
@@ -74,7 +74,8 @@ class ServerRoomListItem(QWidget, Ui_ServerRoomListItem):
         self.players: dict[str, ServerPlayerListItem] = {host_item.name: host_item}
         self.max_players = max_players
         self.ready_players = 0
-        self.game: Game | None = None
+        self.game = GameServer(self)
+        self.game_started = False
         host_item.set_host(True)
 
         self.server.room_list_upd.append({
@@ -119,7 +120,8 @@ class ServerRoomListItem(QWidget, Ui_ServerRoomListItem):
         for player in self.players.values():
             player.ready = False
         self.ready_players = 0
-        self.game = Game(self)
+        self.game_started = True
+        self.game.start_game(self.players.keys())
 
     def check_ready(self):
         if self.ready_players == len(self.players):
@@ -211,14 +213,13 @@ class ServerRoomListItem(QWidget, Ui_ServerRoomListItem):
         })
         self.check_ready()
 
-        if self.game is not None:
-            self.game.remove_player(username)
+        if self.game_started:
+            self.game.remove_team(username, False)
 
         return player_item
 
     def deleteLater(self):
         self.countdown_timer.stop()
-        if self.game is not None: self.game.deleteLater()
         self.broadcast({
             "type": "event",
             "event": "kick",

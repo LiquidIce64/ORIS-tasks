@@ -1,17 +1,20 @@
+from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from PyQt6.QtCore import QPoint
 
 if TYPE_CHECKING:
     from .game import Game
+    from .game_server import GameServer
 
 
 class Unit:
     UNIT_TYPE = 0
+    NAME = ""
     ATTACK_DAMAGE = 3
     MAX_HEALTH = 10
 
-    def __init__(self, game: "Game", x: int, y: int, team: int):
+    def __init__(self, game: "Game" | "GameServer", x: int, y: int, team: int):
         self.game = game
         self.location = QPoint(x, y)
         self.team = team
@@ -68,15 +71,16 @@ class Unit:
             self.location = QPoint(x, y)
             self.has_moved = True
 
-            self.game.selected_tile = self.location
-            for move_x, move_y, can_move, can_attack in self.get_moves():
-                if not can_attack: continue
-                move_check = self.check_move(move_x, move_y)
-                if move_check == 1:
-                    self.game.possible_moves[move_x, move_y] = True
-            if len(self.game.possible_moves) == 0:
-                self.can_select = False
-                self.game.clear_selection()
+            if self.team == self.game.current_team:
+                self.game.selected_tile = self.location
+                for move_x, move_y, can_move, can_attack in self.get_moves():
+                    if not can_attack: continue
+                    move_check = self.check_move(move_x, move_y)
+                    if move_check == 1:
+                        self.game.possible_moves[move_x, move_y] = True
+                if len(self.game.possible_moves) == 0:
+                    self.can_select = False
+                    self.game.clear_selection()
         self.game.map_units_changed = True
 
     def apply_damage(self, damage: int):
@@ -87,6 +91,8 @@ class Unit:
 
 
 class Settler(Unit):
+    NAME = "Settler"
+
     def move(self, x: int, y: int, is_attack=False):
         super().move(x, y, is_attack)
         if not is_attack:
@@ -97,18 +103,21 @@ class Settler(Unit):
 
 class Warrior(Unit):
     UNIT_TYPE = 1
+    NAME = "Warrior"
     ATTACK_DAMAGE = 5
     MAX_HEALTH = 15
 
 
 class Swordsman(Unit):
     UNIT_TYPE = 2
+    NAME = "Swordsman"
     ATTACK_DAMAGE = 15
     MAX_HEALTH = 15
 
 
 class Archer(Unit):
     UNIT_TYPE = 3
+    NAME = "Archer"
     ATTACK_DAMAGE = 8
     MAX_HEALTH = 15
 
@@ -121,4 +130,14 @@ class Archer(Unit):
 
 class ShieldBearer(Unit):
     UNIT_TYPE = 4
+    NAME = "ShieldBearer"
     MAX_HEALTH = 40
+
+
+UNIT_TYPES = {
+    0: Settler,
+    1: Warrior,
+    2: Swordsman,
+    3: Archer,
+    4: ShieldBearer
+}

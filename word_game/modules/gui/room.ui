@@ -6,14 +6,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>500</width>
-    <height>300</height>
+    <width>750</width>
+    <height>400</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>500</width>
-    <height>300</height>
+    <width>750</width>
+    <height>400</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -22,24 +22,21 @@
   <property name="styleSheet">
    <string notr="true">#Room, QScrollArea QWidget {background-color: #DFE0E2}
 
-QLineEdit, QPushButton {
+QLabel {
+	color: black;
+}
+
+QPushButton {
+	background-color: #85D2FF;
 	color: black;
 	border-radius: 10px;
 	padding: 4px;
 	height: 16px;
 }
-QLineEdit {background-color: white}
-QPushButton {background-color: #85D2FF}
 QPushButton:hover {background-color: #5CC3FF}
 QPushButton:disabled {
 	background-color: #D6F0FF;
 	color: #40404F;
-}
-
-QTextEdit {
-	background-color: white;
-	border-radius: 10px;
-	padding: 5px;
 }
 
 QProgressBar {
@@ -92,7 +89,13 @@ QScrollBar::handle:hover {
    </property>
    <item row="0" column="0">
     <widget class="QFrame" name="frame_game">
-     <layout class="QGridLayout" name="gridLayout_2">
+     <property name="minimumSize">
+      <size>
+       <width>412</width>
+       <height>256</height>
+      </size>
+     </property>
+     <layout class="QVBoxLayout" name="layout_game">
       <property name="leftMargin">
        <number>0</number>
       </property>
@@ -105,50 +108,17 @@ QScrollBar::handle:hover {
       <property name="bottomMargin">
        <number>0</number>
       </property>
-      <item row="1" column="0">
-       <widget class="QLineEdit" name="input_word">
-        <property name="enabled">
-         <bool>false</bool>
-        </property>
-        <property name="placeholderText">
-         <string>Type your word here...</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QPushButton" name="btn_submit">
-        <property name="enabled">
-         <bool>false</bool>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>60</width>
-          <height>0</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>Submit</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="0" colspan="2">
-       <widget class="QTextEdit" name="output_words">
-        <property name="enabled">
-         <bool>true</bool>
-        </property>
-        <property name="focusPolicy">
-         <enum>Qt::NoFocus</enum>
-        </property>
-        <property name="readOnly">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
      </layout>
     </widget>
    </item>
    <item row="0" column="1">
     <widget class="QFrame" name="frame_sidepanel">
+     <property name="minimumSize">
+      <size>
+       <width>134</width>
+       <height>0</height>
+      </size>
+     </property>
      <layout class="QGridLayout" name="gridLayout" rowstretch="0,0,0,0,0" columnstretch="3,1,0">
       <property name="sizeConstraint">
        <enum>QLayout::SetMinimumSize</enum>
@@ -186,7 +156,7 @@ QScrollBar::handle:hover {
          <string notr="true"/>
         </property>
         <property name="maximum">
-         <number>3000</number>
+         <number>12000</number>
         </property>
         <property name="value">
          <number>0</number>
@@ -239,8 +209,8 @@ QScrollBar::handle:hover {
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>128</width>
-           <height>180</height>
+           <width>211</width>
+           <height>280</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -294,12 +264,9 @@ QScrollBar::handle:hover {
   </layout>
  </widget>
  <tabstops>
-  <tabstop>input_word</tabstop>
-  <tabstop>btn_submit</tabstop>
   <tabstop>btn_ready</tabstop>
   <tabstop>btn_leave</tabstop>
   <tabstop>scrollArea</tabstop>
-  <tabstop>output_words</tabstop>
  </tabstops>
  <resources/>
  <connections/>

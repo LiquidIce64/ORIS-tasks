@@ -4,11 +4,32 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="004bf431-fb4f-4a0a-8912-e57b0897525c" name="Changes" comment="selectable units highlighting">
+    <list default="true" id="004bf431-fb4f-4a0a-8912-e57b0897525c" name="Changes" comment="destroyable castles; turns accounting for remaining teams">
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/game/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/game/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/word_game/modules/game/cells.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/game/cells.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/word_game/modules/game/game.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/game/game.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/game/game_widget.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/game/game_renderer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/word_game/modules/game/units.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/game/units.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/file_index.json" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/gui/file_index.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/kick_dialog.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/gui/kick_dialog.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/menu.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/gui/menu.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/player_list_item.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/gui/player_list_item.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/player_list_item.ui" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/gui/player_list_item.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/room.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/gui/room.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/room.ui" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/gui/room.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/room_browser.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/gui/room_browser.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/room_browser.ui" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/gui/room_browser.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/room_list_item.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/gui/room_list_item.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/room_list_item.ui" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/gui/room_list_item.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/gui/server.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/server.ui" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/gui/server.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/server_room_list_item.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/gui/server_room_list_item.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/server_room_list_item.ui" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/gui/server_room_list_item.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/room.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/room.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/room_list_item.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/room_list_item.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/server.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,8 +103,8 @@
     &quot;Shell Script.word_game.executor&quot;: &quot;Run&quot;,
     &quot;git-widget-placeholder&quot;: &quot;game&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/gilya/Downloads/GLSL4Idea-1.24.zip&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/gilya/Projects/PyCharm/ORIS-tasks/word_game/modules/game/gui&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;Errors&quot;
   }
 }</component>
   <component name="PyDebuggerOptionsProvider">
@@ -91,38 +112,23 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\gilya\Projects\PyCharm\ORIS-tasks\word_game\modules\game\gui" />
       <recent name="C:\Users\gilya\PycharmProjects\ORIS-tasks\word_game\modules\gui\icons" />
       <recent name="C:\Users\gilya\Projects\PyCharm\ORIS-tasks\word_game\modules\gui\icons" />
       <recent name="C:\Users\gilya\Projects\PyCharm\ORIS-tasks\word_game" />
       <recent name="C:\Users\gilya\Projects\PyCharm\ORIS-tasks\word_game\gui\icons" />
-      <recent name="C:\Users\gilya\Projects\PyCharm\ORIS-tasks\toolkit" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\gilya\Projects\PyCharm\ORIS-tasks\word_game\modules\game\gui" />
       <recent name="C:\Users\gilya\Projects\PyCharm\ORIS-tasks\word_game\modules\game" />
       <recent name="C:\Users\gilya\PycharmProjects\ORIS-tasks\word_game\modules" />
       <recent name="C:\Users\gilya\Projects\PyCharm\ORIS-tasks\word_game" />
       <recent name="C:\Users\gilya\Projects\PyCharm\ORIS-tasks" />
-      <recent name="C:\Users\gilya\Projects\PyCharm\ORIS-tasks\word_game\gui" />
     </key>
   </component>
-  <component name="RunManager" selected="Shell Script.OpenGL Test">
-    <configuration name="OpenGL Test" type="ShConfigurationType">
-      <option name="SCRIPT_TEXT" value="..\venv\Scripts\python.exe modules\game\game.py" />
-      <option name="INDEPENDENT_SCRIPT_PATH" value="false" />
-      <option name="SCRIPT_PATH" value="$PROJECT_DIR$/venv/Scripts/python.exe" />
-      <option name="SCRIPT_OPTIONS" value="C:\Users\gilya\PycharmProjects\ORIS-tasks\word_game\word_game.py" />
-      <option name="INDEPENDENT_SCRIPT_WORKING_DIRECTORY" value="false" />
-      <option name="SCRIPT_WORKING_DIRECTORY" value="$PROJECT_DIR$/word_game" />
-      <option name="INDEPENDENT_INTERPRETER_PATH" value="true" />
-      <option name="INTERPRETER_PATH" value="powershell.exe" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="EXECUTE_IN_TERMINAL" value="true" />
-      <option name="EXECUTE_SCRIPT_FILE" value="false" />
-      <envs />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Shell Script.word_game">
     <configuration name="Qt Designer" type="ShConfigurationType" activateToolWindowBeforeRun="false">
-      <option name="SCRIPT_TEXT" value=".venv/Lib/site-packages/qt6_applications/Qt/bin/designer.exe" />
+      <option name="SCRIPT_TEXT" value="venv/Lib/site-packages/qt6_applications/Qt/bin/designer.exe" />
       <option name="INDEPENDENT_SCRIPT_PATH" value="true" />
       <option name="SCRIPT_PATH" value="" />
       <option name="SCRIPT_OPTIONS" value="" />
@@ -137,7 +143,7 @@
       <method v="2" />
     </configuration>
     <configuration name="word_game" type="ShConfigurationType" singleton="false">
-      <option name="SCRIPT_TEXT" value="..\.venv\Scripts\python.exe word_game.py" />
+      <option name="SCRIPT_TEXT" value="..\venv\Scripts\python.exe word_game.py" />
       <option name="INDEPENDENT_SCRIPT_PATH" value="false" />
       <option name="SCRIPT_PATH" value="$PROJECT_DIR$/venv/Scripts/python.exe" />
       <option name="SCRIPT_OPTIONS" value="C:\Users\gilya\PycharmProjects\ORIS-tasks\word_game\word_game.py" />
@@ -154,7 +160,6 @@
     <list>
       <item itemvalue="Shell Script.Qt Designer" />
       <item itemvalue="Shell Script.word_game" />
-      <item itemvalue="Shell Script.OpenGL Test" />
     </list>
   </component>
   <component name="SharedIndexes">
@@ -349,7 +354,15 @@
       <option name="project" value="LOCAL" />
       <updated>1736549690268</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="destroyable castles; turns accounting for remaining teams">
+      <option name="closed" value="true" />
+      <created>1736688597780</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1736688597780</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -386,6 +399,7 @@
     <MESSAGE value="unit movement" />
     <MESSAGE value="unit health, attacks and movesets; unit textures; player turns" />
     <MESSAGE value="selectable units highlighting" />
-    <option name="LAST_COMMIT_MESSAGE" value="selectable units highlighting" />
+    <MESSAGE value="destroyable castles; turns accounting for remaining teams" />
+    <option name="LAST_COMMIT_MESSAGE" value="destroyable castles; turns accounting for remaining teams" />
   </component>
 </project>

@@ -22,6 +22,10 @@
   <property name="styleSheet">
    <string notr="true">#Server, QScrollArea QWidget {background-color: #DFE0E2}
 
+QLabel {
+	color: black;
+}
+
 QPushButton {
 	color: black;
 	background-color: #85D2FF;
