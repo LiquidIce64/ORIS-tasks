@@ -30,7 +30,7 @@ class Castle(Cell):
     CELL_TYPE = 0
     NAME = "Castle"
     DAMAGEABLE = True
-    MAX_HEALTH = 50
+    MAX_HEALTH = 100
 
     def __init__(self, game: "Game" | "GameServer", x: int, y: int, team: int):
         super().__init__(game, x, y, team)

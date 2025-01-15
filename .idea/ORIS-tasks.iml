@@ -8,11 +8,4 @@
     <orderEntry type="jdk" jdkName="Python 3.9 (ORIS-tasks)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
-  <component name="PyNamespacePackagesService">
-    <option name="namespacePackageFolders">
-      <list>
-        <option value="$MODULE_DIR$/word_game/modules/gui" />
-      </list>
-    </option>
-  </component>
 </module>

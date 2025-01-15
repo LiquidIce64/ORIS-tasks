@@ -9,7 +9,7 @@ from .units import Unit, UNIT_TYPES
 from .cells import Cell, Castle
 
 if TYPE_CHECKING:
-    from word_game.modules.room_list_item import ServerRoomListItem
+    from strategy_game.modules.room_list_item import ServerRoomListItem
 
 
 class GameServer(QObject):

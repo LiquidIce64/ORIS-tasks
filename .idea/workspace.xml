@@ -4,26 +4,68 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="004bf431-fb4f-4a0a-8912-e57b0897525c" name="Changes" comment="">
+    <list default="true" id="004bf431-fb4f-4a0a-8912-e57b0897525c" name="Changes" comment="team money; unit spawn menu; hovered unit info; game settings">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/modules/game/cells.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/game/cells.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/modules/game/game.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/game/game.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/modules/game/game_renderer.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/game/game_renderer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/modules/game/game_server.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/game/game_server.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/modules/game/gui/file_index.json" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/game/gui/file_index.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/modules/game/gui/game.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/game/gui/game.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/modules/game/gui/game.ui" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/game/gui/game.ui" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/modules/game/units.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/game/units.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/file_index.json" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/gui/file_index.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/room.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/gui/room.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/room.ui" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/gui/room.ui" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/room_browser.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/gui/room_browser.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/room_browser.ui" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/gui/room_browser.ui" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/modules/room.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/room.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/modules/room_browser.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/room_browser.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/modules/room_list_item.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/room_list_item.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/modules/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/server.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_game/modules/window.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_game/modules/window.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/communication.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/dialogs.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/game/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/game/cells.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/game/game.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/game/game_renderer.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/game/game_server.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/game/gui/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/game/gui/file_index.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/game/gui/game.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/game/gui/game.ui" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/game/gui/recompile.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/game/shaders/instanced.frag" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/game/shaders/instanced.vert" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/game/shaders/map.frag" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/game/shaders/map.vert" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/game/textures/cells.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/game/textures/cells.xcf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/game/textures/ground.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/game/textures/ground.xcf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/game/textures/selection.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/game/textures/selection.xcf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/game/textures/units.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/game/textures/units.xcf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/game/units.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/file_index.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/icons/arrow_down.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/icons/arrow_up.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/icons/host.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/icons/kick.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/kick_dialog.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/kick_dialog.ui" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/menu.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/menu.ui" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/player_list_item.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/player_list_item.ui" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/recompile.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/resources.qrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/room.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/room.ui" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/room_browser.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/room_browser.ui" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/room_list_item.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/room_list_item.ui" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/server.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/server.ui" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/server_room_list_item.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/gui/server_room_list_item.ui" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/menu.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/networking.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/player_list_item.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/room.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/room_browser.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/room_list_item.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/server.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/modules/window.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/word_game/word_game.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -364,7 +406,15 @@
       <option name="project" value="LOCAL" />
       <updated>1736891063842</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="team money; unit spawn menu; hovered unit info; game settings">
+      <option name="closed" value="true" />
+      <created>1736952121757</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1736952121757</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -403,6 +453,7 @@
     <MESSAGE value="selectable units highlighting" />
     <MESSAGE value="destroyable castles; turns accounting for remaining teams" />
     <MESSAGE value="embedded game renderer into gui; server-side game logic" />
-    <option name="LAST_COMMIT_MESSAGE" value="embedded game renderer into gui; server-side game logic" />
+    <MESSAGE value="team money; unit spawn menu; hovered unit info; game settings" />
+    <option name="LAST_COMMIT_MESSAGE" value="team money; unit spawn menu; hovered unit info; game settings" />
   </component>
 </project>

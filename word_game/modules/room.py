@@ -48,8 +48,8 @@ class Room(QWidget, Ui_Room):
         self.main.comm.recv_signal.connect(self.on_recv_message)
 
         self.game = Game(self.main.comm, settings["map-size"], settings["starting-money"])
-        self.setMinimumWidth(max(256, self.game.renderer.minimumWidth()) + 438)
-        self.setMinimumHeight(max(256, self.game.renderer.minimumHeight()) + 22)
+        self.setMinimumWidth(max(694, self.game.renderer.minimumWidth() + 438))
+        self.setMinimumHeight(max(282, self.game.renderer.minimumHeight() + 22))
         self.layout_game.addWidget(self.game)
 
     @pyqtSlot()

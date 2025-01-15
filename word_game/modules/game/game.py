@@ -14,7 +14,7 @@ from .units import Unit, UNIT_TYPES
 from .cells import Cell, Castle
 
 if TYPE_CHECKING:
-    from word_game.modules.communication import Communication
+    from strategy_game.modules.communication import Communication
 
 
 class Game(QWidget, Ui_Game):
@@ -45,6 +45,8 @@ class Game(QWidget, Ui_Game):
 
         self.renderer = GameRenderer(self)
         self.layout_renderer.addWidget(self.renderer)
+
+        self.frame_selection.setVisible(False)
 
         self.unit_btns = {}
         coin_pixmap = QPixmap("res:/icons/host.png")
@@ -144,6 +146,7 @@ class Game(QWidget, Ui_Game):
         i = x + self.map_size * y
 
         if (unit := self.map_units[i]) is not None:
+            self.frame_selection.setVisible(True)
             self.label_attack.setVisible(True)
             self.icon_attack.setVisible(True)
             self.progress_health.setVisible(True)
@@ -153,6 +156,7 @@ class Game(QWidget, Ui_Game):
             self.label_selection_name.setText(unit.NAME)
 
         elif (cell := self.map_cells[i]) is not None:
+            self.frame_selection.setVisible(True)
             self.label_attack.setVisible(False)
             self.icon_attack.setVisible(False)
             if cell.DAMAGEABLE:
@@ -162,6 +166,8 @@ class Game(QWidget, Ui_Game):
             else:
                 self.progress_health.setVisible(False)
             self.label_selection_name.setText(cell.NAME)
+
+        else: self.frame_selection.setVisible(False)
 
     def clear_selection(self):
         self.selected_tile = QPoint(-1, -1)
