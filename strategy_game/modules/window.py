@@ -25,7 +25,7 @@ class Window(QMainWindow):
         self.comm.connect_signal.connect(self.connect_finished)
         self.comm.host_signal.connect(self.host_finished)
 
-        self.setWindowTitle("WordGame")
+        self.setWindowTitle("StrategyGame")
         self.setCentralWidget(self.menu)
 
     @pyqtSlot(dict)
