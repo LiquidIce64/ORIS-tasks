@@ -49,13 +49,15 @@ class Game(QWidget, Ui_Game):
         self.frame_selection.setVisible(False)
 
         self.unit_btns = {}
-        coin_pixmap = QPixmap("res:/icons/host.png")
+        coin_pixmap = QPixmap("res:/icons/coin.png")
         for unit_type, unit_cls in UNIT_TYPES.items():
             btn = QPushButton(unit_cls.NAME)
             btn.setEnabled(False)
             btn.clicked.connect(lambda *_, unit=unit_cls: self.unit_btn_clicked(unit))
             icon = QLabel()
             icon.setPixmap(coin_pixmap)
+            icon.setMaximumSize(16, 16)
+            icon.setScaledContents(True)
             cost = QLabel(str(unit_cls.COST))
             self.layout_castle.addWidget(btn, unit_type + 1, 0)
             self.layout_castle.addWidget(icon, unit_type + 1, 1)

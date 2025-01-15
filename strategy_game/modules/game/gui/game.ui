@@ -89,7 +89,7 @@ QProgressBar::chunk {
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap resource="../../gui/resources.qrc">:/icons/kick.png</pixmap>
+         <pixmap resource="../../gui/resources.qrc">:/icons/attack.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -196,8 +196,17 @@ QProgressBar::chunk {
       </item>
       <item row="0" column="1">
        <widget class="QLabel" name="label">
+        <property name="maximumSize">
+         <size>
+          <width>16</width>
+          <height>16</height>
+         </size>
+        </property>
         <property name="pixmap">
-         <pixmap resource="../../gui/resources.qrc">:/icons/host.png</pixmap>
+         <pixmap resource="../../gui/resources.qrc">:/icons/coin.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
         </property>
        </widget>
       </item>

@@ -1,5 +1,7 @@
 <RCC>
   <qresource prefix="icons">
+    <file alias="attack.png">icons/attack.png</file>
+    <file alias="coin.png">icons/coin.png</file>
     <file alias="arrow_down.png">icons/arrow_down.png</file>
     <file alias="arrow_up.png">icons/arrow_up.png</file>
     <file alias="host.png">icons/host.png</file>
