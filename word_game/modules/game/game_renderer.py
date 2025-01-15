@@ -49,12 +49,19 @@ class GameRenderer(QOpenGLWidget):
 
         min_size = game.map_size * 16
         self.setMinimumSize(min_size, min_size)
+        self.setMouseTracking(True)
 
     def mousePressEvent(self, event: QMouseEvent):
         pos = event.pos()
         x = pos.x() / self.width()
         y = 1.0 - pos.y() / self.height()
         self.game.on_game_widget_click(x, y, event.button())
+
+    def mouseMoveEvent(self, event: QMouseEvent):
+        pos = event.pos()
+        x = pos.x() / self.width()
+        y = 1.0 - pos.y() / self.height()
+        self.game.on_game_widget_hover(x, y)
 
     def initializeGL(self):
         prof = QOpenGLVersionProfile()

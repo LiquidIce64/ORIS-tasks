@@ -11,6 +11,7 @@ if TYPE_CHECKING:
 class Unit:
     UNIT_TYPE = 0
     NAME = ""
+    COST = 15
     ATTACK_DAMAGE = 3
     MAX_HEALTH = 10
 
@@ -95,8 +96,9 @@ class Settler(Unit):
 
     def move(self, x: int, y: int, is_attack=False):
         super().move(x, y, is_attack)
-        if not is_attack:
-            self.game.map_borders[self.game.map_coord(x, y)] = self.team + 1
+        i = self.game.map_coord(x, y)
+        if not is_attack and self.game.map_borders[i] != self.team + 1:
+            self.game.map_borders[i] = self.team + 1
             self.game.map_borders_changed = True
             self.apply_damage(2)
 
@@ -104,6 +106,7 @@ class Settler(Unit):
 class Warrior(Unit):
     UNIT_TYPE = 1
     NAME = "Warrior"
+    COST = 25
     ATTACK_DAMAGE = 5
     MAX_HEALTH = 15
 
@@ -111,6 +114,7 @@ class Warrior(Unit):
 class Swordsman(Unit):
     UNIT_TYPE = 2
     NAME = "Swordsman"
+    COST = 50
     ATTACK_DAMAGE = 15
     MAX_HEALTH = 15
 
@@ -118,6 +122,7 @@ class Swordsman(Unit):
 class Archer(Unit):
     UNIT_TYPE = 3
     NAME = "Archer"
+    COST = 35
     ATTACK_DAMAGE = 8
     MAX_HEALTH = 15
 
@@ -131,6 +136,7 @@ class Archer(Unit):
 class ShieldBearer(Unit):
     UNIT_TYPE = 4
     NAME = "ShieldBearer"
+    COST = 40
     MAX_HEALTH = 40
 
 

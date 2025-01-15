@@ -43,8 +43,8 @@ class Window(QMainWindow):
         else:
             self.server.deleteLater()
 
-    def join_room(self, name: str, max_players: int, player_list: list[dict]):
-        self.room = Room(self, name, max_players, player_list)
+    def join_room(self, name: str, settings: dict, player_list: list[dict]):
+        self.room = Room(self, name, settings, player_list)
         self.centralWidget().setParent(self.default_parent)
         self.setCentralWidget(self.room)
 

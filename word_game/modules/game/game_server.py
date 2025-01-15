@@ -13,10 +13,11 @@ if TYPE_CHECKING:
 
 
 class GameServer(QObject):
-    def __init__(self, room: "ServerRoomListItem", map_size=16):
+    def __init__(self, room: "ServerRoomListItem", map_size=16, starting_money=100):
         super().__init__()
         self.room = room
         self.map_size = map_size
+        self.starting_money = starting_money
 
         self.map_borders = np.zeros((map_size * map_size,), dtype=np.int32)
         self.map_units: list[Unit | None] = [None] * (map_size * map_size)
@@ -26,6 +27,8 @@ class GameServer(QObject):
         self.current_team = -1
         self.current_team_idx = -1
         self.possible_moves: dict[tuple[int, int], bool] = {}
+        self.teams_money: dict[int, int] = {}
+        self.teams_castles: dict[int, Castle] = {}
 
         self.turn_timer = QTimer()
         self.turn_timer.timeout.connect(self.next_turn)
@@ -39,12 +42,13 @@ class GameServer(QObject):
 
     def start_game(self, player_list: Iterable[str]):
         self.remaining_teams = {username: team for team, username in enumerate(player_list)}
+        self.teams_money = {team: self.starting_money - 9 for team in self.remaining_teams.values()}
         for team, pos in zip(self.remaining_teams.values(), [
             (1, 1),
             (self.map_size - 2, self.map_size - 2),
             (self.map_size - 2, 1),
             (1, self.map_size - 2)
-        ]): Castle(self, pos[0], pos[1], team)
+        ]): self.teams_castles[team] = Castle(self, pos[0], pos[1], team)
         self.next_turn()
 
     @overload
@@ -111,18 +115,22 @@ class GameServer(QObject):
         for username in self.remaining_teams:
             self.room.server.main.comm.send_queue.put((msg, self.room.server.clients[username]))
 
-        for unit in self.map_units:
+        for unit, border in zip(self.map_units, self.map_borders):
+            if border > 0 and border - 1 == self.current_team: self.teams_money[self.current_team] += 1
             if unit is None: continue
             unit.has_moved = False
             unit.can_select = unit.team == self.current_team
         self.turn_timer.start(120000)
 
-    def create_unit(self, unit_info: dict, from_player: str):
+    def create_unit(self, unit_type: int, from_player: str):
         try:
-            x, y = unit_info["pos"]
-            unit_type = unit_info["type"]
             team = self.remaining_teams[from_player]
-            UNIT_TYPES[unit_type](self, x, y, team)
+            unit_cls = UNIT_TYPES[unit_type]
+            if self.teams_money[team] < unit_cls.COST: return
+            self.teams_money[team] -= unit_cls.COST
+            castle = self.teams_castles[team]
+            x, y = castle.location.x(), castle.location.y()
+            unit_cls(self, x, y, team)
         except: return
 
         msg = {

@@ -12,19 +12,33 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 class Ui_Game(object):
     def setupUi(self, Game):
         Game.setObjectName("Game")
-        Game.resize(412, 256)
+        Game.resize(460, 345)
         Game.setStyleSheet("#Game {\n"
 "    background-color: #DFE0E2;\n"
 "}\n"
 "\n"
-"#frame_selection {\n"
+"#frame_selection, #frame_castle {\n"
 "    background-color: #DFE0E2;\n"
 "    border: 1px solid #9EA1A9;\n"
 "    border-radius: 10px;\n"
 "}\n"
 "\n"
+"QPushButton {\n"
+"    background-color: #85D2FF;\n"
+"    color: black;\n"
+"    border-radius: 10px;\n"
+"    padding: 4px;\n"
+"    height: 16px;\n"
+"}\n"
+"QPushButton:hover {background-color: #5CC3FF}\n"
+"QPushButton:disabled {\n"
+"    background-color: #D6F0FF;\n"
+"    color: #40404F;\n"
+"}\n"
+"\n"
 "QProgressBar {\n"
 "    text-align: center;\n"
+"    color: black;\n"
 "    background-color: white;\n"
 "    border-radius: 8px;\n"
 "}\n"
@@ -35,12 +49,11 @@ class Ui_Game(object):
 "")
         self.gridLayout_3 = QtWidgets.QGridLayout(Game)
         self.gridLayout_3.setContentsMargins(0, 0, 0, 0)
-        self.gridLayout_3.setVerticalSpacing(0)
         self.gridLayout_3.setObjectName("gridLayout_3")
         self.frame_selection = QtWidgets.QFrame(parent=Game)
         self.frame_selection.setMinimumSize(QtCore.QSize(150, 0))
         self.frame_selection.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
-        self.frame_selection.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
+        self.frame_selection.setFrameShadow(QtWidgets.QFrame.Shadow.Plain)
         self.frame_selection.setObjectName("frame_selection")
         self.gridLayout_2 = QtWidgets.QGridLayout(self.frame_selection)
         self.gridLayout_2.setObjectName("gridLayout_2")
@@ -73,10 +86,27 @@ class Ui_Game(object):
         self.gridLayout_2.addWidget(self.label_selection_name, 2, 0, 1, 1)
         self.gridLayout_2.setColumnStretch(0, 1)
         self.gridLayout_3.addWidget(self.frame_selection, 1, 1, 1, 1)
-        spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
-        self.gridLayout_3.addItem(spacerItem, 2, 1, 1, 1)
-        spacerItem1 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
-        self.gridLayout_3.addItem(spacerItem1, 0, 1, 1, 1)
+        self.frame_castle = QtWidgets.QFrame(parent=Game)
+        self.frame_castle.setMinimumSize(QtCore.QSize(0, 16))
+        self.frame_castle.setFrameShape(QtWidgets.QFrame.Shape.NoFrame)
+        self.frame_castle.setFrameShadow(QtWidgets.QFrame.Shadow.Plain)
+        self.frame_castle.setLineWidth(1)
+        self.frame_castle.setObjectName("frame_castle")
+        self.layout_castle = QtWidgets.QGridLayout(self.frame_castle)
+        self.layout_castle.setObjectName("layout_castle")
+        self.label_money = QtWidgets.QLabel(parent=self.frame_castle)
+        self.label_money.setMinimumSize(QtCore.QSize(20, 0))
+        self.label_money.setObjectName("label_money")
+        self.layout_castle.addWidget(self.label_money, 0, 2, 1, 1)
+        self.label_3 = QtWidgets.QLabel(parent=self.frame_castle)
+        self.label_3.setObjectName("label_3")
+        self.layout_castle.addWidget(self.label_3, 0, 0, 1, 1)
+        self.label = QtWidgets.QLabel(parent=self.frame_castle)
+        self.label.setPixmap(QtGui.QPixmap("res:/icons/host.png"))
+        self.label.setObjectName("label")
+        self.layout_castle.addWidget(self.label, 0, 1, 1, 1)
+        self.layout_castle.setColumnStretch(0, 1)
+        self.gridLayout_3.addWidget(self.frame_castle, 2, 1, 1, 1)
         self.frame_renderer_outside = QtWidgets.QFrame(parent=Game)
         self.frame_renderer_outside.setObjectName("frame_renderer_outside")
         self.gridLayout = QtWidgets.QGridLayout(self.frame_renderer_outside)
@@ -94,8 +124,9 @@ class Ui_Game(object):
         self.layout_renderer.setSpacing(0)
         self.layout_renderer.setObjectName("layout_renderer")
         self.gridLayout.addWidget(self.frame_renderer, 0, 0, 1, 1)
-        self.gridLayout_3.addWidget(self.frame_renderer_outside, 0, 0, 3, 1)
+        self.gridLayout_3.addWidget(self.frame_renderer_outside, 0, 0, 4, 1)
         self.gridLayout_3.setColumnStretch(0, 1)
+        self.gridLayout_3.setRowStretch(0, 1)
 
         self.retranslateUi(Game)
         QtCore.QMetaObject.connectSlotsByName(Game)
@@ -107,6 +138,8 @@ class Ui_Game(object):
         self.progress_health.setToolTip(_translate("Game", "Health"))
         self.progress_health.setFormat(_translate("Game", "%v/%m"))
         self.label_selection_name.setText(_translate("Game", "TextLabel"))
+        self.label_money.setText(_translate("Game", "100"))
+        self.label_3.setText(_translate("Game", "Available:"))
 
 
 if __name__ == "__main__":

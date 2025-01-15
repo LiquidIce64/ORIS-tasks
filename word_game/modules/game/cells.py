@@ -1,10 +1,7 @@
 from __future__ import annotations
 from typing import TYPE_CHECKING
-from random import choice
 
 from PyQt6.QtCore import QPoint
-
-from .units import Settler, Warrior, Swordsman, Archer, ShieldBearer
 
 if TYPE_CHECKING:
     from .game import Game
@@ -23,7 +20,8 @@ class Cell:
         game.map_cells[game.map_coord(self.location)] = self
         game.map_cells_changed = True
 
-    def select(self): ...
+    def select(self):
+        self.game.clear_selection()
 
     def apply_damage(self, damage: int): ...
 
@@ -41,29 +39,6 @@ class Castle(Cell):
             for off_y in range(-1, 2):
                 game.map_borders[game.map_coord(x + off_x, y + off_y)] = team + 1
         game.map_borders_changed = True
-
-    def select(self):
-        self.game.clear_selection()
-        if self.game.current_team != self.team: return
-        # self.game.selected_tile = self.location
-
-        # DEBUG
-        unit = choice((
-            Settler,
-            Warrior,
-            Swordsman,
-            Archer,
-            ShieldBearer
-        ))(self.game, self.location.x(), self.location.y(), self.team)
-        self.game.comm.send_queue.put({
-            "type": "game-event",
-            "game-event": "create-unit",
-            "body": {
-                "type": unit.UNIT_TYPE,
-                "pos": (self.location.x(), self.location.y()),
-                "team": self.team
-            }
-        })
 
     def apply_damage(self, damage: int):
         self.health -= damage

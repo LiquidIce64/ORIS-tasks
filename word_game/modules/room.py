@@ -14,12 +14,12 @@ if TYPE_CHECKING:
 
 
 class Room(QWidget, Ui_Room):
-    def __init__(self, main: "Window", name: str, max_players: int, player_list: list[dict]):
+    def __init__(self, main: "Window", name: str, settings: dict, player_list: list[dict]):
         super().__init__()
         self.setupUi(self)
         self.main = main
 
-        self.max_players = max_players
+        self.max_players = settings["max-players"]
         self.players: dict[str, PlayerListItem] = {}
         self.ready_players = 0
         self.current_player: PlayerListItem | None = None
@@ -47,7 +47,9 @@ class Room(QWidget, Ui_Room):
 
         self.main.comm.recv_signal.connect(self.on_recv_message)
 
-        self.game = Game(self.main.comm)
+        self.game = Game(self.main.comm, settings["map-size"], settings["starting-money"])
+        self.setMinimumWidth(max(256, self.game.renderer.minimumWidth()) + 438)
+        self.setMinimumHeight(max(256, self.game.renderer.minimumHeight()) + 22)
         self.layout_game.addWidget(self.game)
 
     @pyqtSlot()
@@ -106,7 +108,7 @@ class Room(QWidget, Ui_Room):
             self.game.remaining_teams[player.name] = i
         self.btn_ready.setEnabled(False)
         self.btn_ready.setText("End turn")
-        self.game.start_game()
+        self.game.start_game(self.main.room_browser.username)
 
     @pyqtSlot(dict)
     def on_recv_message(self, msg: dict):

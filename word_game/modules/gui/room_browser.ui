@@ -64,7 +64,7 @@ QScrollBar::handle:hover {
 }
 </string>
   </property>
-  <layout class="QGridLayout" name="gridLayout" rowstretch="1,0,0,0,0,0">
+  <layout class="QGridLayout" name="gridLayout" rowstretch="1,0,0,0,0,0,0,0">
    <property name="leftMargin">
     <number>10</number>
    </property>
@@ -80,6 +80,61 @@ QScrollBar::handle:hover {
    <property name="horizontalSpacing">
     <number>10</number>
    </property>
+   <item row="1" column="2">
+    <widget class="QSpinBox" name="input_playercount">
+     <property name="minimumSize">
+      <size>
+       <width>40</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="minimum">
+      <number>2</number>
+     </property>
+     <property name="maximum">
+      <number>4</number>
+     </property>
+     <property name="value">
+      <number>4</number>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="1" colspan="2">
+    <widget class="QPushButton" name="btn_join">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="text">
+      <string>Join room</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="2">
+    <widget class="QSpinBox" name="input_mapsize">
+     <property name="minimum">
+      <number>8</number>
+     </property>
+     <property name="maximum">
+      <number>32</number>
+     </property>
+     <property name="value">
+      <number>16</number>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1" colspan="2">
+    <widget class="QLineEdit" name="input_roomname">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="placeholderText">
+      <string>Room name</string>
+     </property>
+    </widget>
+   </item>
    <item row="1" column="1">
     <widget class="QLabel" name="label_playercount">
      <property name="minimumSize">
@@ -94,16 +149,20 @@ QScrollBar::handle:hover {
     </widget>
    </item>
    <item row="4" column="1" colspan="2">
-    <widget class="QPushButton" name="btn_join">
-     <property name="enabled">
-      <bool>false</bool>
-     </property>
+    <widget class="QPushButton" name="btn_create">
      <property name="text">
-      <string>Join room</string>
+      <string>Create room</string>
      </property>
     </widget>
    </item>
-   <item row="0" column="0" rowspan="6">
+   <item row="2" column="1">
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>Map size</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="0" rowspan="8">
     <widget class="QScrollArea" name="scrollArea">
      <property name="verticalScrollBarPolicy">
       <enum>Qt::ScrollBarAlwaysOn</enum>
@@ -119,7 +178,7 @@ QScrollBar::handle:hover {
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>321</width>
+        <width>301</width>
         <height>268</height>
        </rect>
       </property>
@@ -151,53 +210,14 @@ QScrollBar::handle:hover {
      </widget>
     </widget>
    </item>
-   <item row="0" column="1" colspan="2">
-    <widget class="QLineEdit" name="input_roomname">
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>0</height>
-      </size>
-     </property>
-     <property name="placeholderText">
-      <string>Room name</string>
-     </property>
-    </widget>
-   </item>
-   <item row="5" column="1" colspan="2">
+   <item row="7" column="1" colspan="2">
     <widget class="QPushButton" name="btn_disconnect">
      <property name="text">
       <string>Disconnect</string>
      </property>
     </widget>
    </item>
-   <item row="1" column="2">
-    <widget class="QSpinBox" name="input_playercount">
-     <property name="minimumSize">
-      <size>
-       <width>40</width>
-       <height>0</height>
-      </size>
-     </property>
-     <property name="minimum">
-      <number>2</number>
-     </property>
-     <property name="maximum">
-      <number>4</number>
-     </property>
-     <property name="value">
-      <number>4</number>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="1" colspan="2">
-    <widget class="QPushButton" name="btn_create">
-     <property name="text">
-      <string>Create room</string>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="1" colspan="2">
+   <item row="5" column="1" colspan="2">
     <spacer name="verticalSpacer">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
@@ -209,6 +229,26 @@ QScrollBar::handle:hover {
       </size>
      </property>
     </spacer>
+   </item>
+   <item row="3" column="2">
+    <widget class="QSpinBox" name="input_startingmoney">
+     <property name="maximum">
+      <number>9999</number>
+     </property>
+     <property name="singleStep">
+      <number>10</number>
+     </property>
+     <property name="value">
+      <number>100</number>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="1">
+    <widget class="QLabel" name="label_2">
+     <property name="text">
+      <string>Starting money</string>
+     </property>
+    </widget>
    </item>
   </layout>
  </widget>

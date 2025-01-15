@@ -12,8 +12,7 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 class Ui_Room(object):
     def setupUi(self, Room):
         Room.setObjectName("Room")
-        Room.resize(750, 400)
-        Room.setMinimumSize(QtCore.QSize(750, 400))
+        Room.resize(692, 407)
         Room.setStyleSheet("#Room, QScrollArea QWidget {background-color: #DFE0E2}\n"
 "\n"
 "QLabel {\n"
@@ -76,7 +75,12 @@ class Ui_Room(object):
         self.layout_game.setObjectName("layout_game")
         self.gridLayout_3.addWidget(self.frame_game, 0, 0, 1, 1)
         self.frame_sidepanel = QtWidgets.QFrame(parent=Room)
-        self.frame_sidepanel.setMinimumSize(QtCore.QSize(134, 0))
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.frame_sidepanel.sizePolicy().hasHeightForWidth())
+        self.frame_sidepanel.setSizePolicy(sizePolicy)
+        self.frame_sidepanel.setMinimumSize(QtCore.QSize(250, 0))
         self.frame_sidepanel.setObjectName("frame_sidepanel")
         self.gridLayout = QtWidgets.QGridLayout(self.frame_sidepanel)
         self.gridLayout.setSizeConstraint(QtWidgets.QLayout.SizeConstraint.SetMinimumSize)
@@ -108,12 +112,18 @@ class Ui_Room(object):
         self.label_game_state.setObjectName("label_game_state")
         self.gridLayout.addWidget(self.label_game_state, 2, 0, 1, 3)
         self.scrollArea = QtWidgets.QScrollArea(parent=self.frame_sidepanel)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.scrollArea.sizePolicy().hasHeightForWidth())
+        self.scrollArea.setSizePolicy(sizePolicy)
+        self.scrollArea.setMinimumSize(QtCore.QSize(250, 0))
         self.scrollArea.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOn)
         self.scrollArea.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
         self.scrollAreaWidgetContents = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 211, 280))
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 221, 287))
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_2.setSpacing(0)
@@ -136,8 +146,7 @@ class Ui_Room(object):
         self.gridLayout.setColumnStretch(0, 3)
         self.gridLayout.setColumnStretch(1, 1)
         self.gridLayout_3.addWidget(self.frame_sidepanel, 0, 1, 1, 1)
-        self.gridLayout_3.setColumnStretch(0, 2)
-        self.gridLayout_3.setColumnStretch(1, 1)
+        self.gridLayout_3.setColumnStretch(0, 1)
 
         self.retranslateUi(Room)
         QtCore.QMetaObject.connectSlotsByName(Room)

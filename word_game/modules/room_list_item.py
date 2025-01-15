@@ -66,15 +66,16 @@ class RoomListItem(QWidget, Ui_RoomListItem):
 
 
 class ServerRoomListItem(QWidget, Ui_ServerRoomListItem):
-    def __init__(self, server: "Server", name: str, max_players: int, host_item: ServerPlayerListItem):
+    def __init__(self, server: "Server", name: str, settings: dict, host_item: ServerPlayerListItem):
         super().__init__()
         self.setupUi(self)
         self.server = server
         self.name = name
         self.players: dict[str, ServerPlayerListItem] = {host_item.name: host_item}
-        self.max_players = max_players
+        self.max_players = settings["max-players"]
+        self.settings = settings
         self.ready_players = 0
-        self.game = GameServer(self)
+        self.game = GameServer(self, settings["map-size"], settings["starting-money"])
         self.game_started = False
         host_item.set_host(True)
 

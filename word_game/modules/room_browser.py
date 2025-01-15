@@ -20,6 +20,11 @@ class RoomBrowser(QWidget, Ui_RoomBrowser):
         self.username = username
         self.rooms: dict[str, RoomListItem] = {}
         self.selected_room: RoomListItem | None = None
+        self.settings = {
+            "max-players": 4,
+            "map-size": 16,
+            "starting-money": 100
+        }
 
         self.setAttribute(Qt.WidgetAttribute.WA_StyledBackground)
 
@@ -58,12 +63,12 @@ class RoomBrowser(QWidget, Ui_RoomBrowser):
 
             elif msg["event"] == "join-room":
                 self.setEnabled(True)
-                if isinstance(msg["body"], list):
+                if isinstance(msg["body"], dict):
                     self.btn_join.setText("Join room")
                     self.main.join_room(
                         name=self.selected_room.name,
-                        max_players=self.selected_room.max_players,
-                        player_list=msg["body"]
+                        settings=msg["body"]["settings"],
+                        player_list=msg["body"]["players"]
                     )
                 elif isinstance(msg["body"], str):
                     self.btn_join.setText(msg["body"])
@@ -76,7 +81,7 @@ class RoomBrowser(QWidget, Ui_RoomBrowser):
                     self.btn_create.setText("Create room")
                     self.main.join_room(
                         name=self.input_roomname.text(),
-                        max_players=self.input_playercount.value(),
+                        settings=self.settings,
                         player_list=[{"name": self.username, "ready": False, "host": True}]
                     )
                 else:
@@ -103,12 +108,17 @@ class RoomBrowser(QWidget, Ui_RoomBrowser):
         if len(name) == 0: return
         self.setEnabled(False)
         self.btn_create.setText("Creating...")
+        self.settings = {
+            "max-players": self.input_playercount.value(),
+            "map-size": self.input_mapsize.value(),
+            "starting-money": self.input_startingmoney.value()
+        }
         self.main.comm.send_queue.put({
             "type": "event",
             "event": "create-room",
             "body": {
                 "name": name,
-                "max-players": self.input_playercount.value()
+                "settings": self.settings
             }
         })
 

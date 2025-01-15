@@ -12,7 +12,6 @@ from PyQt6.QtWidgets import QWidget
 from .player_list_item import ServerPlayerListItem
 from .room_list_item import ServerRoomListItem
 from .gui import Ui_Server
-from .game import GameServer
 
 if TYPE_CHECKING:
     from .window import Window
@@ -211,11 +210,14 @@ class Server(QWidget, Ui_Server):
         self.room_clients[username] = room
         self.label_players_in_rooms.setText(str(len(self.room_clients)))
 
-        return [{
-            "name": player.name,
-            "ready": player.ready,
-            "host": player.host
-        } for player in room.players.values()]
+        return {
+            "settings": room.settings,
+            "players": [{
+                "name": player.name,
+                "ready": player.ready,
+                "host": player.host
+            } for player in room.players.values()]
+        }
 
     def leave_room(self, username: str):
         if username not in self.room_clients: return
@@ -227,17 +229,22 @@ class Server(QWidget, Ui_Server):
         self.label_players_in_rooms.setText(str(len(self.room_clients)))
 
     def create_room(self, room_info: dict, host: str):
-        if "name" not in room_info or "max-players" not in room_info: return "Error"
-        name = room_info["name"]
-        max_players = room_info["max-players"]
-        if name in self.rooms: return "Room already exists"
-        if not (2 <= max_players <= 64): return "Error"
-        if host not in self.browser_clients: return "Error"
+        try:
+            name = room_info["name"]
+            settings = room_info["settings"]
+            if name in self.rooms: return "Room already exists"
+            if not (
+                (2 <= settings["max-players"] <= 4) and
+                (8 <= settings["map-size"] <= 32) and
+                (0 <= settings["starting-money"] <= 9999)
+            ): return "Error"
+            if host not in self.browser_clients: return "Error"
+        except KeyError: return "Error"
 
         host_item = self.browser_clients.pop(host)
         self.layout_playerlist.removeWidget(host_item)
 
-        room = ServerRoomListItem(self, name, max_players, host_item)
+        room = ServerRoomListItem(self, name, settings, host_item)
         self.rooms[name] = room
         self.room_clients[host_item.name] = room
         self.label_players_in_rooms.setText(str(len(self.room_clients)))

@@ -6,15 +6,9 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>750</width>
-    <height>400</height>
+    <width>692</width>
+    <height>407</height>
    </rect>
-  </property>
-  <property name="minimumSize">
-   <size>
-    <width>750</width>
-    <height>400</height>
-   </size>
   </property>
   <property name="windowTitle">
    <string>Form</string>
@@ -71,7 +65,7 @@ QScrollBar::handle:hover {
 	margin: 4px;
 }</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout_3" columnstretch="2,1">
+  <layout class="QGridLayout" name="gridLayout_3" columnstretch="1,0">
    <property name="leftMargin">
     <number>10</number>
    </property>
@@ -113,9 +107,15 @@ QScrollBar::handle:hover {
    </item>
    <item row="0" column="1">
     <widget class="QFrame" name="frame_sidepanel">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
      <property name="minimumSize">
       <size>
-       <width>134</width>
+       <width>250</width>
        <height>0</height>
       </size>
      </property>
@@ -195,6 +195,18 @@ QScrollBar::handle:hover {
       </item>
       <item row="1" column="0" colspan="3">
        <widget class="QScrollArea" name="scrollArea">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>250</width>
+          <height>0</height>
+         </size>
+        </property>
         <property name="verticalScrollBarPolicy">
          <enum>Qt::ScrollBarAlwaysOn</enum>
         </property>
@@ -209,8 +221,8 @@ QScrollBar::handle:hover {
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>211</width>
-           <height>280</height>
+           <width>221</width>
+           <height>287</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_2">
