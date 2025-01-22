@@ -1,16 +1,24 @@
-import sqlite3
+import sqlite3 as sql
 
-db_lp = sqlite3.connect('login_password.db')
-cursor_db = db_lp.cursor()
-sql_create = '''
-CREATE TABLE passwords(
-    login TEXT PRIMARY KEY,
-    password TEXT NOT NULL
-);
-'''
+#connect to SQLite
+con = sql.connect('db_web.db')
 
-cursor_db.execute(sql_create)
-db_lp.commit()
+#Create a Connection
+cur = con.cursor()
 
-cursor_db.close()
-db_lp.close()
+#Drop users table if already exsist.
+cur.execute("DROP TABLE IF EXISTS users")
+
+#Create users table  in db_web database
+sql ='''CREATE TABLE "users" (
+	"UID"	INTEGER PRIMARY KEY AUTOINCREMENT,
+	"UNAME"	TEXT,
+	"CONTACT"	TEXT
+)'''
+cur.execute(sql)
+
+#commit changes
+con.commit()
+
+#close the connection
+con.close()

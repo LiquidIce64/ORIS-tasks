@@ -1,10 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Авторизация</title>
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block title %}Авторизация{% endblock %}
+
+{% block content %}
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/auth.css') }}">
     <form method="POST">
         <div class="container">
             <label for="Login"><b>Логин</b></label>
@@ -15,8 +14,11 @@
             <div class="container">
              <span class="reg"> <a href="/registration">Регистрация</a></span>
             </div>
+            {% if error_message %}
+            <div class="error-message" style="color: red; margin-top: 10px;">
+                {{ error_message }}
+            </div>
+            {% endif %}
         </div>
     </form>
-    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/auth.css') }}">
-</body>
-</html>
+{% endblock %}
