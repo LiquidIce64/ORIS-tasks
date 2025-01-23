@@ -4,21 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="004bf431-fb4f-4a0a-8912-e57b0897525c" name="Changes" comment="simple webserver">
+    <list default="true" id="004bf431-fb4f-4a0a-8912-e57b0897525c" name="Changes" comment="website menu bar, sessions, roles, admin pages, etc.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webserver/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/webserver/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webserver/create_db.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/webserver/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/webserver/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webserver/static/css/auth.css" beforeDir="false" afterPath="$PROJECT_DIR$/webserver/static/css/auth.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webserver/static/css/auth_reply.css" beforeDir="false" afterPath="$PROJECT_DIR$/webserver/static/css/auth_reply.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webserver/static/css/registration.css" beforeDir="false" afterPath="$PROJECT_DIR$/webserver/static/css/registration.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webserver/static/css/registration_reply.css" beforeDir="false" afterPath="$PROJECT_DIR$/webserver/static/css/registration_reply.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webserver/templates/auth.html" beforeDir="false" afterPath="$PROJECT_DIR$/webserver/templates/auth/auth.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webserver/templates/auth_fail.html" beforeDir="false" afterPath="$PROJECT_DIR$/webserver/templates/auth/auth_fail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webserver/templates/auth_success.html" beforeDir="false" afterPath="$PROJECT_DIR$/webserver/templates/auth/auth_success.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webserver/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/webserver/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webserver/templates/registration.html" beforeDir="false" afterPath="$PROJECT_DIR$/webserver/templates/auth/registration.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webserver/templates/registration_success.html" beforeDir="false" afterPath="$PROJECT_DIR$/webserver/templates/auth/registration_success.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webserver/templates/admin/create.html" beforeDir="false" afterPath="$PROJECT_DIR$/webserver/templates/admin/create.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webserver/templates/admin/edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/webserver/templates/admin/edit.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webserver/templates/admin/users.html" beforeDir="false" afterPath="$PROJECT_DIR$/webserver/templates/admin/users.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webserver/templates/posts/create.html" beforeDir="false" afterPath="$PROJECT_DIR$/webserver/templates/posts/create.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,40 +60,40 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "Python.1.executor": "Run",
-    "Python.10.executor": "Run",
-    "Python.2.executor": "Run",
-    "Python.3.executor": "Run",
-    "Python.4.executor": "Run",
-    "Python.5.executor": "Run",
-    "Python.6.executor": "Run",
-    "Python.7.executor": "Run",
-    "Python.8.executor": "Run",
-    "Python.create_db.executor": "Run",
-    "Python.crud_example.executor": "Run",
-    "Python.game.executor": "Run",
-    "Python.main.executor": "Run",
-    "Python.navbar_example.executor": "Run",
-    "Python.networking.executor": "Run",
-    "Python.player_list_item.executor": "Run",
-    "Python.recompile.executor": "Run",
-    "Python.word_game.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "Shell Script.OpenGL Test.executor": "Run",
-    "Shell Script.Qt Designer.executor": "Run",
-    "Shell Script.Unnamed.executor": "Run",
-    "Shell Script.strategy_game.executor": "Run",
-    "Shell Script.word_game.executor": "Run",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/gilya/Projects/PyCharm/ORIS-tasks/webserver/templates/admin",
-    "settings.editor.selected.configurable": "Errors"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;Python.1.executor&quot;: &quot;Run&quot;,
+    &quot;Python.10.executor&quot;: &quot;Run&quot;,
+    &quot;Python.2.executor&quot;: &quot;Run&quot;,
+    &quot;Python.3.executor&quot;: &quot;Run&quot;,
+    &quot;Python.4.executor&quot;: &quot;Run&quot;,
+    &quot;Python.5.executor&quot;: &quot;Run&quot;,
+    &quot;Python.6.executor&quot;: &quot;Run&quot;,
+    &quot;Python.7.executor&quot;: &quot;Run&quot;,
+    &quot;Python.8.executor&quot;: &quot;Run&quot;,
+    &quot;Python.create_db.executor&quot;: &quot;Run&quot;,
+    &quot;Python.crud_example.executor&quot;: &quot;Run&quot;,
+    &quot;Python.game.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.navbar_example.executor&quot;: &quot;Run&quot;,
+    &quot;Python.networking.executor&quot;: &quot;Run&quot;,
+    &quot;Python.player_list_item.executor&quot;: &quot;Run&quot;,
+    &quot;Python.recompile.executor&quot;: &quot;Run&quot;,
+    &quot;Python.word_game.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;Shell Script.OpenGL Test.executor&quot;: &quot;Run&quot;,
+    &quot;Shell Script.Qt Designer.executor&quot;: &quot;Run&quot;,
+    &quot;Shell Script.Unnamed.executor&quot;: &quot;Run&quot;,
+    &quot;Shell Script.strategy_game.executor&quot;: &quot;Run&quot;,
+    &quot;Shell Script.word_game.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/gilya/Projects/PyCharm/ORIS-tasks/webserver/templates/admin&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;Errors&quot;
   }
-}]]></component>
+}</component>
   <component name="PyDebuggerOptionsProvider">
     <option name="myPyQtBackend" value="pyqt6" />
   </component>
@@ -397,7 +389,15 @@
       <option name="project" value="LOCAL" />
       <updated>1737474449817</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="website menu bar, sessions, roles, admin pages, etc.">
+      <option name="closed" value="true" />
+      <created>1737548828009</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1737548828009</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -412,7 +412,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="word game rooms" />
     <MESSAGE value="word game rooms finished" />
     <MESSAGE value="word game resources" />
     <MESSAGE value="Merge branch 'main' of https://github.com/LiquidIce64/ORIS-tasks" />
@@ -437,6 +436,7 @@
     <MESSAGE value="hiding hovering info while not hovering over anything" />
     <MESSAGE value="renamed to StrategyGame" />
     <MESSAGE value="simple webserver" />
-    <option name="LAST_COMMIT_MESSAGE" value="simple webserver" />
+    <MESSAGE value="website menu bar, sessions, roles, admin pages, etc." />
+    <option name="LAST_COMMIT_MESSAGE" value="website menu bar, sessions, roles, admin pages, etc." />
   </component>
 </project>

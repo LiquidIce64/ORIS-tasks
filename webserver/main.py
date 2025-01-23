@@ -8,7 +8,7 @@ app.secret_key = os.urandom(24)  # Генерирует случайный 24-б
 
 
 def get_db_connection():
-    conn = sqlite3.connect('login_password.db')
+    conn = sqlite3.connect('database.db')
     # Возвращаем строки как "словари"
     conn.row_factory = sqlite3.Row
     return conn
@@ -35,9 +35,9 @@ def auth():
         login = request.form.get('Login')
         password = request.form.get('Password')
 
-        db_lp = sqlite3.connect('login_password.db')
-        cursor_db = db_lp.cursor()
-        cursor_db.execute('SELECT password FROM passwords WHERE login = ?', (login,))
+        conn = get_db_connection()
+        cursor_db = conn.cursor()
+        cursor_db.execute('SELECT password FROM passwords WHERE id = (SELECT id FROM accounts WHERE username = ?)', (login,))
         result = cursor_db.fetchone()
 
         if not result: return render_template('auth/auth.html', error_message="Пользователь не найден")
@@ -45,14 +45,14 @@ def auth():
         if result[0] != password: return render_template('auth/auth.html', error_message="Неверный пароль")
 
         # Если логин и пароль верны, извлекаем роль пользователя
-        cursor_db.execute('SELECT role FROM passwords WHERE login = ?', (login,))
+        cursor_db.execute('SELECT user_role FROM accounts WHERE username = ?', (login,))
         role = cursor_db.fetchone()[0]
 
         # Сохраняем данные в сессии только после успешной авторизации
         session['username'] = login
         session['role'] = role
 
-        db_lp.close()
+        conn.close()
         return redirect(url_for('index'))
 
     return render_template('auth/auth.html')
@@ -64,12 +64,13 @@ def registration():
         login = request.form.get('Login')
         password = request.form.get('Password')
 
-        db_lp = sqlite3.connect('login_password.db')
-        cursor_db = db_lp.cursor()
-        cursor_db.execute('INSERT INTO passwords (login, password) VALUES (?, ?)', (login, password))
+        conn = get_db_connection()
+        cursor_db = conn.cursor()
+        cursor_db.execute('INSERT INTO accounts (username) VALUES (?)', (login,))
+        cursor_db.execute('INSERT INTO passwords (password) VALUES (?)', (password,))
 
-        db_lp.commit()
-        db_lp.close()
+        conn.commit()
+        conn.close()
         return redirect(url_for('index'))
 
     return render_template('auth/registration.html')
@@ -93,8 +94,8 @@ def create_user():
         role = request.form.get('role')
 
         conn = get_db_connection()
-        conn.execute('INSERT INTO passwords (login, password) VALUES (?, ?)', (login, password))
-        if role: conn.execute('UPDATE passwords SET role = ? WHERE login = ?', (role, login))
+        conn.execute('INSERT INTO accounts (username, user_role) VALUES (?, ?)', (login, role))
+        conn.execute('INSERT INTO passwords (password) VALUES (?)', (password,))
         conn.commit()
         conn.close()
 
@@ -104,30 +105,30 @@ def create_user():
 
 
 # Страница редактирования поста
-@app.route('/edit_user/<string:username>', methods=('GET', 'POST'))
-def edit_user(username):
+@app.route('/edit_user/<int:id>', methods=('GET', 'POST'))
+def edit_user(id):
     conn = get_db_connection()
-    user = conn.execute('SELECT * FROM passwords WHERE login = ?', (username,)).fetchone()
 
     if request.method == 'POST':
         login = request.form.get('login')
         password = request.form.get('password')
         role = request.form.get('role')
 
-        conn.execute('UPDATE passwords SET login = ?, password = ? WHERE login = ?', (login, password, username))
-        if role: conn.execute('UPDATE passwords SET role = ? WHERE login = ?', (role, username))
+        conn.execute('UPDATE passwords SET password = ? WHERE id = ?', (password, id))
+        if role: conn.execute('UPDATE accounts SET username = ?, user_role = ? WHERE id = ?', (login, role, id))
         conn.commit()
         conn.close()
         return redirect(url_for('get_users'))
 
+    user = conn.execute('SELECT * FROM accounts WHERE id = ?', (id,)).fetchone()
     return render_template('admin/edit.html', user=user)
 
 
 # Удаление поста
-@app.route('/delete_user/<string:username>', methods=('POST',))
-def delete_user(username):
+@app.route('/delete_user/<int:id>', methods=('POST',))
+def delete_user(id):
     conn = get_db_connection()
-    conn.execute('DELETE FROM passwords WHERE login = ?', (username,))
+    conn.execute('DELETE FROM accounts WHERE id = ?', (id,))
     conn.commit()
     conn.close()
     return redirect(url_for('get_users'))
@@ -138,9 +139,9 @@ def get_metrics():
     if session.get('role') != 'manager': return redirect(url_for('auth'))
     conn = get_db_connection()
     metrics = conn.execute('''
-        SELECT SUM(num_posts), MAX(num_posts), AVG(num_posts)
-        FROM passwords
-        WHERE role IS NULL;
+        SELECT SUM(num_posts), MAX(num_posts), AVG(num_posts) FROM (
+            SELECT COUNT() as num_posts FROM posts p, accounts a
+            WHERE p.user_id = a.id GROUP BY a.id)
     ''').fetchone()
     metrics = [{'name': name, 'value': value} for name, value in zip([
         "Кол-во постов",
@@ -160,11 +161,15 @@ def account():
 @app.route('/create_post', methods=('GET', 'POST'))
 def create_post():
     if request.method == 'POST':
+        if not (username := session.get('username')): return redirect(url_for('auth'))
         title = request.form.get('title')
-        content = request.form.get('content')
+        body = request.form.get('body')
 
         conn = get_db_connection()
-        conn.execute('INSERT INTO posts (title, content) VALUES (?, ?)', (title, content))
+        conn.execute('''
+            INSERT INTO posts (title, body, user_id)
+            VALUES (?, ?, (SELECT id FROM accounts WHERE username = ?))
+        ''', (title, body, username))
         conn.commit()
         conn.close()
 
@@ -214,24 +219,24 @@ def logout():
 def posts():
     # Проверяем, авторизован ли пользователь
     if 'username' not in session:
-        return redirect(url_for('login'))  # Если не авторизован, перенаправляем на страницу входа
+        return redirect(url_for('auth'))  # Если не авторизован, перенаправляем на страницу входа
 
     username = session['username']
 
     # Получаем ID пользователя из таблицы passwords на основе имени пользователя (линк с таблицей posts)
     conn = get_db_connection()
 
-    user_id = conn.execute('SELECT id FROM passwords WHERE login = ?', (username,)).fetchone()
+    user_id = conn.execute('SELECT id FROM accounts WHERE username = ?', (username,)).fetchone()
     if user_id is None:
         conn.close()
-        return redirect(url_for('login'))  # Если пользователя не существует, перенаправляем на страницу входа
+        return redirect(url_for('auth'))  # Если пользователя не существует, перенаправляем на страницу входа
 
     # Получаем только те посты, которые принадлежат текущему пользователю
     posts = conn.execute('SELECT * FROM posts WHERE user_id = ?', (user_id['id'],)).fetchall()
     conn.close()
 
     # Рендерим страницу для просмотра "Мои посты"
-    return render_template('posts.html', posts=posts, username=username)
+    return render_template('posts/posts.html', posts=posts, username=username)
 
 
 if __name__ == '__main__':
