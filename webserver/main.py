@@ -80,7 +80,11 @@ def registration():
 def get_users():
     if session.get('role') != 'admin': return redirect(url_for('auth'))
     conn = get_db_connection()
-    users = conn.execute('SELECT * FROM passwords').fetchall()
+    users = conn.execute('''
+        SELECT a.id, a.username, p.password, a.user_role
+        FROM accounts a, passwords p
+        WHERE a.id == p.id
+    ''').fetchall()
     conn.close()
     return render_template('admin/users.html', users=users)
 
@@ -120,7 +124,11 @@ def edit_user(id):
         conn.close()
         return redirect(url_for('get_users'))
 
-    user = conn.execute('SELECT * FROM accounts WHERE id = ?', (id,)).fetchone()
+    user = conn.execute('''
+        SELECT a.username, p.password, a.user_role
+        FROM accounts a, passwords p
+        WHERE a.id == p.id AND a.id = ?
+    ''', (id,)).fetchone()
     return render_template('admin/edit.html', user=user)
 
 
@@ -173,7 +181,7 @@ def create_post():
         conn.commit()
         conn.close()
 
-        return redirect(url_for('index'))
+        return redirect(url_for('posts'))
 
     return render_template('posts/create.html')
 
@@ -182,16 +190,16 @@ def create_post():
 @app.route('/edit_post/<int:id>', methods=('GET', 'POST'))
 def edit_post(id):
     conn = get_db_connection()
-    post = conn.execute('SELECT * FROM posts WHERE id = ?', (id,)).fetchone()
+    post = conn.execute('SELECT title, body FROM posts WHERE id = ?', (id,)).fetchone()
 
     if request.method == 'POST':
         title = request.form.get('title')
-        content = request.form.get('content')
+        body = request.form.get('body')
 
-        conn.execute('UPDATE posts SET title = ?, content = ? WHERE id = ?', (title, content, id))
+        conn.execute('UPDATE posts SET title = ?, body = ? WHERE id = ?', (title, body, id))
         conn.commit()
         conn.close()
-        return redirect(url_for('get_users'))
+        return redirect(url_for('posts'))
 
     return render_template('posts/edit.html', post=post)
 
