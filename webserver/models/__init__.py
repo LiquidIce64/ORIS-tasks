@@ -17,3 +17,6 @@ if not os.path.exists('database.db'):
     Permissions.create_permission('Administration')
     Permissions.create_permission('Thread moderation')
     Permissions.create_permission('Tag editing')
+
+    Users.add_user('admin', 'admin')
+    Permissions.set_permissions(Users.get_user_id('admin'), (1, 2, 3))

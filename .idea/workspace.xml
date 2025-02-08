@@ -4,29 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="004bf431-fb4f-4a0a-8912-e57b0897525c" name="Changes" comment="posts CRUD">
+    <list default="true" id="004bf431-fb4f-4a0a-8912-e57b0897525c" name="Changes" comment="finished webserver">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webserver/create_db.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webserver/controllers/users.py" beforeDir="false" afterPath="$PROJECT_DIR$/webserver/controllers/users.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webserver/database.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webserver/db_passwords.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webserver/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/webserver/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webserver/static/css/auth_reply.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webserver/static/css/registration_reply.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webserver/templates/account/account.html" beforeDir="false" afterPath="$PROJECT_DIR$/webserver/templates/users/account.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webserver/templates/admin/create.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webserver/templates/admin/edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/webserver/templates/users/edit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webserver/templates/admin/metrics.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webserver/templates/admin/users.html" beforeDir="false" afterPath="$PROJECT_DIR$/webserver/templates/users/users.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webserver/templates/auth/auth.html" beforeDir="false" afterPath="$PROJECT_DIR$/webserver/templates/auth/auth.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webserver/templates/auth/auth_fail.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webserver/templates/auth/auth_success.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webserver/templates/auth/registration.html" beforeDir="false" afterPath="$PROJECT_DIR$/webserver/templates/auth/registration.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webserver/templates/auth/registration_success.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webserver/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/webserver/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webserver/templates/layout.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webserver/templates/posts/create.html" beforeDir="false" afterPath="$PROJECT_DIR$/webserver/templates/threads/create.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webserver/templates/posts/edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/webserver/templates/threads/edit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webserver/templates/posts/posts.html" beforeDir="false" afterPath="$PROJECT_DIR$/webserver/templates/threads/threads.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webserver/models/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/webserver/models/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webserver/models/init_database.sql" beforeDir="false" afterPath="$PROJECT_DIR$/webserver/models/init_database.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webserver/templates/users/account.html" beforeDir="false" afterPath="$PROJECT_DIR$/webserver/templates/users/account.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -483,7 +467,15 @@
       <option name="project" value="LOCAL" />
       <updated>1737640862955</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="finished webserver">
+      <option name="closed" value="true" />
+      <created>1738977189792</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1738977189792</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -498,7 +490,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Merge branch 'main' of https://github.com/LiquidIce64/ORIS-tasks" />
     <MESSAGE value="Separated classes into multiple files" />
     <MESSAGE value="fixed nested widget styles not showing + integrated resources with designer" />
     <MESSAGE value="disconnect logic + menu style" />
@@ -523,6 +514,7 @@
     <MESSAGE value="website menu bar, sessions, roles, admin pages, etc." />
     <MESSAGE value="refactored database" />
     <MESSAGE value="posts CRUD" />
-    <option name="LAST_COMMIT_MESSAGE" value="posts CRUD" />
+    <MESSAGE value="finished webserver" />
+    <option name="LAST_COMMIT_MESSAGE" value="finished webserver" />
   </component>
 </project>

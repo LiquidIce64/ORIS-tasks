@@ -1,10 +1,10 @@
 create table users(
     id integer primary key autoincrement,
     username varchar(1, 30) unique,
-    display_name varchar(1, 30),
-    password varchar(8, 50),
-    email varchar(1, 50),
-    phone_number varchar(1, 20)
+    display_name varchar(1, 30) not null,
+    password varchar(8, 50) not null,
+    email varchar(1, 50) not null default '',
+    phone_number varchar(1, 20) not null default ''
 );
 
 create table permissions(

@@ -58,3 +58,12 @@ def account():
         if phone_number: Users.set_phone_number(user_id, phone_number)
 
     return render_template('users/account.html', user=Users.get_user(user_id))
+
+
+@app.route('/account/delete', methods=('POST',))
+def delete_account():
+    user_id = session.get('user_id')
+    if user_id is None: return redirect(url_for('auth'))
+    Users.delete_user(user_id)
+    session.clear()
+    return redirect(url_for('index'))
