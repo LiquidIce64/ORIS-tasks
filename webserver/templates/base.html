@@ -13,17 +13,17 @@
         <div class="topnav">
             <a class="active" href="{{ url_for('index') }}">Главная</a>
             <a href="{{ url_for('about') }}">О приложении</a>
+            <a href="{{ url_for('get_threads') }}">Обсуждения</a>
 
-            {% if session.get('role') == 'admin' %}
+            {% if session.get('permissions') and 'Tag editing' in session.get('permissions') %}
+                <a href="{{ url_for('get_tags') }}">Теги</a>
+            {% endif %}
+
+            {% if session.get('permissions') and 'Administration' in session.get('permissions') %}
                 <a href="{{ url_for('get_users') }}">Пользователи</a>
             {% endif %}
 
-            {% if session.get('role') == 'manager' %}
-                <a href="{{ url_for('get_metrics') }}">Метрики</a>
-            {% endif %}
-
-            {% if session.get('username') %}
-                <a href="{{ url_for('posts') }}">Мои посты</a>
+            {% if session.get('user_id') %}
                 <a class="login" href="{{ url_for('logout') }}">Выйти</a>
                 <a class="login" href="{{ url_for('account') }}">Личный кабинет</a>
             {% else %}

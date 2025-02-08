@@ -7,9 +7,8 @@
 <h2>Привет, {{ session['username'] }}!</h2>
 <form method="POST">
     <div class="container">
-        <input type="text" placeholder="" name="Login" value="{{ session['username'] }}"
-            readonly required>
-        <input type="text" placeholder="Введите имя" name="name" required>
+        <input type="text" name="display_name" id="display_name" value="{{ user['display_name'] }}" required>
+        <input type="text" placeholder="Введите имя" name="display_name" required>
         <input type="text" placeholder="Введите email" name="email" required>
     </div>
     <button type="submit">Сохранить</button>

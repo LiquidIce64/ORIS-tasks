@@ -6,10 +6,10 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/registration.css') }}">
     <form method="POST">
         <div class="container">
-            <label for="Login"><b>Логин</b></label>
-            <input type="text" placeholder="" name="Login" required>
-            <label for="Password"><b>Пароль</b></label>
-            <input type="password" placeholder="" name="Password" required>
+            <label for="username"><b>Логин</b></label>
+            <input type="text" placeholder="" name="username" id="username" required>
+            <label for="password"><b>Пароль</b></label>
+            <input type="password" placeholder="" name="password" id="password" required>
             <button type="submit">Зарегистрироваться</button>
         </div>
     </form>
