@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Удалить</title>
+</head>
+<body>
+    <p>Вы действительно хотите удалить {{ user.display_name }} (@{{ user.username }})?</p>
+    <form method="post">
+        {{ form.hidden_tag() }}
+        <p>{{ form.submit() }}</p>
+    </form>
+    <a href="{{ url_for('user.list') }}">Отмена</a>
+</body>
+</html>

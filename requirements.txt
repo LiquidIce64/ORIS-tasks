@@ -5,3 +5,5 @@ PyOpenGL~=3.1.7
 passlib~=1.7.4
 numpy~=2.0.2
 flask~=3.1.0
+sqlalchemy~=2.0.39
+wtforms~=3.2.1

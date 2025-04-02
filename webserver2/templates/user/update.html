@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Обновить</title>
+</head>
+<body>
+    <form method="post">
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.username.label }}<br>
+            {{ form.username(value=user.username) }}
+        </p>
+        <p>
+            {{ form.display_name.label }}<br>
+            {{ form.display_name(value=user.display_name) }}
+        </p>
+        <p>
+            {{ form.password.label }}<br>
+            {{ form.password(value=user.password) }}
+        </p>
+        <p>{{ form.submit() }}</p>
+    </form>
+    <a href="{{ url_for('user.list') }}">Назад</a>
+</body>
+</html>

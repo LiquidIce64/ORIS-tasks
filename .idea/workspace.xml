@@ -5,12 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="004bf431-fb4f-4a0a-8912-e57b0897525c" name="Changes" comment="finished webserver">
+      <change beforePath="$PROJECT_DIR$/.idea/ORIS-tasks.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ORIS-tasks.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webserver/controllers/users.py" beforeDir="false" afterPath="$PROJECT_DIR$/webserver/controllers/users.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webserver/database.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webserver/models/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/webserver/models/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webserver/models/init_database.sql" beforeDir="false" afterPath="$PROJECT_DIR$/webserver/models/init_database.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webserver/templates/users/account.html" beforeDir="false" afterPath="$PROJECT_DIR$/webserver/templates/users/account.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webserver/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/webserver/database.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +32,7 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -73,6 +73,7 @@
     "Python.7.executor": "Run",
     "Python.8.executor": "Run",
     "Python.Web Server.executor": "Run",
+    "Python.app.executor": "Run",
     "Python.client.executor": "Run",
     "Python.create_db.executor": "Run",
     "Python.crud_example.executor": "Run",
@@ -93,7 +94,7 @@
     "Shell Script.word_game.executor": "Run",
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/gilya/Projects/PyCharm/ORIS-tasks/webserver/templates/comments",
+    "last_opened_file_path": "C:/Users/gilya/Projects/PyCharm/ORIS-tasks/webserver2",
     "settings.editor.selected.configurable": "preferences.pluginManager"
   }
 }]]></component>
@@ -102,21 +103,21 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\gilya\Projects\PyCharm\ORIS-tasks\webserver2" />
+      <recent name="C:\Users\gilya\Projects\PyCharm\ORIS-tasks\sqlalchemy" />
       <recent name="C:\Users\gilya\Projects\PyCharm\ORIS-tasks\webserver\templates\comments" />
       <recent name="C:\Users\gilya\Projects\PyCharm\ORIS-tasks\webserver\templates\tags" />
       <recent name="C:\Users\gilya\Projects\PyCharm\ORIS-tasks\webserver\templates\threads" />
-      <recent name="C:\Users\gilya\Projects\PyCharm\ORIS-tasks\webserver\templates\admin" />
-      <recent name="C:\Users\gilya\Projects\PyCharm\ORIS-tasks\webserver" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\gilya\Projects\PyCharm\ORIS-tasks\webserver2\instance" />
       <recent name="C:\Users\gilya\Projects\PyCharm\ORIS-tasks\webserver\templates\users" />
       <recent name="C:\Users\gilya\Projects\PyCharm\ORIS-tasks\webserver\models" />
       <recent name="C:\Users\gilya\Projects\PyCharm\ORIS-tasks\webserver\templates\posts" />
       <recent name="C:\Users\gilya\Projects\PyCharm\ORIS-tasks\webserver\templates\admin" />
-      <recent name="C:\Users\gilya\Projects\PyCharm\ORIS-tasks\webserver\templates" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.Web Server">
+  <component name="RunManager" selected="Python.WebServer2">
     <configuration name="Web Server" type="PythonConfigurationType" factoryName="Python">
       <module name="ORIS-tasks" />
       <option name="ENV_FILES" value="$PROJECT_DIR$/webserver/.env" />
@@ -131,6 +132,28 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/webserver/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="WebServer2" type="PythonConfigurationType" factoryName="Python">
+      <module name="ORIS-tasks" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/webserver2" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/webserver2/app.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -196,6 +219,7 @@
       <item itemvalue="Python.client" />
       <item itemvalue="Shell Script.Qt Designer" />
       <item itemvalue="Shell Script.strategy_game" />
+      <item itemvalue="Python.WebServer2" />
     </list>
     <recent_temporary>
       <list>
@@ -475,7 +499,15 @@
       <option name="project" value="LOCAL" />
       <updated>1738977189792</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="finished webserver">
+      <option name="closed" value="true" />
+      <created>1738979403784</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1738979403784</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
