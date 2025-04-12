@@ -1,19 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Список всех записей</title>
-</head>
-<body>
-    <a href="{{ url_for('user.create') }}">Создать</a>
-    <ul>
-        {% for user in users %}
-            <li>
-                <a href="{{ url_for('user.view', user_id=user.id) }}">{{ user.display_name }} (@{{ user.username }})</a>
-                (<a href="{{ url_for('user.update', user_id=user.id) }}">Изменить</a> |
-                <a href="{{ url_for('user.delete', user_id=user.id) }}">Удалить</a>)
-            </li>
-        {% endfor %}
-    </ul>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block title %}Список всех записей{% endblock %}
+
+{% block content %}
+    <div class="container mt-3">
+        <a class="btn btn-primary m-2" href="{{ url_for('user.create') }}">Создать</a>
+        <div class="row">
+            {% for user in users %}
+                <div class="col-4 mt-4">
+                    <div class="card m-2 p-2">
+                        <div class="card-body">
+                            <a href="{{ url_for('user.view', user_id=user.id) }}"><h3>{{ user.display_name }}</h3></a>
+                            <p class="card-subtitle mb-2 text-muted">(@{{ user.username }})</p>
+
+                            <a class="btn btn-secondary" href="{{ url_for('user.update', user_id=user.id) }}">Изменить</a>
+                            <a class="btn btn-danger" href="{{ url_for('user.delete', user_id=user.id) }}">Удалить</a>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <h2 class="mx-2 mt-4">Создайте пользователя, чтобы его информация появилась здесь</h2>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

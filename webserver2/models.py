@@ -15,6 +15,7 @@ class User(db.Model):
     username: Mapped[str] = mapped_column(db.String, nullable=False)
     display_name: Mapped[str] = mapped_column(db.String, nullable=False)
     password: Mapped[str] = mapped_column(db.String, nullable=False)
+    email: Mapped[str] = mapped_column(db.String, nullable=True)
 
     def __repr__(self):
         return f'<User {self.username}>'

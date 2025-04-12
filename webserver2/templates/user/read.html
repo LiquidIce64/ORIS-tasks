@@ -1,12 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ user.display_name }}</title>
-</head>
-<body>
-    <h1>{{ user.display_name }} (@{{ user.username }})</h1>
-    <p>{{ user.password }}</p>
-    <a href="{{ url_for('user.list') }}">Назад</a>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block title %}{{ user.display_name }}{% endblock %}
+
+{% block content %}
+    <div class="container card card-body mx-auto mt-5 px-5 py-4" style="width: 500px;">
+        <h1 class="card-title">{{ user.display_name }}</h1>
+        <h4 class="card-subtitle mb-2 text-muted">@{{ user.username }}</h4>
+        <p class="card-text">Пароль: {{ user.password }}</p>
+        <a class="btn btn-secondary" href="{{ url_for('user.list') }}">Назад</a>
+    </div>
+{% endblock %}

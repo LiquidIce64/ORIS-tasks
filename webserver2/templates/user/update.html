@@ -1,26 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Обновить</title>
-</head>
-<body>
-    <form method="post">
-        {{ form.hidden_tag() }}
-        <p>
-            {{ form.username.label }}<br>
-            {{ form.username(value=user.username) }}
-        </p>
-        <p>
-            {{ form.display_name.label }}<br>
-            {{ form.display_name(value=user.display_name) }}
-        </p>
-        <p>
-            {{ form.password.label }}<br>
-            {{ form.password(value=user.password) }}
-        </p>
-        <p>{{ form.submit() }}</p>
-    </form>
-    <a href="{{ url_for('user.list') }}">Назад</a>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block title %}Обновить{% endblock %}
+
+{% block content %}
+    <div class="container card card-body mx-auto mt-5 px-5 py-4" style="width: 500px;">
+        <form method="post">
+            {{ form.hidden_tag() }}
+            <div class="mb-3">
+                {{ form.username.label(class="form-label") }}<br>
+                {{ form.username(value=user.username, class="form-control") }}
+            </div>
+            <div class="mb-3">
+                {{ form.display_name.label(class="form-label") }}<br>
+                {{ form.display_name(value=user.display_name, class="form-control") }}
+            </div>
+            <div class="mb-3">
+                {{ form.password.label(class="form-label") }}<br>
+                {{ form.password(value=user.password, class="form-control", type="password") }}
+            </div>
+            <div class="d-flex justify-content-around mt-4">
+                <a class="btn btn-secondary w-25" href="{{ url_for('user.list') }}">Назад</a>
+                {{ form.submit(class="btn btn-success w-25") }}
+            </div>
+        </form>
+    </div>
+{% endblock %}

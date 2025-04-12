@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_migrate import Migrate
 from models import db, create_table
 from views import UserView, UserList, UserCreate, UserUpdate, UserDelete
 import os
@@ -9,7 +10,8 @@ app.config['SECRET_KEY'] = os.urandom(24)
 db.init_app(app)
 
 # Создание таблиц
-create_table(app)
+# create_table(app)
+migrate = Migrate(app, db)
 
 # Регистрация представлений
 app.add_url_rule('/', view_func=UserList.as_view('user.list', engine=db))

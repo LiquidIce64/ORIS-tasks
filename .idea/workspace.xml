@@ -4,12 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="004bf431-fb4f-4a0a-8912-e57b0897525c" name="Changes" comment="finished webserver">
+    <list default="true" id="004bf431-fb4f-4a0a-8912-e57b0897525c" name="Changes" comment="modified wtforms example">
       <change beforePath="$PROJECT_DIR$/.idea/ORIS-tasks.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ORIS-tasks.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webserver/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/webserver/database.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webserver2/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/webserver2/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webserver2/instance/database.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webserver2/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/webserver2/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webserver2/templates/user/create.html" beforeDir="false" afterPath="$PROJECT_DIR$/webserver2/templates/user/create.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webserver2/templates/user/delete.html" beforeDir="false" afterPath="$PROJECT_DIR$/webserver2/templates/user/delete.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webserver2/templates/user/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/webserver2/templates/user/list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webserver2/templates/user/read.html" beforeDir="false" afterPath="$PROJECT_DIR$/webserver2/templates/user/read.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webserver2/templates/user/update.html" beforeDir="false" afterPath="$PROJECT_DIR$/webserver2/templates/user/update.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,8 +27,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="GLSL Shader" />
-        <option value="HTML File" />
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -60,44 +67,45 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "Python.1.executor": "Run",
-    "Python.10.executor": "Run",
-    "Python.2.executor": "Run",
-    "Python.3.executor": "Run",
-    "Python.4.executor": "Run",
-    "Python.5.executor": "Run",
-    "Python.6.executor": "Run",
-    "Python.7.executor": "Run",
-    "Python.8.executor": "Run",
-    "Python.Web Server.executor": "Run",
-    "Python.app.executor": "Run",
-    "Python.client.executor": "Run",
-    "Python.create_db.executor": "Run",
-    "Python.crud_example.executor": "Run",
-    "Python.game.executor": "Run",
-    "Python.main.executor": "Run",
-    "Python.navbar_example.executor": "Run",
-    "Python.networking.executor": "Run",
-    "Python.player_list_item.executor": "Run",
-    "Python.recompile.executor": "Run",
-    "Python.server.executor": "Run",
-    "Python.word_game.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "Shell Script.OpenGL Test.executor": "Run",
-    "Shell Script.Qt Designer.executor": "Run",
-    "Shell Script.Unnamed.executor": "Run",
-    "Shell Script.strategy_game.executor": "Run",
-    "Shell Script.word_game.executor": "Run",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/gilya/Projects/PyCharm/ORIS-tasks/webserver2",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;Python.1.executor&quot;: &quot;Run&quot;,
+    &quot;Python.10.executor&quot;: &quot;Run&quot;,
+    &quot;Python.2.executor&quot;: &quot;Run&quot;,
+    &quot;Python.3.executor&quot;: &quot;Run&quot;,
+    &quot;Python.4.executor&quot;: &quot;Run&quot;,
+    &quot;Python.5.executor&quot;: &quot;Run&quot;,
+    &quot;Python.6.executor&quot;: &quot;Run&quot;,
+    &quot;Python.7.executor&quot;: &quot;Run&quot;,
+    &quot;Python.8.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Web Server.executor&quot;: &quot;Run&quot;,
+    &quot;Python.WebServer2.executor&quot;: &quot;Run&quot;,
+    &quot;Python.app.executor&quot;: &quot;Run&quot;,
+    &quot;Python.client.executor&quot;: &quot;Run&quot;,
+    &quot;Python.create_db.executor&quot;: &quot;Run&quot;,
+    &quot;Python.crud_example.executor&quot;: &quot;Run&quot;,
+    &quot;Python.game.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.navbar_example.executor&quot;: &quot;Run&quot;,
+    &quot;Python.networking.executor&quot;: &quot;Run&quot;,
+    &quot;Python.player_list_item.executor&quot;: &quot;Run&quot;,
+    &quot;Python.recompile.executor&quot;: &quot;Run&quot;,
+    &quot;Python.server.executor&quot;: &quot;Run&quot;,
+    &quot;Python.word_game.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;Shell Script.OpenGL Test.executor&quot;: &quot;Run&quot;,
+    &quot;Shell Script.Qt Designer.executor&quot;: &quot;Run&quot;,
+    &quot;Shell Script.Unnamed.executor&quot;: &quot;Run&quot;,
+    &quot;Shell Script.strategy_game.executor&quot;: &quot;Run&quot;,
+    &quot;Shell Script.word_game.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/gilya/Projects/PyCharm/ORIS-tasks/webserver2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
-}]]></component>
+}</component>
   <component name="PyDebuggerOptionsProvider">
     <option name="myPyQtBackend" value="pyqt6" />
   </component>
@@ -162,28 +170,6 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="client" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="ORIS-tasks" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/local" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/local/client.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <configuration name="Qt Designer" type="ShConfigurationType" activateToolWindowBeforeRun="false">
       <option name="SCRIPT_TEXT" value="venv/Lib/site-packages/qt6_applications/Qt/bin/designer.exe" />
       <option name="INDEPENDENT_SCRIPT_PATH" value="true" />
@@ -216,16 +202,10 @@
     </configuration>
     <list>
       <item itemvalue="Python.Web Server" />
-      <item itemvalue="Python.client" />
+      <item itemvalue="Python.WebServer2" />
       <item itemvalue="Shell Script.Qt Designer" />
       <item itemvalue="Shell Script.strategy_game" />
-      <item itemvalue="Python.WebServer2" />
     </list>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Python.client" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -507,7 +487,15 @@
       <option name="project" value="LOCAL" />
       <updated>1738979403784</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="modified wtforms example">
+      <option name="closed" value="true" />
+      <created>1743601915811</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1743601915811</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -522,7 +510,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Separated classes into multiple files" />
     <MESSAGE value="fixed nested widget styles not showing + integrated resources with designer" />
     <MESSAGE value="disconnect logic + menu style" />
     <MESSAGE value="corrected message handling" />
@@ -547,6 +534,7 @@
     <MESSAGE value="refactored database" />
     <MESSAGE value="posts CRUD" />
     <MESSAGE value="finished webserver" />
-    <option name="LAST_COMMIT_MESSAGE" value="finished webserver" />
+    <MESSAGE value="modified wtforms example" />
+    <option name="LAST_COMMIT_MESSAGE" value="modified wtforms example" />
   </component>
 </project>

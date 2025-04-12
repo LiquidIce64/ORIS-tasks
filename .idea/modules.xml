@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/ORIS-tasks.iml" filepath="$PROJECT_DIR$/.idea/ORIS-tasks.iml" />
-      <module fileurl="file://$USER_HOME$/Downloads/appExample/.idea/appExample.iml" filepath="$USER_HOME$/Downloads/appExample/.idea/appExample.iml" />
     </modules>
   </component>
 </project>
