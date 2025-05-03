@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %}Test Flask API{% endblock %}
+
+{% block content %}
+    <h1 class="p-2">Test Flask API - User Resource</h1>
+
+    <!-- Section for fetching all items -->
+    <h2 class="p-2">User List</h2>
+    <button class="btn btn-primary m-2" onclick="fetchUsers()">Update</button>
+    <ul id="user-list"></ul>
+
+    <div class="row m-2" style="width: 600px;">
+        <!-- Section for creating a new item -->
+        <div class="col card card-body m-2 w-25">
+            <h2>Create New User</h2>
+            <form id="create-form">
+                <label for="username">Username: </label><br>
+                <input type="text" id="username" required><br>
+                <label for="display_name">Display Name: </label><br>
+                <input type="text" id="display_name" required><br>
+                <label for="password">Password: </label><br>
+                <input type="password" id="password" required><br>
+                <label for="email">Email: </label><br>
+                <input type="text" id="email"><br><br>
+                <button class="btn btn-success" type="submit">Create User</button>
+            </form>
+        </div>
+
+        <!-- Section for updating an item -->
+        <div class="col card card-body m-2 w-25">
+            <h2>Update User</h2>
+            <form id="update-form">
+                <label for="update-id">User ID: </label><br>
+                <input type="number" id="update-id" required readonly><br>
+                <label for="update-username">New Username: </label><br>
+                <input type="text" id="update-username"><br>
+                <label for="update-display_name">New Display Name: </label><br>
+                <input type="text" id="update-display_name"><br>
+                <label for="update-password">New Password: </label><br>
+                <input type="text" id="update-password"><br>
+                <label for="update-email">New Email: </label><br>
+                <input type="text" id="update-email"><br><br>
+                <button class="btn btn-success" type="submit">Update User</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Output Area -->
+    <div class="m-2">
+        <h2>Response</h2>
+        <pre id="response-output"></pre>
+
+        <!-- Подключаем JS -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+    </div>
+{% endblock %}

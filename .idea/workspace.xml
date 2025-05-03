@@ -4,19 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="004bf431-fb4f-4a0a-8912-e57b0897525c" name="Changes" comment="modified wtforms example">
+    <list default="true" id="004bf431-fb4f-4a0a-8912-e57b0897525c" name="Changes" comment="added bootstrap css and flask migration">
       <change beforePath="$PROJECT_DIR$/.idea/ORIS-tasks.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ORIS-tasks.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webserver2/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/webserver2/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webserver2/instance/database.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webserver2/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/webserver2/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webserver2/templates/user/create.html" beforeDir="false" afterPath="$PROJECT_DIR$/webserver2/templates/user/create.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webserver2/templates/user/delete.html" beforeDir="false" afterPath="$PROJECT_DIR$/webserver2/templates/user/delete.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webserver2/templates/user/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/webserver2/templates/user/list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webserver2/templates/user/read.html" beforeDir="false" afterPath="$PROJECT_DIR$/webserver2/templates/user/read.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webserver2/templates/user/update.html" beforeDir="false" afterPath="$PROJECT_DIR$/webserver2/templates/user/update.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webserver2/instance/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/webserver2/instance/database.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,55 +61,55 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;Python.1.executor&quot;: &quot;Run&quot;,
-    &quot;Python.10.executor&quot;: &quot;Run&quot;,
-    &quot;Python.2.executor&quot;: &quot;Run&quot;,
-    &quot;Python.3.executor&quot;: &quot;Run&quot;,
-    &quot;Python.4.executor&quot;: &quot;Run&quot;,
-    &quot;Python.5.executor&quot;: &quot;Run&quot;,
-    &quot;Python.6.executor&quot;: &quot;Run&quot;,
-    &quot;Python.7.executor&quot;: &quot;Run&quot;,
-    &quot;Python.8.executor&quot;: &quot;Run&quot;,
-    &quot;Python.Web Server.executor&quot;: &quot;Run&quot;,
-    &quot;Python.WebServer2.executor&quot;: &quot;Run&quot;,
-    &quot;Python.app.executor&quot;: &quot;Run&quot;,
-    &quot;Python.client.executor&quot;: &quot;Run&quot;,
-    &quot;Python.create_db.executor&quot;: &quot;Run&quot;,
-    &quot;Python.crud_example.executor&quot;: &quot;Run&quot;,
-    &quot;Python.game.executor&quot;: &quot;Run&quot;,
-    &quot;Python.main.executor&quot;: &quot;Run&quot;,
-    &quot;Python.navbar_example.executor&quot;: &quot;Run&quot;,
-    &quot;Python.networking.executor&quot;: &quot;Run&quot;,
-    &quot;Python.player_list_item.executor&quot;: &quot;Run&quot;,
-    &quot;Python.recompile.executor&quot;: &quot;Run&quot;,
-    &quot;Python.server.executor&quot;: &quot;Run&quot;,
-    &quot;Python.word_game.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;Shell Script.OpenGL Test.executor&quot;: &quot;Run&quot;,
-    &quot;Shell Script.Qt Designer.executor&quot;: &quot;Run&quot;,
-    &quot;Shell Script.Unnamed.executor&quot;: &quot;Run&quot;,
-    &quot;Shell Script.strategy_game.executor&quot;: &quot;Run&quot;,
-    &quot;Shell Script.word_game.executor&quot;: &quot;Run&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/gilya/Projects/PyCharm/ORIS-tasks/webserver2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "Python.1.executor": "Run",
+    "Python.10.executor": "Run",
+    "Python.2.executor": "Run",
+    "Python.3.executor": "Run",
+    "Python.4.executor": "Run",
+    "Python.5.executor": "Run",
+    "Python.6.executor": "Run",
+    "Python.7.executor": "Run",
+    "Python.8.executor": "Run",
+    "Python.Web Server.executor": "Run",
+    "Python.WebServer2.executor": "Run",
+    "Python.app.executor": "Run",
+    "Python.client.executor": "Run",
+    "Python.create_db.executor": "Run",
+    "Python.crud_example.executor": "Run",
+    "Python.game.executor": "Run",
+    "Python.main.executor": "Run",
+    "Python.navbar_example.executor": "Run",
+    "Python.networking.executor": "Run",
+    "Python.player_list_item.executor": "Run",
+    "Python.recompile.executor": "Run",
+    "Python.server.executor": "Run",
+    "Python.word_game.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "Shell Script.OpenGL Test.executor": "Run",
+    "Shell Script.Qt Designer.executor": "Run",
+    "Shell Script.Unnamed.executor": "Run",
+    "Shell Script.strategy_game.executor": "Run",
+    "Shell Script.word_game.executor": "Run",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/gilya/Projects/PyCharm/ORIS-tasks/webserver2/templates",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
-}</component>
+}]]></component>
   <component name="PyDebuggerOptionsProvider">
     <option name="myPyQtBackend" value="pyqt6" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\gilya\Projects\PyCharm\ORIS-tasks\webserver2\templates" />
       <recent name="C:\Users\gilya\Projects\PyCharm\ORIS-tasks\webserver2" />
       <recent name="C:\Users\gilya\Projects\PyCharm\ORIS-tasks\sqlalchemy" />
       <recent name="C:\Users\gilya\Projects\PyCharm\ORIS-tasks\webserver\templates\comments" />
       <recent name="C:\Users\gilya\Projects\PyCharm\ORIS-tasks\webserver\templates\tags" />
-      <recent name="C:\Users\gilya\Projects\PyCharm\ORIS-tasks\webserver\templates\threads" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\gilya\Projects\PyCharm\ORIS-tasks\webserver2\instance" />
@@ -495,7 +489,15 @@
       <option name="project" value="LOCAL" />
       <updated>1743601915811</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="added bootstrap css and flask migration">
+      <option name="closed" value="true" />
+      <created>1744464055290</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1744464055290</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -510,7 +512,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fixed nested widget styles not showing + integrated resources with designer" />
     <MESSAGE value="disconnect logic + menu style" />
     <MESSAGE value="corrected message handling" />
     <MESSAGE value="server rooms (incomplete)" />
@@ -535,6 +536,7 @@
     <MESSAGE value="posts CRUD" />
     <MESSAGE value="finished webserver" />
     <MESSAGE value="modified wtforms example" />
-    <option name="LAST_COMMIT_MESSAGE" value="modified wtforms example" />
+    <MESSAGE value="added bootstrap css and flask migration" />
+    <option name="LAST_COMMIT_MESSAGE" value="added bootstrap css and flask migration" />
   </component>
 </project>
